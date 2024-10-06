@@ -1,13 +1,138 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html,
+body,
+#root {
+  height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap");
+
+:root {
+  --primary-color: #4b0082;
+  --secondary-color: #19111e;
+  --third-color: #3a3642;
+  --accent-color: #e9d254;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Belanosima", sans-serif;
+  background-color: var(--primary-color);
+}
+
+.container {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 75px;
+  margin-bottom: 75px;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 750px;
+  }
+}
+
+h1 {
+  font-size: 48px;
+  color: var(--accent-color);
+  text-align: center;
+}
+h2 {
+  font-size: 48px;
+  color: white;
+  text-align: center;
+}
+h3 {
+  font-size: 32px;
+  font-weight: 400;
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: "Belanosima", sans-serif;
+  font-weight: 100;
+  font-size: 24px;
+  color: white;
+}
+
+button {
+  font-family: "Belanosima", sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  color: var(--primary-color);
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  border: none;
+}
+
+input {
+  font-family: "Belanosima", sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  color: var(--accent-color);
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--secondary-color);
+  border: none;
+}
+
+input::placeholder {
+  color: var(--third-color);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.answer {
+  font-weight: 200 !important;
+  font-size: 24px !important;
+  color: white !important;
+  border: 3px solid white !important;
+  background-color: var(--primary-color);
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-space-btw {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gap-1 {
+  gap: 10px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.accent-color {
+  color: #e9d254;
 }
