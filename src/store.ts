@@ -1,7 +1,7 @@
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { io } from "socket.io-client";
-import { Game, Round } from "./Constantes";
+import { Game, Player, Question, Round } from "./Constantes";
 
 // Initialiser la connexion avec le serveur Socket.IO
 const socket = io("http://localhost:5000");
@@ -9,11 +9,14 @@ const socket = io("http://localhost:5000");
 class GameStore {
   pin: string = "";
   gameCreator: boolean = false;
-  username: string = "";
+  currentPlayer: Player | null = null;
+  roundPlayer: Player | null = null;
   isPinValid: boolean = false;
   currentGame: Game | null = null;
   errorMessage: string = "";
   currentRound: Round | null = null;
+  currentQuestion: Question | null = null;
+  rightAnswer: string | null = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -21,13 +24,22 @@ class GameStore {
 
   setupSocketListeners = () => {
     socket.on("player-joined", (game) => {
+      console.log(game);
+
       this.currentGame = game;
       console.log("Un nouveau joueur a rejoint la partie", game);
     });
 
-    socket.on("game-started", (currentRound) => {
-      this.currentRound = currentRound;
+    socket.on("game-started", (res) => {
+      this.currentRound = res.currentRound;
+      this.currentQuestion = res.currentQuestion;
+      this.roundPlayer = res.roundPlayer;
       console.log("La partie a démarré, Manche 1");
+    });
+
+    socket.on("right-answer-submitted", (rightAnswer) => {
+      this.setRightAnswer(rightAnswer);
+      console.log("La bonne réponse a été soumise : ", rightAnswer);
     });
   };
 
@@ -43,16 +55,27 @@ class GameStore {
     this.gameCreator = gameCreator;
   };
 
-  setUsername = (username: string) => {
-    this.username = username;
-  };
-
   setCurrentGame = (currentGame: Game) => {
     this.currentGame = currentGame;
   };
 
   setCurrentRound = (currentRound: Round) => {
     this.currentRound = currentRound;
+  };
+
+  setCurrentPlayer = (currentPlayer: Player) => {
+    this.currentPlayer = currentPlayer;
+  };
+  setRoundPlayer = (roundPlayer: Player) => {
+    this.roundPlayer = roundPlayer;
+  };
+
+  setCurrentQuestion = (currentQuestion: Question) => {
+    this.currentQuestion = currentQuestion;
+  };
+
+  setRightAnswer = (rightAnswer: string | null) => {
+    this.rightAnswer = rightAnswer;
   };
 
   setErrorMessage = (message: string) => {
@@ -84,18 +107,17 @@ class GameStore {
   };
 
   createGame = async (username: string) => {
-    this.username = username;
-
-    const newGame = {
+    const data = {
       pin: this.pin,
-      player: this.username,
+      username: username,
     };
 
     try {
       const response = await axios.post(
         "http://localhost:5000/create-game",
-        newGame
+        data
       );
+      this.currentPlayer = response.data.currentPlayer;
       this.currentGame = response.data.game;
     } catch (error) {
       this.setErrorMessage("Erreur lors de la création de la partie");
@@ -103,11 +125,9 @@ class GameStore {
   };
 
   joinGame = async (username: string) => {
-    this.username = username;
-
     const gameData = {
       pin: this.pin,
-      player: this.username,
+      username: username,
     };
 
     try {
@@ -115,7 +135,10 @@ class GameStore {
         "http://localhost:5000/create-game",
         gameData
       );
+
       this.currentGame = response.data.game;
+      this.currentPlayer = response.data.currentPlayer;
+
       this.clearErrorMessage();
     } catch (error) {
       this.setErrorMessage("Impossible de rejoindre la partie");
@@ -128,11 +151,39 @@ class GameStore {
         pin: this.pin,
       });
 
-      if (response.data.currentRound) {
+      if (response.data) {
         this.setCurrentRound(response.data.currentRound);
+        this.setCurrentQuestion(response.data.currentQuestion);
+        this.setRoundPlayer(response.data.roundPlayer);
+        this.setCurrentPlayer(response.data.roundPlayer);
       }
     } catch (error) {
       console.error("Erreur lors du démarrage du jeu", error);
+    }
+  };
+
+  submitRightAnswer = async (rightAnswer: string) => {
+    try {
+      const response = await axios.post("http://localhost:5000/submit-answer", {
+        pin: this.pin,
+        rightAnswer,
+      });
+      console.log(response.data.message);
+    } catch (error) {
+      console.error("Erreur lors de la soumission de la réponse", error);
+    }
+  };
+
+  submitGuess = async (guessedAnswer: string) => {
+    try {
+      const response = await axios.post("http://localhost:5000/submit-guess", {
+        pin: this.pin,
+        playerId: this.currentPlayer?.id,
+        guessedAnswer,
+      });
+      console.log(response.data.message);
+    } catch (error) {
+      console.error("Erreur lors de la soumission de la réponse", error);
     }
   };
 }

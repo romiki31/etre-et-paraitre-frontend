@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import { gameStore } from "../store";
 
-const CreateGame = observer(() => {
+const LoadingRoom = observer(() => {
   const { startGame } = gameStore;
 
   return (
@@ -27,4 +27,4 @@ const CreateGame = observer(() => {
   );
 });
 
-export default CreateGame;
+export default LoadingRoom;
