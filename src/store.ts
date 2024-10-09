@@ -17,6 +17,13 @@ class GameStore {
   currentRound: Round | null = null;
   currentQuestion: Question | null = null;
   rightAnswer: string | null = "";
+  hasAnswered: boolean = false;
+  answer: string | null = null;
+  showAnswers: boolean = false;
+  showRanking: boolean = false;
+  showEndRound: boolean = false;
+  allAnswered: boolean = false;
+  gamePlayers: Player[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -24,23 +31,50 @@ class GameStore {
 
   setupSocketListeners = () => {
     socket.on("player-joined", (game) => {
-      console.log(game);
-
       this.currentGame = game;
-      console.log("Un nouveau joueur a rejoint la partie", game);
     });
 
     socket.on("game-started", (res) => {
       this.currentRound = res.currentRound;
       this.currentQuestion = res.currentQuestion;
       this.roundPlayer = res.roundPlayer;
-      console.log("La partie a démarré, Manche 1");
     });
 
     socket.on("right-answer-submitted", (rightAnswer) => {
       this.setRightAnswer(rightAnswer);
-      console.log("La bonne réponse a été soumise : ", rightAnswer);
     });
+
+    socket.on("all-answered", (allAnswered, gamePlayers) => {
+      this.setAllAnswered(allAnswered);
+      this.setGamePlayers(gamePlayers);
+    });
+
+    socket.on("show-answers", () => {
+      this.setShowAnswers(true);
+    });
+
+    socket.on("show-ranking", () => {
+      this.setShowRanking(true);
+    });
+
+    socket.on("show-end-round", () => {
+      this.setShowEndRound(true);
+    });
+  };
+
+  emitShowAnswers = () => {
+    this.setShowAnswers(true);
+    socket.emit("show-answers", this.pin); // Émettre à tous les joueurs
+  };
+
+  emitShowRanking = () => {
+    this.setShowRanking(true);
+    socket.emit("show-ranking", this.pin); // Émettre à tous les joueurs
+  };
+
+  emitShowEndRound = () => {
+    this.setShowEndRound(true);
+    socket.emit("show-end-round", this.pin); // Émettre à tous les joueurs
   };
 
   joinSocketRoom = (pin: string) => {
@@ -76,6 +110,30 @@ class GameStore {
 
   setRightAnswer = (rightAnswer: string | null) => {
     this.rightAnswer = rightAnswer;
+  };
+
+  setHasAnswered = (hasAnswered: true | false) => {
+    this.hasAnswered = hasAnswered;
+  };
+  setAnswer = (answer: string | null) => {
+    this.answer = answer;
+  };
+
+  setAllAnswered = (allAnswered: true | false) => {
+    this.allAnswered = allAnswered;
+  };
+
+  setShowAnswers = (showAnswers: true | false) => {
+    this.showAnswers = showAnswers;
+  };
+  setShowRanking = (showRanking: true | false) => {
+    this.showRanking = showRanking;
+  };
+  setShowEndRound = (showEndRound: true | false) => {
+    this.showEndRound = showEndRound;
+  };
+  setGamePlayers = (gamePlayers: Player[]) => {
+    this.gamePlayers = gamePlayers;
   };
 
   setErrorMessage = (message: string) => {
@@ -167,6 +225,7 @@ class GameStore {
       const response = await axios.post("http://localhost:5000/submit-answer", {
         pin: this.pin,
         rightAnswer,
+        roundPlayer: this.roundPlayer,
       });
       console.log(response.data.message);
     } catch (error) {
@@ -181,7 +240,10 @@ class GameStore {
         playerId: this.currentPlayer?.id,
         guessedAnswer,
       });
-      console.log(response.data.message);
+      if (response.data.hasAnswered) {
+        this.setHasAnswered(true);
+        this.setAnswer(response.data.answer);
+      }
     } catch (error) {
       console.error("Erreur lors de la soumission de la réponse", error);
     }

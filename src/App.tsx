@@ -4,10 +4,11 @@ import HomePage from "./Components/HomePage";
 import LoadingRoom from "./Components/LoadingRoom";
 import Question from "./Components/Question";
 import Round from "./Components/Round";
+import RoundEnd from "./Components/RoundEnd";
 import { gameStore } from "./store";
 
 const App: React.FC = () => {
-  const { currentGame, currentRound } = gameStore;
+  const { currentGame, currentRound, allAnswered, showAnswers } = gameStore;
   const [showQuestion, setShowQuestion] = useState(false);
 
   useEffect(() => {
@@ -30,7 +31,9 @@ const App: React.FC = () => {
 
   return (
     <div className="container">
-      {showQuestion ? (
+      {allAnswered ? (
+        <RoundEnd />
+      ) : showQuestion ? (
         <Question />
       ) : currentRound ? (
         <Round />

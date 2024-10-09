@@ -8,6 +8,7 @@ const Question = observer(() => {
     roundPlayer,
     currentQuestion,
     rightAnswer,
+    hasAnswered,
     setRightAnswer,
     submitRightAnswer,
     submitGuess,
@@ -36,8 +37,10 @@ const Question = observer(() => {
             ) : (
               <QuestionForm submitFunc={handleSubmitAnswer} />
             )
-          ) : rightAnswer ? (
+          ) : rightAnswer && !hasAnswered ? (
             <QuestionForm submitFunc={handleGuessAnswer} />
+          ) : rightAnswer && hasAnswered ? (
+            <div>En attente des réponses des autres joueurs</div>
           ) : (
             <div>{roundPlayer?.username} est en train de répondre</div>
           )}

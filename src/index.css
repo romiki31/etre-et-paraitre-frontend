@@ -136,3 +136,10 @@ input[type="number"] {
 .accent-color {
   color: #e9d254;
 }
+
+.highlight-right-answer {
+  background-color: #74f081;
+  color: #28aa35;
+  border-radius: 10px;
+  padding: 10px;
+}
