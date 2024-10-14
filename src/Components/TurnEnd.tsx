@@ -3,32 +3,26 @@ import { gameStore } from "../store";
 import Ranking from "./Ranking";
 import RightAnswer from "./RightAnswer";
 
-const RoundEnd = observer(() => {
+const TurnEnd = observer(() => {
   const {
     gameCreator,
     showAnswers,
     showRanking,
-    showEndRound,
     emitShowAnswers,
     emitShowRanking,
-    emitShowEndRound,
+    emitNextTurn,
   } = gameStore;
 
   return (
-    <div className="container">
-      {!showAnswers && <h3>Terminé</h3>}
-      {showEndRound ? (
-        <RoundEnd />
-      ) : showRanking ? (
-        <Ranking />
-      ) : showAnswers ? (
-        <RightAnswer />
-      ) : null}
+    <div className="colmn-space-btwn gap-2">
+      <div></div>
+      {!showAnswers && <h4>TERMINÉ</h4>}
+      {showRanking ? <Ranking /> : showAnswers ? <RightAnswer /> : null}
       {gameCreator ? (
         showRanking ? (
           <button
             onClick={() => {
-              emitShowEndRound();
+              emitNextTurn();
             }}
           >
             Suivant
@@ -50,9 +44,11 @@ const RoundEnd = observer(() => {
             Voir la réponse
           </button>
         )
-      ) : null}
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 });
 
-export default RoundEnd;
+export default TurnEnd;

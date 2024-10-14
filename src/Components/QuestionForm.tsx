@@ -6,30 +6,45 @@ interface QuestionFORMProps {
 }
 
 const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
-  const { currentPlayer, currentQuestion } = gameStore;
+  const { currentPlayer, roundPlayer, currentQuestion } = gameStore;
+
   return (
     <>
       {currentQuestion ? (
-        <div className="container">
-          <div>
-            {currentPlayer?.username}, {currentQuestion.name}
-          </div>
-          <div>
-            <button onClick={() => submitFunc(currentQuestion.answer_1)}>
+        <div className="colmn-space-btwn">
+          <p>
+            {currentPlayer?.username},
+            {currentPlayer?.username !== roundPlayer?.username
+              ? ` qu'a répondu ${roundPlayer?.username} à la question : `
+              : null}
+            {` ${currentQuestion.name}`}
+          </p>
+          <div className="flex-column gap-2">
+            <button
+              className="answer-btn"
+              onClick={() => submitFunc(currentQuestion.answer_1)}
+            >
               {currentQuestion.answer_1}
             </button>
-          </div>
-          <div>
-            <button onClick={() => submitFunc(currentQuestion.answer_2)}>
+            <button
+              className="answer-btn"
+              onClick={() => submitFunc(currentQuestion.answer_2)}
+            >
               {currentQuestion.answer_2}
             </button>
             {currentQuestion.answer_3 ? (
-              <button onClick={() => submitFunc(currentQuestion.answer_3)}>
+              <button
+                className="answer-btn"
+                onClick={() => submitFunc(currentQuestion.answer_3)}
+              >
                 {currentQuestion.answer_3}
               </button>
             ) : null}
             {currentQuestion.answer_4 ? (
-              <button onClick={() => submitFunc(currentQuestion.answer_4)}>
+              <button
+                className="answer-btn"
+                onClick={() => submitFunc(currentQuestion.answer_4)}
+              >
                 {currentQuestion.answer_4}
               </button>
             ) : null}

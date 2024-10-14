@@ -9,7 +9,6 @@ const HomePage = observer(() => {
     gameCreator,
     generatePin,
     checkPin,
-    joinGame,
     createGame,
     errorMessage,
   } = gameStore;
@@ -17,60 +16,48 @@ const HomePage = observer(() => {
   const [inputPin, setInputPin] = useState("");
   const [inputUsername, setInputUsername] = useState("");
 
-  // Étape 1: Vérifier le code PIN
   const handleCheckPin = async () => {
     await checkPin(inputPin);
   };
 
-  // Étape 2: Ajouter le joueur après vérification du PIN
-  const handleJoinGame = async () => {
-    await joinGame(inputUsername);
-  };
-
   return (
-    <>
+    <div className="colmn-space-btwn">
       <h1>ÊTRE ET PARAÎTRE</h1>
       {gameCreator || isPinValid ? (
-        <>
-          {gameCreator && (
-            <p className="center-text">
-              Code PIN en cours de téléchargement ...
-            </p>
-          )}
+        <div className="flex-column gap-1">
           <div className="flex">
             <UsernameInput
               value={inputUsername}
               onChange={(e) => setInputUsername(e.target.value)}
             />
-            <button onClick={() => createGame(inputUsername)}>GO</button>
+            <button
+              className="w-33 internal-btn"
+              onClick={() => createGame(inputUsername)}
+            >
+              GO
+            </button>
           </div>
-        </>
+          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+        </div>
       ) : (
-        <div>
+        <div className="flex-column gap-1">
           <button onClick={generatePin}>Créer une partie</button>
-          <h3>Ou</h3>
+          <h4>Ou</h4>
           <div className="flex">
             <input
+              className="w-66 internal-input"
               placeholder="Code PIN ..."
               value={inputPin}
               onChange={(e) => setInputPin(e.target.value)}
             />
-            <button onClick={handleCheckPin}>Vérifier le PIN</button>
+            <button className="w-33 internal-btn" onClick={handleCheckPin}>
+              GO
+            </button>
           </div>
-          {isPinValid && (
-            <div className="flex">
-              <input
-                placeholder="Pseudo ..."
-                value={inputUsername}
-                onChange={(e) => setInputUsername(e.target.value)}
-              />
-              <button onClick={handleJoinGame}>Rejoindre la partie</button>
-            </div>
-          )}
           {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         </div>
       )}
-    </>
+    </div>
   );
 });
 

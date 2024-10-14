@@ -4,7 +4,12 @@ interface UsernameInputProps {
 }
 
 const UsernameInput: React.FC<UsernameInputProps> = ({ value, onChange }) => (
-  <input placeholder="Pseudo ..." value={value} onChange={onChange} />
+  <input
+    className="w-66 internal-input"
+    placeholder="Pseudo ..."
+    value={value}
+    onChange={onChange}
+  />
 );
 
 export default UsernameInput;

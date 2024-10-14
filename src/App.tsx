@@ -4,7 +4,7 @@ import HomePage from "./Components/HomePage";
 import LoadingRoom from "./Components/LoadingRoom";
 import Question from "./Components/Question";
 import Round from "./Components/Round";
-import RoundEnd from "./Components/RoundEnd";
+import TurnEnd from "./Components/TurnEnd";
 import { gameStore } from "./store";
 
 const App: React.FC = () => {
@@ -23,7 +23,7 @@ const App: React.FC = () => {
     if (currentRound) {
       const timer = setTimeout(() => {
         setShowQuestion(true);
-      }, 3000);
+      }, 2000);
 
       return () => clearTimeout(timer);
     }
@@ -32,7 +32,7 @@ const App: React.FC = () => {
   return (
     <div className="container">
       {allAnswered ? (
-        <RoundEnd />
+        <TurnEnd />
       ) : showQuestion ? (
         <Question />
       ) : currentRound ? (

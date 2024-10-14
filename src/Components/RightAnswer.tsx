@@ -5,10 +5,10 @@ const RightAnswer = observer(() => {
   const { showAnswers, currentQuestion, rightAnswer } = gameStore;
 
   return (
-    <div className="container">
+    <>
       {currentQuestion ? (
-        <div>
-          <div
+        <div className="flex-column gap-2">
+          <p
             className={
               showAnswers && rightAnswer === currentQuestion.answer_1
                 ? "highlight-right-answer"
@@ -16,8 +16,8 @@ const RightAnswer = observer(() => {
             }
           >
             {currentQuestion.answer_1}
-          </div>
-          <div
+          </p>
+          <p
             className={
               showAnswers && rightAnswer === currentQuestion.answer_2
                 ? "highlight-right-answer"
@@ -25,8 +25,8 @@ const RightAnswer = observer(() => {
             }
           >
             {currentQuestion.answer_2}
-          </div>
-          <div
+          </p>
+          <p
             className={
               showAnswers && rightAnswer === currentQuestion.answer_3
                 ? "highlight-right-answer"
@@ -34,8 +34,8 @@ const RightAnswer = observer(() => {
             }
           >
             {currentQuestion.answer_3}
-          </div>
-          <div
+          </p>
+          <p
             className={
               showAnswers && rightAnswer === currentQuestion.answer_4
                 ? "highlight-right-answer"
@@ -43,10 +43,10 @@ const RightAnswer = observer(() => {
             }
           >
             {currentQuestion.answer_4}
-          </div>
+          </p>
         </div>
       ) : null}
-    </div>
+    </>
   );
 });
 

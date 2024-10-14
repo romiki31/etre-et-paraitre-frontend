@@ -21,7 +21,7 @@ class GameStore {
   answer: string | null = null;
   showAnswers: boolean = false;
   showRanking: boolean = false;
-  showEndRound: boolean = false;
+  nextTurn: boolean = false;
   allAnswered: boolean = false;
   gamePlayers: Player[] = [];
 
@@ -38,6 +38,7 @@ class GameStore {
       this.currentRound = res.currentRound;
       this.currentQuestion = res.currentQuestion;
       this.roundPlayer = res.roundPlayer;
+      this.gamePlayers = res.gamePlayers;
     });
 
     socket.on("right-answer-submitted", (rightAnswer) => {
@@ -57,8 +58,8 @@ class GameStore {
       this.setShowRanking(true);
     });
 
-    socket.on("show-end-round", () => {
-      this.setShowEndRound(true);
+    socket.on("next-turn", (res) => {
+      this.setterNextTurn(res);
     });
   };
 
@@ -72,9 +73,30 @@ class GameStore {
     socket.emit("show-ranking", this.pin); // Émettre à tous les joueurs
   };
 
-  emitShowEndRound = () => {
-    this.setShowEndRound(true);
-    socket.emit("show-end-round", this.pin); // Émettre à tous les joueurs
+  emitNextTurn = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/next-turn", {
+        pin: this.pin,
+      });
+      if (response.data.message === "Tour suivant") {
+        this.setterNextTurn(response.data);
+      }
+    } catch (error) {
+      console.error("Erreur lors du passage au joueur suivant", error);
+    }
+  };
+
+  setterNextTurn = (res: any) => {
+    this.currentQuestion = res.currentQuestion;
+    this.gamePlayers = res.gamePlayers;
+    this.roundPlayer = res.roundPlayer;
+    this.rightAnswer = null;
+    this.hasAnswered = false;
+    this.answer = null;
+    this.showAnswers = false;
+    this.showRanking = false;
+    this.allAnswered = false;
+    this.nextTurn = false;
   };
 
   joinSocketRoom = (pin: string) => {
@@ -129,8 +151,8 @@ class GameStore {
   setShowRanking = (showRanking: true | false) => {
     this.showRanking = showRanking;
   };
-  setShowEndRound = (showEndRound: true | false) => {
-    this.showEndRound = showEndRound;
+  setNextTurn = (nextTurn: true | false) => {
+    this.nextTurn = nextTurn;
   };
   setGamePlayers = (gamePlayers: Player[]) => {
     this.gamePlayers = gamePlayers;
@@ -163,7 +185,6 @@ class GameStore {
       this.setErrorMessage("Code PIN invalide");
     }
   };
-
   createGame = async (username: string) => {
     const data = {
       pin: this.pin,
@@ -177,8 +198,12 @@ class GameStore {
       );
       this.currentPlayer = response.data.currentPlayer;
       this.currentGame = response.data.game;
-    } catch (error) {
-      this.setErrorMessage("Erreur lors de la création de la partie");
+    } catch (error: any) {
+      if (error.response.data.message) {
+        this.setErrorMessage(error.response.data.message);
+      } else {
+        this.setErrorMessage("Une erreur inattendue est survenue");
+      }
     }
   };
 
@@ -227,7 +252,9 @@ class GameStore {
         rightAnswer,
         roundPlayer: this.roundPlayer,
       });
-      console.log(response.data.message);
+      if (response.data) {
+        this.setRightAnswer(response.data.right_answer);
+      }
     } catch (error) {
       console.error("Erreur lors de la soumission de la réponse", error);
     }

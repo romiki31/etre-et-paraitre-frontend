@@ -5,14 +5,14 @@ const Round = observer(() => {
   const { currentRound } = gameStore;
 
   return (
-    <div className="container">
+    <>
       {currentRound ? (
-        <>
-          <h3>Manche {currentRound.id}</h3>
-          <h2>{currentRound.name}</h2>
-        </>
+        <div className="colmn-center gap-2">
+          <h4>Manche {currentRound.id}</h4>
+          <h2 className="uppercase">{currentRound.name}</h2>
+        </div>
       ) : null}
-    </div>
+    </>
   );
 });
 
