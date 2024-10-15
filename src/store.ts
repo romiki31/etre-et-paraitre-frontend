@@ -21,6 +21,7 @@ class GameStore {
   answer: string | null = null;
   showAnswers: boolean = false;
   showRanking: boolean = false;
+  showQuestion: boolean = false;
   nextTurn: boolean = false;
   allAnswered: boolean = false;
   gamePlayers: Player[] = [];
@@ -116,6 +117,7 @@ class GameStore {
     this.allAnswered = false;
     this.currentQuestion = res.currentQuestion;
     this.roundPlayer = res.roundPlayer;
+    this.showQuestion = false;
   };
 
   joinSocketRoom = (pin: string) => {
@@ -167,8 +169,13 @@ class GameStore {
   setShowAnswers = (showAnswers: true | false) => {
     this.showAnswers = showAnswers;
   };
+
   setShowRanking = (showRanking: true | false) => {
     this.showRanking = showRanking;
+  };
+
+  setShowQuestion = (showQuestion: true | false) => {
+    this.showQuestion = showQuestion;
   };
   setNextTurn = (nextTurn: true | false) => {
     this.nextTurn = nextTurn;

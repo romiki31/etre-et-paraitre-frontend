@@ -7,12 +7,11 @@ import Ranking from "./Ranking";
 
 const Question = observer(() => {
   const {
+    currentRound,
     currentPlayer,
     roundPlayer,
-    currentRound,
     currentQuestion,
     rightAnswer,
-    hasAnswered,
     submitRightAnswer,
     submitGuess,
   } = gameStore;

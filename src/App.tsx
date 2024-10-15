@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import HomePage from "./Components/HomePage";
 import LoadingRoom from "./Components/LoadingRoom";
 import Question from "./Components/Question";
@@ -8,8 +8,13 @@ import TurnEnd from "./Components/TurnEnd";
 import { gameStore } from "./store";
 
 const App: React.FC = () => {
-  const { currentGame, currentRound, allAnswered } = gameStore;
-  const [showQuestion, setShowQuestion] = useState(false);
+  const {
+    currentGame,
+    currentRound,
+    allAnswered,
+    showQuestion,
+    setShowQuestion,
+  } = gameStore;
 
   useEffect(() => {
     gameStore.setupSocketListeners();
@@ -21,7 +26,6 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (currentRound) {
-      setShowQuestion(false);
       const timer = setTimeout(() => {
         setShowQuestion(true);
       }, 3000);
