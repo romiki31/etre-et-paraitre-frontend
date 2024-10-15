@@ -8,7 +8,7 @@ import TurnEnd from "./Components/TurnEnd";
 import { gameStore } from "./store";
 
 const App: React.FC = () => {
-  const { currentGame, currentRound, allAnswered, showAnswers } = gameStore;
+  const { currentGame, currentRound, allAnswered } = gameStore;
   const [showQuestion, setShowQuestion] = useState(false);
 
   useEffect(() => {
@@ -21,9 +21,10 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (currentRound) {
+      setShowQuestion(false);
       const timer = setTimeout(() => {
         setShowQuestion(true);
-      }, 2000);
+      }, 3000);
 
       return () => clearTimeout(timer);
     }

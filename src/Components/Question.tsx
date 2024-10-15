@@ -33,7 +33,7 @@ const Question = observer(() => {
     <>
       {currentQuestion && currentPlayer && currentRound ? (
         <div className="colmn-space-btwn">
-          <div className="flex-space-btw m-b-150">
+          <div className="flex-space-btw m-b-100">
             <div>
               <h4 className="m-b-10">Manche {currentRound.id}</h4>
               <div className="flex gap-1">

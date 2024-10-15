@@ -61,6 +61,10 @@ class GameStore {
     socket.on("next-turn", (res) => {
       this.setterNextTurn(res);
     });
+
+    socket.on("round-ended", (res) => {
+      this.setterNextRound(res);
+    });
   };
 
   emitShowAnswers = () => {
@@ -97,6 +101,21 @@ class GameStore {
     this.showRanking = false;
     this.allAnswered = false;
     this.nextTurn = false;
+  };
+
+  setterNextRound = (res: any) => {
+    this.currentGame = res.game;
+    this.gamePlayers = res.game.players;
+    this.currentRound = res.game.currentRound;
+    this.rightAnswer = res.game.rightAnswer;
+    this.hasAnswered = false;
+    this.answer = null;
+    this.showAnswers = false;
+    this.showRanking = false;
+    this.nextTurn = false;
+    this.allAnswered = false;
+    this.currentQuestion = res.currentQuestion;
+    this.roundPlayer = res.roundPlayer;
   };
 
   joinSocketRoom = (pin: string) => {
