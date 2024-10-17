@@ -5,7 +5,10 @@ const { Server } = require("socket.io");
 const { questions, rounds } = require("./constantes");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
+const path = require("path");
+
+app.use(express.static(path.join(__dirname, "build")));
 
 const server = http.createServer(app);
 
