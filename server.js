@@ -8,17 +8,9 @@ const app = express();
 const port = process.env.PORT || 5001;
 const path = require("path");
 
-app.use(express.static(path.join(__dirname, "build")));
-
 const server = http.createServer(app);
 
-const io = new Server(server, {
-  cors: {
-    // origin: "http://localhost:3000",
-    origin: "https://donska.fr/",
-    methods: ["GET", "POST"],
-  },
-});
+const io = new Server(server, {});
 
 app.use(cors());
 app.use(express.json());
@@ -72,7 +64,7 @@ app.post("/check-pin", (req, res) => {
   }
 });
 
-app.post("/create-game", (req, res) => {
+app.post("/api/create-game", (req, res) => {
   const { pin, username } = req.body;
 
   let game = games.find((g) => g.pin === pin);
@@ -244,6 +236,8 @@ app.post("/next-turn", (req, res) => {
       let currentQuestion = getRandomQuestion(game);
       let roundPlayer = game.players.find((player) => player.id === 1);
 
+      console.log(currentQuestion);
+
       io.to(pin).emit("round-ended", {
         message: "Tous les joueurs ont joué, la manche est terminée.",
         game: game,
@@ -289,6 +283,8 @@ app.post("/next-turn", (req, res) => {
   }
 });
 
+app.use(express.static(path.join(__dirname, "build")));
+
 server.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on port :${port}`);
 });

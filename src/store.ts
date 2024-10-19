@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import { Game, Player, Question, Round } from "./Constantes";
 
 // Initialiser la connexion avec le serveur Socket.IO
-const socket = io("http://localhost:5000");
+const socket = io("/");
 
 class GameStore {
   pin: string = "";
@@ -80,7 +80,7 @@ class GameStore {
 
   emitNextTurn = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/next-turn", {
+      const response = await axios.post("/api/next-turn", {
         pin: this.pin,
       });
       if (response.data.message === "Tour suivant") {
@@ -109,14 +109,14 @@ class GameStore {
     this.gamePlayers = res.game.players;
     this.currentRound = res.game.currentRound;
     this.rightAnswer = res.game.rightAnswer;
+    this.currentQuestion = res.currentQuestion;
+    this.roundPlayer = res.roundPlayer;
     this.hasAnswered = false;
     this.answer = null;
     this.showAnswers = false;
     this.showRanking = false;
     this.nextTurn = false;
     this.allAnswered = false;
-    this.currentQuestion = res.currentQuestion;
-    this.roundPlayer = res.roundPlayer;
     this.showQuestion = false;
   };
 
@@ -200,7 +200,7 @@ class GameStore {
 
   checkPin = async (pin: string) => {
     try {
-      const response = await axios.post("http://localhost:5000/check-pin", {
+      const response = await axios.post("/api/check-pin", {
         pin,
       });
       if (response.data.valid) {
@@ -218,10 +218,7 @@ class GameStore {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/create-game",
-        data
-      );
+      const response = await axios.post("/api/create-game", data);
       this.currentPlayer = response.data.currentPlayer;
       this.currentGame = response.data.game;
     } catch (error: any) {
@@ -240,10 +237,7 @@ class GameStore {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/create-game",
-        gameData
-      );
+      const response = await axios.post("/api/create-game", gameData);
 
       this.currentGame = response.data.game;
       this.currentPlayer = response.data.currentPlayer;
@@ -256,7 +250,7 @@ class GameStore {
 
   startGame = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/start-game", {
+      const response = await axios.post("/api/start-game", {
         pin: this.pin,
       });
 
@@ -273,7 +267,7 @@ class GameStore {
 
   submitRightAnswer = async (rightAnswer: string) => {
     try {
-      const response = await axios.post("http://localhost:5000/submit-answer", {
+      const response = await axios.post("/api/submit-answer", {
         pin: this.pin,
         rightAnswer,
         roundPlayer: this.roundPlayer,
@@ -288,7 +282,7 @@ class GameStore {
 
   submitGuess = async (guessedAnswer: string) => {
     try {
-      const response = await axios.post("http://localhost:5000/submit-guess", {
+      const response = await axios.post("/api/submit-guess", {
         pin: this.pin,
         playerId: this.currentPlayer?.id,
         guessedAnswer,

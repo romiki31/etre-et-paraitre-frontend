@@ -6,7 +6,13 @@ interface QuestionFORMProps {
 }
 
 const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
-  const { currentPlayer, roundPlayer, currentQuestion } = gameStore;
+  const {
+    currentPlayer,
+    roundPlayer,
+    currentQuestion,
+    currentRound,
+    gamePlayers,
+  } = gameStore;
 
   return (
     <>
@@ -19,36 +25,52 @@ const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
               : null}
             {` ${currentQuestion.name}`}
           </p>
-          <div className="flex-column gap-2">
-            <button
-              className="answer-btn"
-              onClick={() => submitFunc(currentQuestion.answer_1)}
-            >
-              {currentQuestion.answer_1}
-            </button>
-            <button
-              className="answer-btn"
-              onClick={() => submitFunc(currentQuestion.answer_2)}
-            >
-              {currentQuestion.answer_2}
-            </button>
-            {currentQuestion.answer_3 ? (
+
+          {currentRound?.id === 4 ? (
+            <div className="flex-column gap-2">
+              {gamePlayers.map((p) => {
+                return (
+                  <button
+                    className="answer-btn"
+                    onClick={() => submitFunc(p.username)}
+                  >
+                    {p.username}
+                  </button>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="flex-column gap-2">
               <button
                 className="answer-btn"
-                onClick={() => submitFunc(currentQuestion.answer_3)}
+                onClick={() => submitFunc(currentQuestion.answer_1)}
               >
-                {currentQuestion.answer_3}
+                {currentQuestion.answer_1}
               </button>
-            ) : null}
-            {currentQuestion.answer_4 ? (
               <button
                 className="answer-btn"
-                onClick={() => submitFunc(currentQuestion.answer_4)}
+                onClick={() => submitFunc(currentQuestion.answer_2)}
               >
-                {currentQuestion.answer_4}
+                {currentQuestion.answer_2}
               </button>
-            ) : null}
-          </div>
+              {currentQuestion.answer_3 ? (
+                <button
+                  className="answer-btn"
+                  onClick={() => submitFunc(currentQuestion.answer_3)}
+                >
+                  {currentQuestion.answer_3}
+                </button>
+              ) : null}
+              {currentQuestion.answer_4 ? (
+                <button
+                  className="answer-btn"
+                  onClick={() => submitFunc(currentQuestion.answer_4)}
+                >
+                  {currentQuestion.answer_4}
+                </button>
+              ) : null}
+            </div>
+          )}
         </div>
       ) : null}
     </>

@@ -1,3 +1,4 @@
+import { toJS } from "mobx";
 import { observer } from "mobx-react";
 import { useState } from "react";
 import { gameStore } from "../store";
@@ -27,6 +28,9 @@ const Question = observer(() => {
       }
     }
   };
+
+  console.log(toJS(currentQuestion));
+  console.log(toJS(currentRound));
 
   return (
     <>
