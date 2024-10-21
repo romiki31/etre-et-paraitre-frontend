@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
   });
 });
 
-app.post("/check-pin", (req, res) => {
+app.post("/api/check-pin", (req, res) => {
   const { pin } = req.body;
 
   const game = games.find((g) => g.pin === pin);
@@ -123,7 +123,7 @@ app.post("/api/create-game", (req, res) => {
   }
 });
 
-app.post("/start-game", (req, res) => {
+app.post("/api/start-game", (req, res) => {
   const { pin } = req.body;
 
   let game = games.find((g) => g.pin === pin);
@@ -156,7 +156,7 @@ app.post("/start-game", (req, res) => {
   }
 });
 
-app.post("/submit-answer", (req, res) => {
+app.post("/api/submit-answer", (req, res) => {
   const { pin, rightAnswer, roundPlayer } = req.body;
 
   let game = games.find((g) => g.pin === pin);
@@ -178,7 +178,7 @@ app.post("/submit-answer", (req, res) => {
   }
 });
 
-app.post("/submit-guess", (req, res) => {
+app.post("/api/submit-guess", (req, res) => {
   const { pin, playerId, guessedAnswer } = req.body;
 
   let game = games.find((g) => g.pin === pin);
@@ -215,7 +215,7 @@ app.post("/submit-guess", (req, res) => {
   }
 });
 
-app.post("/next-turn", (req, res) => {
+app.post("/api/next-turn", (req, res) => {
   const { pin } = req.body;
 
   let game = games.find((g) => g.pin === pin);

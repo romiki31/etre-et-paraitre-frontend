@@ -135,10 +135,10 @@ body,
 @import url("https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap");
 
 :root {
-  --primary-color: #4b0082;
+  --primary-color: #7329b9;
   --secondary-color: #19111e;
   --third-color: #3a3642;
-  --accent-color: #e9d254;
+  --accent-color: #ffc759;
 }
 
 body {
