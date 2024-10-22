@@ -55,7 +55,7 @@ io.on("connection", (socket) => {
   });
 });
 
-app.post(`${apiBaseUrl}/api/check-pin`, (req, res) => {
+app.post("/api/check-pin", (req, res) => {
   const { pin } = req.body;
 
   const game = games.find((g) => g.pin === pin);
