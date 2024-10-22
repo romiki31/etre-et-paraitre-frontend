@@ -4,9 +4,7 @@ import { io } from "socket.io-client";
 import { Game, Player, Question, Round } from "./Constantes";
 
 const socket =
-  process.env.NODE_ENV === "production"
-    ? io("https://ton-domaine.com")
-    : io("/");
+  process.env.NODE_ENV === "production" ? io("https://donska.fr") : io("/");
 
 class GameStore {
   pin: string = "";
