@@ -16,10 +16,6 @@ const HomePage = observer(() => {
   const [inputPin, setInputPin] = useState("");
   const [inputUsername, setInputUsername] = useState("");
 
-  const handleCheckPin = async () => {
-    checkPin(inputPin);
-  };
-
   return (
     <div className="colmn-space-btwn">
       <h1>ÊTRE ET PARAÎTRE</h1>
@@ -50,7 +46,10 @@ const HomePage = observer(() => {
               value={inputPin}
               onChange={(e) => setInputPin(e.target.value)}
             />
-            <button className="w-33 internal-btn" onClick={handleCheckPin}>
+            <button
+              className="w-33 internal-btn"
+              onClick={() => checkPin(inputPin)}
+            >
               GO
             </button>
           </div>
