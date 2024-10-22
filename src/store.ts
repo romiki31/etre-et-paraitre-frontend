@@ -3,8 +3,10 @@ import { makeAutoObservable } from "mobx";
 import { io } from "socket.io-client";
 import { Game, Player, Question, Round } from "./Constantes";
 
-// Initialiser la connexion avec le serveur Socket.IO
-const socket = io("/");
+const socket =
+  process.env.NODE_ENV === "production"
+    ? io("https://ton-domaine.com")
+    : io("/");
 
 class GameStore {
   pin: string = "";

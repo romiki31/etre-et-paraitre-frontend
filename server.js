@@ -9,8 +9,11 @@ const port = process.env.PORT || 5001;
 const path = require("path");
 
 const server = http.createServer(app);
-
 const io = new Server(server, {});
+const apiBaseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://donska.fr"
+    : "http://localhost:5001";
 
 app.use(cors());
 app.use(express.json());
@@ -52,7 +55,7 @@ io.on("connection", (socket) => {
   });
 });
 
-app.post("/api/check-pin", (req, res) => {
+app.post(`${apiBaseUrl}/api/check-pin`, (req, res) => {
   const { pin } = req.body;
 
   const game = games.find((g) => g.pin === pin);
