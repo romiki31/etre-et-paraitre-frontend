@@ -14,6 +14,7 @@ const App: React.FC = () => {
     allAnswered,
     showQuestion,
     setShowQuestion,
+    getBackgroundClass,
   } = gameStore;
 
   useEffect(() => {
@@ -35,18 +36,26 @@ const App: React.FC = () => {
   }, [currentRound]);
 
   return (
-    <div className="container">
-      {allAnswered ? (
-        <TurnEnd />
-      ) : showQuestion ? (
-        <Question />
-      ) : currentRound ? (
-        <Round />
-      ) : currentGame ? (
-        <LoadingRoom />
-      ) : (
-        <HomePage />
-      )}
+    <div
+      className={
+        currentRound
+          ? `main-container ${getBackgroundClass(currentRound.id)}`
+          : "main-container"
+      }
+    >
+      <div className="container">
+        {allAnswered ? (
+          <TurnEnd />
+        ) : showQuestion ? (
+          <Question />
+        ) : currentRound ? (
+          <Round />
+        ) : currentGame ? (
+          <LoadingRoom />
+        ) : (
+          <HomePage />
+        )}
+      </div>
     </div>
   );
 };

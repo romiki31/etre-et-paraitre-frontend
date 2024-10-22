@@ -1,4 +1,3 @@
-import { toJS } from "mobx";
 import { observer } from "mobx-react";
 import { useState } from "react";
 import { gameStore } from "../store";
@@ -29,19 +28,16 @@ const Question = observer(() => {
     }
   };
 
-  console.log(toJS(currentQuestion));
-  console.log(toJS(currentRound));
-
   return (
     <>
       {currentQuestion && currentPlayer && currentRound ? (
         <div className="colmn-space-btwn">
-          <div className="flex-space-btw m-b-100">
+          <div className="flex-space-btw">
             <div>
-              <h4 className="m-b-10">Manche {currentRound.id}</h4>
+              <h4 className="text-left m-b-10">Manche {currentRound.id}</h4>
               <div className="flex gap-1">
                 <p className="small-text">Tour de :</p>
-                <p className="accent-color">{roundPlayer?.username}</p>
+                <p className="third-color">{roundPlayer?.username}</p>
               </div>
             </div>
             <button
@@ -68,7 +64,10 @@ const Question = observer(() => {
             <QuestionForm submitFunc={handleSubmitAnswer} />
           ) : (
             <>
-              <p>{roundPlayer?.username} est en train de répondre</p>
+              <div className="flex-center gap-1">
+                <p className="third-color">{roundPlayer?.username}</p>
+                <p>est en train de répondre</p>
+              </div>
               <div></div>
             </>
           )}

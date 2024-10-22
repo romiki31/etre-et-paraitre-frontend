@@ -25,6 +25,7 @@ class GameStore {
   nextTurn: boolean = false;
   allAnswered: boolean = false;
   gamePlayers: Player[] = [];
+  winner: Player | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -86,6 +87,9 @@ class GameStore {
       if (response.data.message === "Tour suivant") {
         this.setterNextTurn(response.data);
       }
+      if (response.data.message === "Partie terminée") {
+        this.setWinner(response.data.winner);
+      }
     } catch (error) {
       console.error("Erreur lors du passage au joueur suivant", error);
     }
@@ -118,6 +122,36 @@ class GameStore {
     this.nextTurn = false;
     this.allAnswered = false;
     this.showQuestion = false;
+  };
+
+  getBackgroundClass = (roundId: number) => {
+    switch (roundId) {
+      case 1:
+        return "bg-personality";
+      case 2:
+        return "bg-situations";
+      case 3:
+        return "bg-relations";
+      case 4:
+        return "bg-representations";
+      default:
+        return "bg-default";
+    }
+  };
+
+  getBtnClass = (roundId: number) => {
+    switch (roundId) {
+      case 1:
+        return "btn-personality";
+      case 2:
+        return "btn-situations";
+      case 3:
+        return "btn-relations";
+      case 4:
+        return "btn-representations";
+      default:
+        return "btn-default";
+    }
   };
 
   joinSocketRoom = (pin: string) => {
@@ -177,11 +211,17 @@ class GameStore {
   setShowQuestion = (showQuestion: true | false) => {
     this.showQuestion = showQuestion;
   };
+
   setNextTurn = (nextTurn: true | false) => {
     this.nextTurn = nextTurn;
   };
+
   setGamePlayers = (gamePlayers: Player[]) => {
     this.gamePlayers = gamePlayers;
+  };
+
+  setWinner = (winner: Player) => {
+    this.winner = winner;
   };
 
   setErrorMessage = (message: string) => {

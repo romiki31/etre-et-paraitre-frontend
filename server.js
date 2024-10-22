@@ -222,33 +222,56 @@ app.post("/api/next-turn", (req, res) => {
 
   if (game) {
     const allPlayersPlayed = game.players.every((player) => player.isTurn);
-
     if (allPlayersPlayed) {
-      game.currentRound = rounds.find((r) => r.id === game.currentRound.id + 1);
-      game.rightAnswer = null;
-      game.posedQuestions = [];
-      game.players = game.players.map((p) => ({
-        ...p,
-        isTurn: false,
-        hasAnswered: false,
-        answer: false,
-      }));
-      let currentQuestion = getRandomQuestion(game);
-      let roundPlayer = game.players.find((player) => player.id === 1);
+      if (game.currentRound.id === 4) {
+        const winner = game.players.reduce((maxPlayer, currentPlayer) => {
+          return currentPlayer.points > maxPlayer.points
+            ? currentPlayer
+            : maxPlayer;
+        }, game.players[0]);
 
-      console.log(currentQuestion);
+        io.to(pin).emit("end-game", {
+          message: "Partie terminée",
+          winner: winner,
+        });
+        return res.json({
+          message: "Partie terminée",
+          winner: winner,
+        });
+      } else {
+        game.currentRound = rounds.find(
+          (r) => r.id === game.currentRound.id + 1
+        );
+        let roundPlayer = game.players.find((player) => player.id === 1);
+        game.rightAnswer = null;
+        game.posedQuestions = [];
+        game.players = game.players.map((p) =>
+          p.id === roundPlayer.id
+            ? { ...p, isTurn: true }
+            : {
+                ...p,
+                isTurn: false,
+                hasAnswered: false,
+                answer: false,
+              }
+        );
+        let currentQuestion = getRandomQuestion(game);
+        roundPlayer = { ...roundPlayer, isTurn: true };
 
-      io.to(pin).emit("round-ended", {
-        message: "Tous les joueurs ont joué, la manche est terminée.",
-        game: game,
-        roundPlayer: roundPlayer,
-        currentQuestion: currentQuestion,
-      });
+        io.to(pin).emit("round-ended", {
+          message: "Tous les joueurs ont joué, la manche est terminée.",
+          game: game,
+          roundPlayer: roundPlayer,
+          currentQuestion: currentQuestion,
+        });
 
-      return res.json({
-        message: "La manche est terminée.",
-        gamePlayers: game.players,
-      });
+        return res.json({
+          message: "La manche est terminée.",
+          gamePlayers: game.players,
+          roundPlayer: roundPlayer,
+          currentQuestion: currentQuestion,
+        });
+      }
     } else {
       const nextPlayer = game.players.filter((player) => !player.isTurn)[0];
 

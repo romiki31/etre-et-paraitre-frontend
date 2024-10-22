@@ -17,20 +17,23 @@ const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
   return (
     <>
       {currentQuestion ? (
-        <div className="colmn-space-btwn">
-          <p>
-            {currentPlayer?.username},
-            {currentPlayer?.username !== roundPlayer?.username
-              ? ` qu'a répondu ${roundPlayer?.username} à la question : `
-              : null}
-            {` ${currentQuestion.name}`}
-          </p>
+        <>
+          <div>
+            <p className="third-color">{currentPlayer?.username},</p>
+            <p>
+              {currentPlayer?.username !== roundPlayer?.username
+                ? ` qu'a répondu ${roundPlayer?.username} à la question : `
+                : null}
+              {` ${currentQuestion.name}`}
+            </p>
+          </div>
 
-          {currentRound?.id === 4 ? (
+          {currentRound?.id === 3 || currentRound?.id === 4 ? (
             <div className="flex-column gap-2">
               {gamePlayers.map((p) => {
                 return (
                   <button
+                    key={p.id}
                     className="answer-btn"
                     onClick={() => submitFunc(p.username)}
                   >
@@ -71,7 +74,7 @@ const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
               ) : null}
             </div>
           )}
-        </div>
+        </>
       ) : null}
     </>
   );

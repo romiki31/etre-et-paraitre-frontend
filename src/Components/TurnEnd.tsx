@@ -11,11 +11,13 @@ const TurnEnd = observer(() => {
     emitShowAnswers,
     emitShowRanking,
     emitNextTurn,
+    getBtnClass,
+    currentRound,
   } = gameStore;
 
   return (
     <div className="colmn-space-btwn gap-2">
-      <div></div>
+      {showRanking ? null : <div></div>}
       {!showAnswers && <h4>TERMINÉ</h4>}
       {showRanking ? <Ranking /> : showAnswers ? <RightAnswer /> : null}
       {gameCreator ? (
@@ -24,6 +26,7 @@ const TurnEnd = observer(() => {
             onClick={() => {
               emitNextTurn();
             }}
+            className={currentRound ? `${getBtnClass(currentRound.id)}` : ""}
           >
             Suivant
           </button>
@@ -32,6 +35,7 @@ const TurnEnd = observer(() => {
             onClick={() => {
               emitShowRanking();
             }}
+            className={currentRound ? `${getBtnClass(currentRound.id)}` : ""}
           >
             Voir le classement
           </button>
@@ -40,6 +44,7 @@ const TurnEnd = observer(() => {
             onClick={() => {
               emitShowAnswers();
             }}
+            className={currentRound ? `${getBtnClass(currentRound.id)}` : ""}
           >
             Voir la réponse
           </button>

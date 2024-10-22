@@ -2,11 +2,34 @@ import { observer } from "mobx-react";
 import { gameStore } from "../store";
 
 const RightAnswer = observer(() => {
-  const { showAnswers, currentQuestion, rightAnswer } = gameStore;
+  const {
+    showAnswers,
+    currentQuestion,
+    rightAnswer,
+    currentRound,
+    gamePlayers,
+  } = gameStore;
 
   return (
     <>
-      {currentQuestion ? (
+      {currentRound?.id === 3 || currentRound?.id === 4 ? (
+        <div className="flex-column gap-2">
+          {gamePlayers.map((p) => {
+            return (
+              <p
+                key={p.id}
+                className={
+                  showAnswers && rightAnswer === p.username
+                    ? "highlight-right-answer"
+                    : ""
+                }
+              >
+                {p.username}
+              </p>
+            );
+          })}
+        </div>
+      ) : currentQuestion ? (
         <div className="flex-column gap-2">
           <p
             className={

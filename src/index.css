@@ -139,6 +139,14 @@ body,
   --secondary-color: #19111e;
   --third-color: #3a3642;
   --accent-color: #ffc759;
+  --first-round-light: #ffad0a;
+  --first-round: #e6870b;
+  --second-round-light: #0b69d5;
+  --second-round: #052f5f;
+  --third-round-light: #01df5e;
+  --third-round: #018d3c;
+  --fourth-round-light: #e63946;
+  --fourth-round: #c81927;
 }
 
 body {
@@ -157,10 +165,63 @@ body {
   );  */
 }
 
-#root {
+.main-container {
+  height: 100vh;
   display: flex;
   flex-direction: row;
 }
+
+.bg-personality {
+  background: linear-gradient(
+    0deg,
+    var(--first-round) 0%,
+    var(--first-round-light) 80% /* rgba(116, 42, 185, 1) 100% */
+  );
+}
+
+.bg-situations {
+  background: linear-gradient(
+    0deg,
+    var(--second-round) 0%,
+    var(--second-round-light) 80% /* rgba(116, 42, 185, 1) 100% */
+  );
+}
+
+.bg-relations {
+  background: linear-gradient(
+    0deg,
+    var(--third-round) 0%,
+    var(--third-round-light) 80% /* rgba(116, 42, 185, 1) 100% */
+  );
+}
+
+.bg-representations {
+  background: linear-gradient(
+    0deg,
+    var(--fourth-round) 0%,
+    var(--fourth-round-light) 80% /* rgba(116, 42, 185, 1) 100% */
+  );
+}
+
+.btn-personality {
+  color: var(--first-round);
+}
+
+.btn-situations {
+  color: var(--second-round);
+}
+
+.btn-relations {
+  color: var(--third-round);
+}
+
+.btn-representations {
+  color: var(--fourth-round);
+}
+/* 
+.bg-default {
+  background-color: white;
+} */
 
 .container {
   margin-left: 20px;
@@ -262,7 +323,7 @@ input[type="number"] {
   color: #ffffff !important;
   padding: 10px !important;
   border-radius: 10px !important;
-  background-color: #4b0082 !important;
+  background-color: transparent;
   border: 3px solid #ffffff !important;
 }
 
@@ -277,6 +338,12 @@ input[type="number"] {
 .flex {
   display: flex;
   align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .flex-column {
@@ -321,19 +388,25 @@ input[type="number"] {
   gap: 50px;
 }
 
+.text-left {
+  text-align: left !important;
+}
 .center-text {
   text-align: center;
 }
 
 .accent-color {
-  color: #e9d254;
+  color: #ffc759;
 }
 
+.third-color {
+  color: var(--third-color);
+}
 .w-33 {
-  width: 33%;
+  width: 33.333%;
 }
 .w-66 {
-  width: 66%;
+  width: 66.666%;
 }
 
 .m-b-10 {
