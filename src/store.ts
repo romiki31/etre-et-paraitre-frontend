@@ -251,12 +251,12 @@ class GameStore {
       this.setErrorMessage("Code PIN invalide");
     }
   };
+
   createGame = async (username: string) => {
     const data = {
       pin: this.pin,
       username: username,
     };
-
     try {
       const response = await axios.post("/api/create-game", data);
       this.currentPlayer = response.data.currentPlayer;

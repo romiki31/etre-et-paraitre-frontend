@@ -10,10 +10,10 @@ const path = require("path");
 
 const server = http.createServer(app);
 const io = new Server(server, {});
-const apiBaseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://donska.fr"
-    : "http://localhost:5001";
+// const apiBaseUrl =
+//   process.env.NODE_ENV === "production"
+//     ? "https://donska.fr"
+//     : "http://localhost:5001";
 
 app.use(cors());
 app.use(express.json());

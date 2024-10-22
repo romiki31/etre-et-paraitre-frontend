@@ -17,7 +17,7 @@ const HomePage = observer(() => {
   const [inputUsername, setInputUsername] = useState("");
 
   const handleCheckPin = async () => {
-    await checkPin(inputPin);
+    checkPin(inputPin);
   };
 
   return (
