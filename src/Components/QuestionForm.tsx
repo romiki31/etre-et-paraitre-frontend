@@ -18,15 +18,13 @@ const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
     <>
       {currentQuestion ? (
         <>
-          <div>
-            <p className="third-color">{currentPlayer?.username},</p>
-            <p>
-              {currentPlayer?.username !== roundPlayer?.username
-                ? ` qu'a répondu ${roundPlayer?.username} à la question : `
-                : null}
-              {` ${currentQuestion.name}`}
-            </p>
-          </div>
+          <p>
+            <span className="accent-text">{currentPlayer?.username}</span>
+            {currentPlayer?.username !== roundPlayer?.username
+              ? ` qu'a répondu ${roundPlayer?.username} à la question : `
+              : null}
+            <span className="strong">{` ${currentQuestion.name}`}</span>
+          </p>
 
           {currentRound?.id === 3 || currentRound?.id === 4 ? (
             <div className="flex-column gap-2">

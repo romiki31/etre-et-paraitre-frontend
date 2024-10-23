@@ -37,7 +37,7 @@ const Question = observer(() => {
               <h4 className="text-left m-b-10">Manche {currentRound.id}</h4>
               <div className="flex gap-1">
                 <p className="small-text">Tour de :</p>
-                <p className="third-color">{roundPlayer?.username}</p>
+                <p className="accent-text">{roundPlayer?.username}</p>
               </div>
             </div>
             <button
@@ -65,8 +65,11 @@ const Question = observer(() => {
           ) : (
             <>
               <div className="flex-center gap-1">
-                <p className="third-color">{roundPlayer?.username}</p>
-                <p>est en train de répondre</p>
+                <p>
+                  {" "}
+                  <span className="strong">{roundPlayer?.username} </span>
+                  est en train de répondre
+                </p>
               </div>
               <div></div>
             </>

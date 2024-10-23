@@ -139,8 +139,9 @@ body,
   --secondary-color: #19111e;
   --third-color: #3a3642;
   --accent-color: #ffc759;
+  --soft-color: #ece9ec;
   --first-round-light: #ffad0a;
-  --first-round: #e6870b;
+  --first-round: #f48e0a;
   --second-round-light: #0b69d5;
   --second-round: #052f5f;
   --third-round-light: #01df5e;
@@ -231,32 +232,25 @@ body {
   flex: 1;
 }
 
-@media (min-width: 768px) {
-  .container {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 750px;
-  }
-}
-
 h1 {
-  font-size: 48px;
+  font-size: 44px;
+  font-weight: bold;
   color: var(--accent-color);
   text-align: center;
 }
 h2 {
-  font-size: 48px;
+  font-size: 42px;
   color: white;
   text-align: center;
 }
 h3 {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 800;
   color: white;
   text-align: center;
 }
 h4 {
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 400;
   color: white;
   text-align: center;
@@ -264,21 +258,69 @@ h4 {
 
 p {
   font-family: "Belanosima", sans-serif;
-  font-weight: 100;
-  font-size: 24px;
+  font-weight: 400;
+  font-size: 18px !important;
+  line-height: 1.2;
   color: white;
   text-align: center;
 }
 
+@media (min-width: 768px) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 750px;
+  }
+
+  p {
+    font-size: 22px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 40px;
+  }
+  h2 {
+    font-size: 36px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  h4 {
+    font-size: 24px;
+  }
+  p {
+    font-size: 16px !important;
+  }
+  button {
+    font-size: 24px !important;
+    padding: 20px !important;
+  }
+  input {
+    font-size: 24px !important;
+    padding: 20px !important;
+  }
+  .answer-btn {
+    font-size: 20px !important;
+  }
+}
+
 .small-text {
+  font-size: 18px;
+}
+
+.soft-text {
   font-size: 20px;
+  font-weight: 400 !important;
+  color: var(--soft-color);
 }
 
 button {
   cursor: pointer;
   font-family: "Belanosima", sans-serif;
   font-weight: 600;
-  font-size: 32px;
+  font-size: 28px;
   color: var(--primary-color);
   width: 100%;
   padding: 25px;
@@ -295,7 +337,7 @@ button:hover {
 input {
   font-family: "Belanosima", sans-serif;
   font-weight: 600;
-  font-size: 32px;
+  font-size: 28px;
   color: var(--accent-color);
   width: 100%;
   padding: 25px;
@@ -319,7 +361,7 @@ input[type="number"] {
 
 .answer-btn {
   font-weight: 400 !important;
-  font-size: 28px !important;
+  font-size: 24px;
   color: #ffffff !important;
   padding: 10px !important;
   border-radius: 10px !important;
@@ -327,9 +369,13 @@ input[type="number"] {
   border: 3px solid #ffffff !important;
 }
 
+.strong {
+  font-weight: 600 !important;
+}
+
 .answer {
-  font-weight: 200 !important;
-  font-size: 24px !important;
+  font-weight: 400 !important;
+  font-size: 20px !important;
   color: white !important;
   border: 3px solid white !important;
   background-color: var(--primary-color);
@@ -399,7 +445,8 @@ input[type="number"] {
   color: #ffc759;
 }
 
-.third-color {
+.accent-text {
+  font-weight: 700 !important;
   color: var(--third-color);
 }
 .w-33 {

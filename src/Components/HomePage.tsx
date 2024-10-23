@@ -18,7 +18,7 @@ const HomePage = observer(() => {
 
   return (
     <div className="colmn-space-btwn">
-      <h1>ÊTRE ET PARAÎTRE</h1>
+      <h1 className="title">ÊTRE ET PARAÎTRE</h1>
       {gameCreator || isPinValid ? (
         <div className="flex-column gap-1">
           <div className="flex">
@@ -36,25 +36,37 @@ const HomePage = observer(() => {
           {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         </div>
       ) : (
-        <div className="flex-column gap-1">
-          <button onClick={generatePin}>Créer une partie</button>
-          <h4>Ou</h4>
-          <div className="flex">
-            <input
-              className="w-66 internal-input"
-              placeholder="Code PIN ..."
-              value={inputPin}
-              onChange={(e) => setInputPin(e.target.value)}
-            />
-            <button
-              className="w-33 internal-btn"
-              onClick={() => checkPin(inputPin)}
-            >
-              GO
-            </button>
+        <>
+          <p className="soft-text">
+            Bienvenue ! <br />
+            <br />
+            Si vous êtes le premier joueur, cliquez sur "Créer une partie". Un
+            code PIN unique sera généré que vous pourrez partager avec vos amis
+            pour qu'ils puissent vous rejoindre. <br />
+            Si vous avez déjà un code PIN, entrez-le dans le champ prévu et
+            cliquez sur "GO". Vous serez immédiatement ajouté à la partie en
+            cours.
+          </p>
+          <div className="flex-column gap-1">
+            <button onClick={generatePin}>Créer une partie</button>
+            <h4>Ou</h4>
+            <div className="flex">
+              <input
+                className="w-66 internal-input"
+                placeholder="Code PIN ..."
+                value={inputPin}
+                onChange={(e) => setInputPin(e.target.value)}
+              />
+              <button
+                className="w-33 internal-btn"
+                onClick={() => checkPin(inputPin)}
+              >
+                GO
+              </button>
+            </div>
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           </div>
-          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-        </div>
+        </>
       )}
     </div>
   );
