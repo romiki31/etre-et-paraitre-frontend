@@ -12,6 +12,7 @@ const Question = observer(() => {
     roundPlayer,
     currentQuestion,
     rightAnswer,
+    answer,
     submitRightAnswer,
     submitGuess,
   } = gameStore;
@@ -60,8 +61,13 @@ const Question = observer(() => {
             ) : (
               <QuestionForm submitFunc={handleSubmitAnswer} />
             )
-          ) : rightAnswer ? (
+          ) : rightAnswer && !answer ? (
             <QuestionForm submitFunc={handleSubmitAnswer} />
+          ) : answer ? (
+            <>
+              <p>En attente des réponses des autres joueurs</p>
+              <div></div>
+            </>
           ) : (
             <>
               <div className="flex-center gap-1">
