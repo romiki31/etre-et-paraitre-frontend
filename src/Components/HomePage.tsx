@@ -40,12 +40,8 @@ const HomePage = observer(() => {
           <p className="soft-text">
             Bienvenue ! <br />
             <br />
-            Si vous êtes le premier joueur, cliquez sur "Créer une partie". Un
-            code PIN unique sera généré que vous pourrez partager avec vos amis
-            pour qu'ils puissent vous rejoindre. <br />
-            Si vous avez déjà un code PIN, entrez-le dans le champ prévu et
-            cliquez sur "GO". Vous serez immédiatement ajouté à la partie en
-            cours.
+            Commencer une nouvelle partie ou rejoignez une partie existante en
+            entrant le code PIN généré par le créateur de la partie
           </p>
           <div className="flex-column gap-1">
             <button onClick={generatePin}>Créer une partie</button>
