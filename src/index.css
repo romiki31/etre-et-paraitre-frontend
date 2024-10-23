@@ -282,27 +282,27 @@ p {
     font-size: 40px;
   }
   h2 {
-    font-size: 36px;
+    font-size: 38px;
   }
   h3 {
-    font-size: 24px;
+    font-size: 26px;
   }
   h4 {
-    font-size: 24px;
+    font-size: 26px;
   }
   p {
-    font-size: 16px !important;
+    font-size: 18px !important;
   }
   button {
-    font-size: 24px !important;
-    padding: 20px !important;
+    font-size: 26px !important;
+    padding: 22px !important;
   }
   input {
-    font-size: 24px !important;
-    padding: 20px !important;
+    font-size: 26px !important;
+    padding: 22px !important;
   }
   .answer-btn {
-    font-size: 20px !important;
+    font-size: 22px !important;
   }
 }
 
