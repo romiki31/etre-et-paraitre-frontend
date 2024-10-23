@@ -317,6 +317,10 @@ p {
   color: var(--soft-color);
 }
 
+.btn-icon {
+  padding: 0 !important;
+}
+
 button {
   cursor: pointer;
   font-family: "Belanosima", sans-serif;

@@ -32,6 +32,7 @@ const Popup: React.FC<PopupProps> = ({ onClose, children }) => {
         <div className="container">
           <div className="flex-end">
             <button
+              className="btn-icon"
               style={{
                 all: "unset",
                 cursor: "pointer",
