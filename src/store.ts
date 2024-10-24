@@ -67,6 +67,10 @@ class GameStore {
     socket.on("round-ended", (res) => {
       this.setterNextRound(res);
     });
+
+    socket.on("end-game", (res) => {
+      this.setWinner(res.winner);
+    });
   };
 
   emitShowAnswers = () => {

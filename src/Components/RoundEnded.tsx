@@ -1,16 +1,17 @@
-import { toJS } from "mobx";
 import { observer } from "mobx-react";
 import { gameStore } from "../store";
 
 const RoundEnded = observer(() => {
   const { winner } = gameStore;
 
-  console.log(toJS(winner));
-
   return (
     <>
       {winner ? (
-        <div>{winner.username} a remporté la partie !</div>
+        <div className="colmn-space-btwn">
+          <div></div>
+          <h3>{winner.username} a remporté la partie !</h3>
+          <div></div>
+        </div>
       ) : (
         <div>
           <h2>MANCHE TERMINÉE !</h2>

@@ -4,6 +4,7 @@ import HomePage from "./Components/HomePage";
 import LoadingRoom from "./Components/LoadingRoom";
 import Question from "./Components/Question";
 import Round from "./Components/Round";
+import RoundEnded from "./Components/RoundEnded";
 import TurnEnd from "./Components/TurnEnd";
 import { gameStore } from "./store";
 
@@ -15,6 +16,7 @@ const App: React.FC = () => {
     showQuestion,
     setShowQuestion,
     getBackgroundClass,
+    winner,
   } = gameStore;
 
   useEffect(() => {
@@ -44,7 +46,9 @@ const App: React.FC = () => {
       }
     >
       <div className="container">
-        {allAnswered ? (
+        {winner ? (
+          <RoundEnded />
+        ) : allAnswered ? (
           <TurnEnd />
         ) : showQuestion ? (
           <Question />

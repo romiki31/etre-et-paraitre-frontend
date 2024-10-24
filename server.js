@@ -134,6 +134,8 @@ app.post("/api/start-game", (req, res) => {
 
   if (game) {
     const currentQuestion = getRandomQuestion(game);
+    game.posedQuestions = [...game.posedQuestions, currentQuestion.id];
+
     const roundPlayer = game.players.find((player) => player.id === 1);
 
     game.players = game.players.map((player) => ({
@@ -260,6 +262,7 @@ app.post("/api/next-turn", (req, res) => {
               }
         );
         let currentQuestion = getRandomQuestion(game);
+        game.posedQuestions = [...game.posedQuestions, currentQuestion.id];
         roundPlayer = { ...roundPlayer, isTurn: true };
 
         io.to(pin).emit("round-ended", {
@@ -290,7 +293,7 @@ app.post("/api/next-turn", (req, res) => {
       );
 
       const currentQuestion = getRandomQuestion(game);
-      game.posedQuestions.push(currentQuestion.id);
+      game.posedQuestions = [...game.posedQuestions, currentQuestion.id];
 
       io.to(pin).emit("next-turn", {
         currentQuestion,
