@@ -485,9 +485,21 @@ input[type="number"] {
   border-radius: 0px 10px 10px 0px !important;
 }
 
+.error-red {
+  color: #cc1417;
+}
+
 .highlight-right-answer {
   background-color: #74f081;
   color: #28aa35;
+  border-radius: 10px;
+  padding: 20px;
+  transition: all 1s ease-out;
+}
+
+.highlight-wrong-answer {
+  background-color: #f06a6d;
+  color: #cc1417;
   border-radius: 10px;
   padding: 20px;
   transition: all 1s ease-out;

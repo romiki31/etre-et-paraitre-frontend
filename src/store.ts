@@ -70,6 +70,7 @@ class GameStore {
 
     socket.on("end-game", (res) => {
       this.setWinner(res.winner);
+      this.setCurrentRound(null);
     });
   };
 
@@ -93,6 +94,7 @@ class GameStore {
       }
       if (response.data.message === "Partie terminée") {
         this.setWinner(response.data.winner);
+        this.setCurrentRound(null);
       }
     } catch (error) {
       console.error("Erreur lors du passage au joueur suivant", error);
@@ -174,7 +176,7 @@ class GameStore {
     this.currentGame = currentGame;
   };
 
-  setCurrentRound = (currentRound: Round) => {
+  setCurrentRound = (currentRound: Round | null) => {
     this.currentRound = currentRound;
   };
 

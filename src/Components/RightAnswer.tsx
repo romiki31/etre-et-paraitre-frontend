@@ -1,30 +1,40 @@
 import { observer } from "mobx-react";
+import { Question } from "../Constantes";
 import { gameStore } from "../store";
 
 const RightAnswer = observer(() => {
   const {
     showAnswers,
     currentQuestion,
+    answer,
     rightAnswer,
     currentRound,
     gamePlayers,
+    roundPlayer,
+    currentPlayer,
   } = gameStore;
 
   return (
     <>
+      <h4>La bonne réponse est ...</h4>
       {currentRound?.id === 3 || currentRound?.id === 4 ? (
         <>
-          <h4>La bonne réponse était ...</h4>
           <div className="flex-column gap-2">
             {gamePlayers.map((p) => {
+              const isRightAnswer = rightAnswer === p.username;
+              const isWrongAnswer =
+                answer === p.username && answer !== rightAnswer;
+
               return (
                 <p
                   key={p.id}
-                  className={
-                    showAnswers && rightAnswer === p.username
+                  className={`${
+                    showAnswers && isRightAnswer
                       ? "highlight-right-answer"
+                      : showAnswers && isWrongAnswer
+                      ? "highlight-wrong-answer"
                       : ""
-                  }
+                  }`}
                 >
                   {p.username}
                 </p>
@@ -34,43 +44,38 @@ const RightAnswer = observer(() => {
         </>
       ) : currentQuestion ? (
         <div className="flex-column gap-2">
-          <p
-            className={
-              showAnswers && rightAnswer === currentQuestion.answer_1
-                ? "highlight-right-answer"
-                : ""
-            }
-          >
-            {currentQuestion.answer_1}
-          </p>
-          <p
-            className={
-              showAnswers && rightAnswer === currentQuestion.answer_2
-                ? "highlight-right-answer"
-                : ""
-            }
-          >
-            {currentQuestion.answer_2}
-          </p>
-          <p
-            className={
-              showAnswers && rightAnswer === currentQuestion.answer_3
-                ? "highlight-right-answer"
-                : ""
-            }
-          >
-            {currentQuestion.answer_3}
-          </p>
-          <p
-            className={
-              showAnswers && rightAnswer === currentQuestion.answer_4
-                ? "highlight-right-answer"
-                : ""
-            }
-          >
-            {currentQuestion.answer_4}
-          </p>
+          {[1, 2, 3, 4].map((num) => {
+            const currentAnswer =
+              currentQuestion[`answer_${num}` as keyof Question];
+            if (!currentAnswer) return null;
+
+            const isRightAnswer = rightAnswer === currentAnswer;
+            const isWrongAnswer =
+              answer === currentAnswer && answer !== rightAnswer;
+
+            return (
+              <p
+                key={num}
+                className={`${
+                  showAnswers && isRightAnswer
+                    ? "highlight-right-answer"
+                    : showAnswers && isWrongAnswer
+                    ? "highlight-wrong-answer"
+                    : ""
+                }`}
+              >
+                {currentAnswer}
+              </p>
+            );
+          })}
         </div>
+      ) : null}
+      {roundPlayer?.id !== currentPlayer?.id ? (
+        rightAnswer === answer ? (
+          <h3>Bien joué !</h3>
+        ) : (
+          <h3 className="accent-text">Mauvaise réponse...</h3>
+        )
       ) : null}
     </>
   );

@@ -9,7 +9,10 @@ const RoundEnded = observer(() => {
       {winner ? (
         <div className="colmn-space-btwn">
           <div></div>
-          <h3>{winner.username} a remporté la partie !</h3>
+          <h3>
+            <span className="accent-color">{winner.username}</span> a remporté
+            la partie !
+          </h3>
           <div></div>
         </div>
       ) : (
