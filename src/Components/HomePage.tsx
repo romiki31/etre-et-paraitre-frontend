@@ -11,6 +11,7 @@ const HomePage = observer(() => {
     checkPin,
     createGame,
     errorMessage,
+    setErrorMessage,
   } = gameStore;
 
   const [inputPin, setInputPin] = useState("");
@@ -21,14 +22,20 @@ const HomePage = observer(() => {
       <h1 className="title">ÊTRE ET PARAÎTRE</h1>
       {gameCreator || isPinValid ? (
         <div className="flex-column gap-1">
-          <div className="flex">
+          <div className="flex button-slide-in">
             <UsernameInput
               value={inputUsername}
               onChange={(e) => setInputUsername(e.target.value)}
             />
             <button
               className="w-33 internal-btn"
-              onClick={() => createGame(inputUsername)}
+              onClick={() => {
+                if (inputUsername.trim() !== "") {
+                  createGame(inputUsername);
+                } else {
+                  setErrorMessage("Insérez un pseudo valide");
+                }
+              }}
             >
               GO
             </button>
@@ -40,7 +47,7 @@ const HomePage = observer(() => {
           <p className="soft-text">
             Bienvenue ! <br />
             <br />
-            Commencer une nouvelle partie ou rejoignez une partie existante en
+            Commencez une nouvelle partie ou rejoignez une partie existante en
             entrant le code PIN généré par le créateur de la partie
           </p>
           <div className="flex-column gap-1">

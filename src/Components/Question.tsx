@@ -71,10 +71,12 @@ const Question = observer(() => {
           ) : (
             <>
               <div className="flex-center gap-1">
-                <p>
+                <p className="soft-text">
                   {" "}
                   <span className="strong">{roundPlayer?.username} </span>
-                  est en train de répondre
+                  est en train de répondre à : <br />
+                  <br />
+                  <p className="strong">{currentQuestion.name}</p>
                 </p>
               </div>
               <div></div>

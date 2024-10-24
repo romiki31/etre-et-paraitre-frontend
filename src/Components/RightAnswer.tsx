@@ -13,22 +13,25 @@ const RightAnswer = observer(() => {
   return (
     <>
       {currentRound?.id === 3 || currentRound?.id === 4 ? (
-        <div className="flex-column gap-2">
-          {gamePlayers.map((p) => {
-            return (
-              <p
-                key={p.id}
-                className={
-                  showAnswers && rightAnswer === p.username
-                    ? "highlight-right-answer"
-                    : ""
-                }
-              >
-                {p.username}
-              </p>
-            );
-          })}
-        </div>
+        <>
+          <h4>La bonne réponse était ...</h4>
+          <div className="flex-column gap-2">
+            {gamePlayers.map((p) => {
+              return (
+                <p
+                  key={p.id}
+                  className={
+                    showAnswers && rightAnswer === p.username
+                      ? "highlight-right-answer"
+                      : ""
+                  }
+                >
+                  {p.username}
+                </p>
+              );
+            })}
+          </div>
+        </>
       ) : currentQuestion ? (
         <div className="flex-column gap-2">
           <p

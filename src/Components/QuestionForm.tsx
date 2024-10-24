@@ -19,11 +19,27 @@ const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
       {currentQuestion ? (
         <>
           <p>
-            <span className="accent-text">{currentPlayer?.username}</span>
-            {currentPlayer?.username !== roundPlayer?.username
-              ? ` qu'a répondu ${roundPlayer?.username} à la question : `
-              : null}
-            <span className="strong">{` ${currentQuestion.name}`}</span>
+            <p className="soft-text m-b-10">
+              {roundPlayer?.id !== currentPlayer?.id ? (
+                <span className="accent-text">{currentPlayer?.username}</span>
+              ) : null}
+              {currentPlayer?.username !== roundPlayer?.username ? (
+                <>
+                  {", qu'a répondu "}
+                  <span className="accent-text">{roundPlayer?.username}</span>
+                  {" à la question : "}
+                </>
+              ) : null}
+            </p>
+            <p>
+              {roundPlayer?.id === currentPlayer?.id ? (
+                <>
+                  <span className="accent-text">{currentPlayer?.username}</span>
+                  <span>,</span>
+                </>
+              ) : null}
+              <span className="strong">{` ${currentQuestion.name}`}</span>
+            </p>
           </p>
 
           {currentRound?.id === 3 || currentRound?.id === 4 ? (
@@ -41,7 +57,7 @@ const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
               })}
             </div>
           ) : (
-            <div className="flex-column gap-2">
+            <div className="flex-column gap-1">
               <button
                 className="answer-btn"
                 onClick={() => submitFunc(currentQuestion.answer_1)}

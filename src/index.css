@@ -100,8 +100,13 @@ section {
   display: block;
 }
 body {
+  overflow-x: hidden;
   line-height: 1;
 }
+body.no-scroll {
+  overflow-x: hidden;
+}
+
 ol,
 ul {
   list-style: none;
@@ -305,6 +310,10 @@ p {
   .answer-btn {
     font-size: 22px !important;
   }
+
+  .soft-text {
+    font-size: 16px !important;
+  }
 }
 
 .small-text {
@@ -312,7 +321,7 @@ p {
 }
 
 .soft-text {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400 !important;
   color: var(--soft-color);
 }
@@ -378,12 +387,13 @@ input[type="number"] {
   font-weight: 600 !important;
 }
 
-.answer {
-  font-weight: 400 !important;
-  font-size: 20px !important;
-  color: white !important;
-  border: 3px solid white !important;
-  background-color: var(--primary-color);
+.item {
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.accent-item {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .flex {
@@ -480,6 +490,7 @@ input[type="number"] {
   color: #28aa35;
   border-radius: 10px;
   padding: 20px;
+  transition: all 1s ease-out;
 }
 
 .uppercase {
@@ -488,4 +499,20 @@ input[type="number"] {
 
 .padding-top {
   padding-top: 20vh;
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateY(100%); /* Hors de l'écran à droite */
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0); /* Position finale */
+    opacity: 1;
+  }
+}
+
+.button-slide-in {
+  animation: slideInFromRight 0.5s ease-out;
+  opacity: 1;
 }
