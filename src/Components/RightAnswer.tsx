@@ -72,7 +72,7 @@ const RightAnswer = observer(() => {
       ) : null}
       {roundPlayer?.id !== currentPlayer?.id ? (
         rightAnswer === answer ? (
-          <h3>Bien joué !</h3>
+          <h3 className="accent-text">Bien joué !</h3>
         ) : (
           <h3 className="accent-text">Mauvaise réponse...</h3>
         )

@@ -246,9 +246,8 @@ class GameStore {
 
   checkPin = async (pin: string) => {
     try {
-      const formatedPin: string = pin.toUpperCase();
       const response = await axios.post("/api/check-pin", {
-        pin: formatedPin,
+        pin,
       });
       if (response.data.valid) {
         this.setPin(pin);

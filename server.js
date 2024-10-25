@@ -56,9 +56,7 @@ io.on("connection", (socket) => {
 });
 
 app.post("/api/check-pin", (req, res) => {
-  console.log("Requête reçue pour le PIN :", req.body.pin); // Ajoute ceci pour vérifier la requête
   const { pin } = req.body;
-
   const game = games.find((g) => g.pin === pin);
 
   if (game) {
