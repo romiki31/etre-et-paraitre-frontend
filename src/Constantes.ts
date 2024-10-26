@@ -2,16 +2,19 @@ export interface Question {
   id: number;
   round_id: 1 | 2 | 3 | 4;
   name: string;
-  answer_1: string;
-  answer_2: string;
+  answer_1: string | null;
+  answer_2: string | null;
   answer_3: string | null;
   answer_4: string | null;
 }
 
 export interface Game {
+  currentRound: Round;
   id: number;
   pin: string;
   players: Player[];
+  posedQuestions: number[];
+  rightAnswer: string | null;
 }
 
 export interface GameData {
@@ -23,6 +26,9 @@ export interface Player {
   id: number;
   username: string;
   points: number;
+  hasAnswered: boolean;
+  answer: string;
+  isTurn: boolean;
 }
 
 export interface Round {
@@ -30,18 +36,18 @@ export interface Round {
   name: string;
 }
 
-export const Games: Game[] = [
-  {
-    id: 1,
-    pin: "1VR3QX",
-    players: [
-      { id: 1, username: "Dona", points: 0 },
-      { id: 2, username: "Sacha", points: 0 },
-      { id: 3, username: "Tom", points: 0 },
-      { id: 4, username: "Yo", points: 0 },
-    ],
-  },
-];
+// export const Games: Game[] = [
+//   {
+//     id: 1,
+//     pin: "1VR3QX",
+//     players: [
+//       { id: 1, username: "Dona", points: 0 },
+//       { id: 2, username: "Sacha", points: 0 },
+//       { id: 3, username: "Tom", points: 0 },
+//       { id: 4, username: "Yo", points: 0 },
+//     ],
+//   },
+// ];
 // export const Rounds: Round[] = [
 //   {
 //     id: 1,
@@ -60,3 +66,12 @@ export const Games: Game[] = [
 //     name: "Représentations",
 //   },
 // ];
+
+export const emptyPlayer: Player = {
+  id: 1,
+  username: "",
+  points: 0,
+  hasAnswered: false,
+  isTurn: false,
+  answer: "",
+};

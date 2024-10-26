@@ -1,3 +1,5 @@
+import { Question } from "./src/Constantes";
+
 const rounds = [
   {
     id: 1,
@@ -16,7 +18,7 @@ const rounds = [
     name: "Représentations",
   },
 ];
-const questions = [
+const questions: Question[] = [
   {
     id: 1,
     round_id: 1,
