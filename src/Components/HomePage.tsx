@@ -1,3 +1,4 @@
+import { toJS } from "mobx";
 import { observer } from "mobx-react";
 import { useState } from "react";
 import { gameStore } from "../store";
@@ -16,6 +17,7 @@ const HomePage = observer(() => {
 
   const [inputPin, setInputPin] = useState("");
   const [inputUsername, setInputUsername] = useState("");
+  console.log(toJS(errorMessage));
 
   return (
     <div className="colmn-space-btwn">

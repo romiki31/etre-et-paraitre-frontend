@@ -239,6 +239,7 @@ class GameStore {
   };
 
   generatePin = () => {
+    this.clearErrorMessage();
     const newPin = Math.random().toString(36).substr(2, 6).toUpperCase();
     this.pin = newPin;
     this.gameCreator = true;
@@ -264,6 +265,7 @@ class GameStore {
       username: username,
     };
     try {
+      this.setErrorMessage("");
       const response = await axios.post("/api/create-game", data);
       this.currentPlayer = response.data.currentPlayer;
       this.currentGame = response.data.game;

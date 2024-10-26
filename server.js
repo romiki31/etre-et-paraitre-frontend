@@ -261,7 +261,7 @@ app.post("/api/next-turn", (req, res) => {
         );
         let currentQuestion = getRandomQuestion(game);
         game.posedQuestions = [...game.posedQuestions, currentQuestion.id];
-        roundPlayer = { ...roundPlayer, isTurn: true };
+        roundPlayer.isTurn = true;
 
         io.to(pin).emit("round-ended", {
           message: "Tous les joueurs ont joué, la manche est terminée.",
