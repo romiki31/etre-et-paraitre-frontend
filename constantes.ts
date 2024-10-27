@@ -1,6 +1,6 @@
 import { Question } from "./src/Constantes";
 
-const rounds = [
+export const rounds = [
   {
     id: 1,
     name: "Personnalité",
@@ -18,7 +18,7 @@ const rounds = [
     name: "Représentations",
   },
 ];
-const questions: Question[] = [
+export const questions: Question[] = [
   {
     id: 1,
     round_id: 1,
@@ -1272,5 +1272,3 @@ const questions: Question[] = [
     answer_4: null,
   },
 ];
-
-module.exports = { rounds, questions };
