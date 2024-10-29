@@ -2,15 +2,17 @@ import { observer } from "mobx-react";
 import { gameStore } from "../store";
 
 const Ranking = observer(() => {
-  const { gamePlayers, currentPlayer } = gameStore;
+  const { currentGame, currentPlayer } = gameStore;
 
-  const sortedPlayers = [...gamePlayers].sort((a, b) => b.points - a.points);
+  const sortedPlayers = currentGame?.players
+    .slice()
+    .sort((a, b) => b.points - a.points);
 
   return (
     <div className="flex-column gap-2">
       <h4>Classement</h4>
       <div className="flex-column gap-1">
-        {sortedPlayers.length
+        {sortedPlayers?.length
           ? sortedPlayers.map((player, index) => {
               return (
                 <div

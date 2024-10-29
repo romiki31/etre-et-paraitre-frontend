@@ -8,11 +8,12 @@ const RightAnswer = observer(() => {
     currentQuestion,
     answer,
     rightAnswer,
-    currentRound,
-    gamePlayers,
     roundPlayer,
     currentPlayer,
+    currentGame,
   } = gameStore;
+
+  const currentRound = currentGame?.currentRound;
 
   return (
     <>
@@ -20,7 +21,7 @@ const RightAnswer = observer(() => {
       {currentRound?.id === 3 || currentRound?.id === 4 ? (
         <>
           <div className="flex-column gap-2">
-            {gamePlayers.map((p) => {
+            {currentGame?.players.map((p) => {
               const isRightAnswer = rightAnswer === p.username;
               const isWrongAnswer =
                 answer === p.username && answer !== rightAnswer;

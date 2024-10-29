@@ -1,7 +1,7 @@
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { io } from "socket.io-client";
-import { Game, Player, Question, Round } from "./Constantes";
+import { Game, Player, Question } from "./Constantes";
 
 const socket =
   process.env.NODE_ENV === "production" ? io("https://donska.fr") : io("/");
@@ -14,7 +14,6 @@ class GameStore {
   isPinValid: boolean = false;
   currentGame: Game | null = null;
   errorMessage: string = "";
-  currentRound: Round | null = null;
   currentQuestion: Question | null = null;
   rightAnswer: string | null = "";
   hasAnswered: boolean = false;
@@ -24,7 +23,6 @@ class GameStore {
   showQuestion: boolean = false;
   nextTurn: boolean = false;
   allAnswered: boolean = false;
-  gamePlayers: Player[] = [];
   winner: Player | null = null;
 
   constructor() {
@@ -37,19 +35,19 @@ class GameStore {
     });
 
     socket.on("game-started", (res) => {
-      this.currentRound = res.currentRound;
-      this.currentQuestion = res.currentQuestion;
-      this.roundPlayer = res.roundPlayer;
-      this.gamePlayers = res.gamePlayers;
+      this.currentQuestion = res.game.currentQuestion;
+      this.roundPlayer = res.game.roundPlayer;
+      this.currentGame = res.game;
     });
 
-    socket.on("right-answer-submitted", (rightAnswer) => {
-      this.setRightAnswer(rightAnswer);
+    socket.on("right-answer-submitted", (game) => {
+      this.setRightAnswer(game.rightAnswer);
     });
 
-    socket.on("all-answered", (allAnswered, gamePlayers) => {
-      this.setAllAnswered(allAnswered);
-      this.setGamePlayers(gamePlayers);
+    socket.on("all-answered", (game) => {
+      this.setAllAnswered(game.allAnswered);
+      this.setShowQuestion(false);
+      this.setCurrentGame(game);
     });
 
     socket.on("show-answers", () => {
@@ -70,7 +68,7 @@ class GameStore {
 
     socket.on("end-game", (res) => {
       this.setWinner(res.winner);
-      this.setCurrentRound(null);
+      // this.setCurrentRound(null);
     });
   };
 
@@ -94,7 +92,7 @@ class GameStore {
       }
       if (response.data.message === "Partie terminée") {
         this.setWinner(response.data.winner);
-        this.setCurrentRound(null);
+        // this.setCurrentRound(null);
       }
     } catch (error) {
       console.error("Erreur lors du passage au joueur suivant", error);
@@ -102,9 +100,9 @@ class GameStore {
   };
 
   setterNextTurn = (res: any) => {
-    this.currentQuestion = res.currentQuestion;
-    this.gamePlayers = res.gamePlayers;
-    this.roundPlayer = res.roundPlayer;
+    this.currentGame = res.game;
+    this.currentQuestion = res.game.currentQuestion;
+    this.roundPlayer = res.game.roundPlayer;
     this.rightAnswer = null;
     this.hasAnswered = false;
     this.answer = null;
@@ -116,11 +114,9 @@ class GameStore {
 
   setterNextRound = (res: any) => {
     this.currentGame = res.game;
-    this.gamePlayers = res.game.players;
-    this.currentRound = res.game.currentRound;
     this.rightAnswer = res.game.rightAnswer;
-    this.currentQuestion = res.currentQuestion;
-    this.roundPlayer = res.roundPlayer;
+    this.currentQuestion = res.game.currentQuestion;
+    this.roundPlayer = res.game.roundPlayer;
     this.hasAnswered = false;
     this.answer = null;
     this.showAnswers = false;
@@ -176,10 +172,6 @@ class GameStore {
     this.currentGame = currentGame;
   };
 
-  setCurrentRound = (currentRound: Round | null) => {
-    this.currentRound = currentRound;
-  };
-
   setCurrentPlayer = (currentPlayer: Player) => {
     this.currentPlayer = currentPlayer;
   };
@@ -220,10 +212,6 @@ class GameStore {
 
   setNextTurn = (nextTurn: true | false) => {
     this.nextTurn = nextTurn;
-  };
-
-  setGamePlayers = (gamePlayers: Player[]) => {
-    this.gamePlayers = gamePlayers;
   };
 
   setWinner = (winner: Player) => {
@@ -267,8 +255,8 @@ class GameStore {
     try {
       this.setErrorMessage("");
       const response = await axios.post("/api/create-game", data);
-      this.currentPlayer = response.data.currentPlayer;
       this.currentGame = response.data.game;
+      this.currentPlayer = response.data.currentPlayer;
     } catch (error: any) {
       if (error.response.data.message) {
         this.setErrorMessage(error.response.data.message);
@@ -303,10 +291,10 @@ class GameStore {
       });
 
       if (response.data) {
-        this.setCurrentRound(response.data.currentRound);
-        this.setCurrentQuestion(response.data.currentQuestion);
-        this.setRoundPlayer(response.data.roundPlayer);
-        this.setCurrentPlayer(response.data.roundPlayer);
+        this.setCurrentGame(response.data.game);
+        this.setCurrentQuestion(response.data.game.currentQuestion);
+        this.setRoundPlayer(response.data.game.roundPlayer);
+        this.setCurrentPlayer(response.data.game.roundPlayer);
       }
     } catch (error) {
       console.error("Erreur lors du démarrage du jeu", error);
@@ -321,7 +309,7 @@ class GameStore {
         roundPlayer: this.roundPlayer,
       });
       if (response.data) {
-        this.setRightAnswer(response.data.right_answer);
+        this.setRightAnswer(response.data.game.rightAnswer);
       }
     } catch (error) {
       console.error("Erreur lors de la soumission de la réponse", error);

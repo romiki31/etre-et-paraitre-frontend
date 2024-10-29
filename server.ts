@@ -1,26 +1,24 @@
-import cors from "cors";
 import express, { Request, Response } from "express";
 import http from "http";
 import path from "path";
 import { Server, Socket } from "socket.io";
 import { questions, rounds } from "./constantes";
-import { emptyPlayer, Game, Player, Question, Round } from "./src/Constantes";
+import { emptyPlayer, Game, Player, Question } from "./src/Constantes";
 
 const app = express();
 const port = process.env.PORT || 5001;
-
 const server = http.createServer(app);
 const io = new Server(server, {});
 
-app.use(cors());
 app.use(express.json());
 
 let games: Game[] = [];
 
-function getRandomQuestion(game: Game) {
+function getRandomQuestion(game: Game): Question | undefined {
   const roundQuestions = questions.filter(
     (q: Question) =>
-      q.round_id === game.currentRound.id && !game.posedQuestions.includes(q.id)
+      q.round_id === game.currentRound?.id &&
+      !game.posedQuestions.includes(q.id)
   );
   return roundQuestions[Math.floor(Math.random() * roundQuestions.length)];
 }
@@ -63,7 +61,7 @@ app.post("/api/check-pin", (req: Request, res: Response) => {
   }
 });
 
-app.post("/api/create-game", (req, res) => {
+app.post("/api/create-game", (req: Request, res: Response) => {
   const { pin, username } = req.body;
 
   let game = games.find((g) => g.pin === pin);
@@ -87,7 +85,6 @@ app.post("/api/create-game", (req, res) => {
     };
 
     game.players.push(newPlayer);
-
     io.to(pin).emit("player-joined", game);
 
     return res.json({
@@ -102,42 +99,45 @@ app.post("/api/create-game", (req, res) => {
       username: username,
     };
 
-    const currentRound: Round | undefined = rounds.find(
-      (round) => round.id === 1
-    );
+    const newGame: Game = {
+      id: games.length + 1,
+      pin: pin,
+      players: [newPlayer],
+      currentRound: null,
+      posedQuestions: [],
+      rightAnswer: null,
+      allAnswered: false,
+      currentQuestion: null,
+      roundPlayer: null,
+    };
 
-    if (currentRound) {
-      const newGame: Game = {
-        id: games.length + 1,
-        pin: pin,
-        players: [newPlayer],
-        currentRound: currentRound,
-        posedQuestions: [],
-        rightAnswer: null,
-      };
-      games.push(newGame);
+    games.push(newGame);
 
-      io.to(pin).emit("game-created", newGame);
+    io.to(pin).emit("game-created", newGame);
 
-      return res.json({
-        message: "Nouvelle partie créée",
-        game: newGame,
-        currentPlayer: newPlayer,
-      });
-    }
+    return res.json({
+      message: "Nouvelle partie créée",
+      game: newGame,
+      currentPlayer: newPlayer,
+    });
   }
 });
 
-app.post("/api/start-game", (req, res) => {
+app.post("/api/start-game", (req: Request, res: Response) => {
   const { pin } = req.body;
 
   let game = games.find((g) => g.pin === pin);
-
   if (game) {
+    game.currentRound = rounds[0];
+
     const currentQuestion = getRandomQuestion(game);
-    game.posedQuestions = [...game.posedQuestions, currentQuestion.id];
+    if (currentQuestion) {
+      game.posedQuestions.push(currentQuestion.id);
+      game.currentQuestion = currentQuestion;
+    }
 
     const roundPlayer = game.players.find((player) => player.id === 1);
+    game.roundPlayer = roundPlayer ?? null;
 
     game.players = game.players.map((player) => ({
       ...player,
@@ -145,25 +145,19 @@ app.post("/api/start-game", (req, res) => {
     }));
 
     io.to(pin).emit("game-started", {
-      currentQuestion,
-      roundPlayer,
-      currentRound: game.currentRound,
-      gamePlayers: game.players,
+      game: game,
     });
 
     return res.json({
       message: "Le jeu a démarré",
-      currentQuestion,
-      roundPlayer: roundPlayer,
-      currentRound: game.currentRound,
-      gamePlayers: game.players,
+      game: game,
     });
   } else {
     return res.status(404).json({ message: "Partie non trouvée" });
   }
 });
 
-app.post("/api/submit-answer", (req, res) => {
+app.post("/api/submit-answer", (req: Request, res: Response) => {
   const { pin, rightAnswer, roundPlayer } = req.body;
 
   let game = games.find((g) => g.pin === pin);
@@ -177,18 +171,18 @@ app.post("/api/submit-answer", (req, res) => {
       player.answer = rightAnswer;
     }
 
-    io.to(pin).emit("right-answer-submitted", rightAnswer);
+    io.to(pin).emit("right-answer-submitted", game);
 
     return res.json({
       message: "Bonne réponse soumise",
-      right_answer: rightAnswer,
+      game: game,
     });
   } else {
     return res.status(404).json({ message: "Partie non trouvée" });
   }
 });
 
-app.post("/api/submit-guess", (req, res) => {
+app.post("/api/submit-guess", (req: Request, res: Response) => {
   const { pin, playerId, guessedAnswer } = req.body;
 
   let game = games.find((g) => g.pin === pin);
@@ -209,14 +203,14 @@ app.post("/api/submit-guess", (req, res) => {
     player.answer = guessedAnswer;
 
     let allAnswered = game.players.every((p) => p.hasAnswered);
+    game.allAnswered = allAnswered;
 
     if (allAnswered) {
-      io.to(pin).emit("all-answered", true, game.players);
+      io.to(pin).emit("all-answered", game);
     }
 
     return res.json({
       message: isCorrect ? "Bonne réponse, points ajoutés" : "Mauvaise réponse",
-      isCorrect,
       hasAnswered: true,
       answer: guessedAnswer,
     });
@@ -225,7 +219,7 @@ app.post("/api/submit-guess", (req, res) => {
   }
 });
 
-app.post("/api/next-turn", (req, res) => {
+app.post("/api/next-turn", (req: Request, res: Response) => {
   const { pin } = req.body;
 
   let game = games.find((g) => g.pin === pin);
@@ -233,12 +227,10 @@ app.post("/api/next-turn", (req, res) => {
   if (game) {
     const allPlayersPlayed = game.players.every((player) => player.isTurn);
     if (allPlayersPlayed) {
-      if (game.currentRound.id === 4) {
-        const winner = game.players.reduce((maxPlayer, currentPlayer) => {
-          return currentPlayer.points > maxPlayer.points
-            ? currentPlayer
-            : maxPlayer;
-        }, game.players[0]);
+      if (game.currentRound?.id === 4) {
+        const winner = game.players.reduce((maxPlayer, currentPlayer) =>
+          currentPlayer.points > maxPlayer.points ? currentPlayer : maxPlayer
+        );
 
         io.to(pin).emit("end-game", {
           message: "Partie terminée",
@@ -250,7 +242,7 @@ app.post("/api/next-turn", (req, res) => {
         });
       } else {
         const currentRound = rounds.find(
-          (r) => r.id === game.currentRound.id + 1
+          (r) => r.id === (game.currentRound?.id ?? 0) + 1
         );
         if (currentRound) {
           game.currentRound = currentRound;
@@ -261,59 +253,38 @@ app.post("/api/next-turn", (req, res) => {
         game.players = game.players.map((p) =>
           p.id === roundPlayer?.id
             ? { ...p, isTurn: true }
-            : {
-                ...p,
-                isTurn: false,
-                hasAnswered: false,
-                answer: "",
-              }
+            : { ...p, isTurn: false, hasAnswered: false, answer: "" }
         );
         let currentQuestion = getRandomQuestion(game);
-        game.posedQuestions = [...game.posedQuestions, currentQuestion.id];
-        roundPlayer && (roundPlayer.isTurn = true);
+        if (currentQuestion) {
+          game.posedQuestions.push(currentQuestion.id);
+          game.currentQuestion = currentQuestion;
+        }
+        game.roundPlayer = roundPlayer ?? null;
 
         io.to(pin).emit("round-ended", {
           message: "Tous les joueurs ont joué, la manche est terminée.",
           game: game,
-          roundPlayer: roundPlayer,
-          currentQuestion: currentQuestion,
-        });
-
-        return res.json({
-          message: "La manche est terminée.",
-          gamePlayers: game.players,
-          roundPlayer: roundPlayer,
-          currentQuestion: currentQuestion,
         });
       }
     } else {
-      const nextPlayer = game.players.filter((player) => !player.isTurn)[0];
+      const nextPlayer = game.players.find((player) => !player.isTurn);
 
-      game.players = game.players.map((player) => ({
-        ...player,
-        hasAnswered: false,
-        answer: "",
-      }));
+      if (nextPlayer) {
+        game.players.forEach((player) => {
+          player.hasAnswered = false;
+          player.answer = "";
+        });
 
-      game.players = game.players.map((p) =>
-        p.id === nextPlayer.id ? { ...p, isTurn: true } : p
-      );
+        nextPlayer.isTurn = true;
+        game.currentQuestion = getRandomQuestion(game) ?? null;
+        if (game.currentQuestion) {
+          game.posedQuestions.push(game.currentQuestion.id);
+        }
+        game.roundPlayer = nextPlayer;
 
-      const currentQuestion = getRandomQuestion(game);
-      game.posedQuestions = [...game.posedQuestions, currentQuestion.id];
-
-      io.to(pin).emit("next-turn", {
-        currentQuestion,
-        roundPlayer: game.players.find((p) => p.id === nextPlayer.id),
-        gamePlayers: game.players,
-      });
-
-      return res.json({
-        message: "Tour suivant",
-        currentQuestion,
-        roundPlayer: game.players.find((p) => p.id === nextPlayer.id),
-        gamePlayers: game.players,
-      });
+        io.to(pin).emit("next-turn", { game });
+      }
     }
   } else {
     return res.status(404).json({ message: "Partie non trouvée" });
@@ -322,7 +293,7 @@ app.post("/api/next-turn", (req, res) => {
 
 app.use(express.static(path.join(__dirname, "build")));
 
-app.get("*", (req, res) => {
+app.get("*", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 

@@ -9,12 +9,15 @@ export interface Question {
 }
 
 export interface Game {
-  currentRound: Round;
   id: number;
   pin: string;
   players: Player[];
+  currentRound: Round | null;
+  currentQuestion: Question | null;
+  roundPlayer: Player | null;
   posedQuestions: number[];
   rightAnswer: string | null;
+  allAnswered: boolean;
 }
 
 export interface GameData {

@@ -2,7 +2,9 @@ import { observer } from "mobx-react";
 import { gameStore } from "../store";
 
 const Round = observer(() => {
-  const { currentRound } = gameStore;
+  const { currentGame } = gameStore;
+
+  const currentRound = currentGame?.currentRound;
 
   return (
     <>

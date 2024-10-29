@@ -1,6 +1,6 @@
-import { Question } from "./src/Constantes";
+import { Question, Round } from "./src/Constantes";
 
-export const rounds = [
+export const rounds: Round[] = [
   {
     id: 1,
     name: "Personnalité",

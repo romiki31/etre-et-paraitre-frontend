@@ -12,8 +12,10 @@ const TurnEnd = observer(() => {
     emitShowRanking,
     emitNextTurn,
     getBtnClass,
-    currentRound,
+    currentGame,
   } = gameStore;
+
+  const currentRound = currentGame?.currentRound;
 
   return (
     <div className="colmn-space-btwn gap-2">

@@ -6,13 +6,10 @@ interface QuestionFORMProps {
 }
 
 const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
-  const {
-    currentPlayer,
-    roundPlayer,
-    currentQuestion,
-    currentRound,
-    gamePlayers,
-  } = gameStore;
+  const { currentPlayer, roundPlayer, currentQuestion, currentGame } =
+    gameStore;
+
+  const currentRound = currentGame?.currentQuestion;
 
   return (
     <>
@@ -44,7 +41,7 @@ const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
 
           {currentRound?.id === 3 || currentRound?.id === 4 ? (
             <div className="flex-column gap-2">
-              {gamePlayers.map((p) => {
+              {currentGame?.players.map((p) => {
                 return (
                   <button
                     key={p.id}

@@ -1,8 +1,11 @@
+import { toJS } from "mobx";
 import { observer } from "mobx-react";
 import { gameStore } from "../store";
 
 const LoadingRoom = observer(() => {
   const { startGame, currentPlayer } = gameStore;
+
+  console.log(toJS(currentPlayer));
 
   return (
     <div className="colmn-space-btwn">

@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "express": "^4.21.0",
     "mobx": "^6.13.3",
+    "mobx-observable-history": "^2.0.3",
     "mobx-react": "^9.1.1",
     "mobx-router": "^1.0.0",
     "react": "^18.3.1",
@@ -19,12 +20,12 @@
     "react-scripts": "5.0.1",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.0",
-    "typescript": "^5.6.2",
+    "url-pattern": "^1.0.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "server": "nodemon server.js",
+    "server": "nodemon --watch src --ext ts --exec ts-node ./server.ts",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -46,6 +47,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
   },
   "proxy": "http://localhost:5001"
 }

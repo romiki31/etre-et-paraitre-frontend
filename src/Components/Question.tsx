@@ -7,7 +7,7 @@ import Ranking from "./Ranking";
 
 const Question = observer(() => {
   const {
-    currentRound,
+    currentGame,
     currentPlayer,
     roundPlayer,
     currentQuestion,
@@ -18,6 +18,7 @@ const Question = observer(() => {
   } = gameStore;
 
   const [showPopup, setShowPopup] = useState(false);
+  const currentRound = currentGame?.currentRound;
 
   const handleSubmitAnswer = (answer: string | null) => {
     if (answer) {
