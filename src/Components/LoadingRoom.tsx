@@ -17,8 +17,6 @@ const LoadingRoom = observer(() => {
         <p>En attente des autres joueurs...</p>
         <div className="flex-column gap-2">
           {currentGame?.players.map((player) => {
-            console.log(currentPlayerId);
-
             return (
               <h4
                 key={player.id}

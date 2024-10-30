@@ -1,7 +1,6 @@
 import { createBrowserHistory } from "history";
-import { createObservableHistory } from "mobx-observable-history";
 import { observer } from "mobx-react";
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import UrlPattern from "url-pattern";
 import HomePage from "./Components/HomePage";
 import LoadingRoom from "./Components/LoadingRoom";
@@ -10,38 +9,41 @@ import Round from "./Components/Round";
 import RoundEnded from "./Components/RoundEnded";
 import TurnEnd from "./Components/TurnEnd";
 
-export const history = createObservableHistory(createBrowserHistory());
+export const history = createBrowserHistory();
+
 export function goToUrl(url: string) {
-  if (!history) return;
   history.push(url);
 }
 
-export class Link extends Component<{
+export const Link: React.FC<{
   to: string;
   id?: string;
   className?: string;
   children?: any;
-}> {
-  onClick = (e: React.MouseEvent<HTMLElement>) => {
+}> = ({ to, children, ...props }) => {
+  const onClick = (e: React.MouseEvent<HTMLElement>) => {
     if (e.altKey || e.metaKey || e.ctrlKey) return;
     e.preventDefault();
-    goToUrl(this.props.to);
+    goToUrl(to);
   };
-  render() {
-    let { to, ...props } = this.props;
-
-    return <a {...props} href={to} onClick={this.onClick} />;
-  }
-}
+  return (
+    <a {...props} href={to} onClick={onClick}>
+      {children}
+    </a>
+  );
+};
 
 export const Routes = observer(() => {
-  let pathname = history.location.pathname;
-  if (pathname.length > 1 && pathname.endsWith("/")) {
-    history.replace(pathname.substring(0, pathname.length - 1));
-    return null;
-  }
+  const [currentPath, setCurrentPath] = useState(history.location.pathname);
 
-  let items = [
+  useEffect(() => {
+    const unlisten = history.listen(({ location }) => {
+      setCurrentPath(location.pathname);
+    });
+    return () => unlisten();
+  }, []);
+
+  const items = [
     {
       path: "/",
       component: HomePage,
@@ -69,7 +71,7 @@ export const Routes = observer(() => {
   ];
 
   for (const item of items) {
-    const match = new UrlPattern(item.path).match(pathname);
+    const match = new UrlPattern(item.path).match(currentPath);
     if (match) {
       return <item.component {...match} />;
     }
