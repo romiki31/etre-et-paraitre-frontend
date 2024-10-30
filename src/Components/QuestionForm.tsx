@@ -6,14 +6,18 @@ interface QuestionFORMProps {
 }
 
 const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
-  const { currentPlayer, roundPlayer, currentQuestion, currentGame } =
-    gameStore;
+  const { currentPlayerId, currentGame } = gameStore;
 
-  const currentRound = currentGame?.currentQuestion;
+  const currentRound = currentGame?.currentRound;
+  const currentQuestion = currentGame?.currentQuestion;
+  const roundPlayer = currentGame?.players.find((p) => p.isRoundPlayer);
+  const currentPlayer = currentGame?.players.find(
+    (p) => p.id === currentPlayerId
+  );
 
   return (
     <>
-      {currentQuestion ? (
+      {currentRound && currentPlayer && currentQuestion ? (
         <>
           <p>
             <p className="soft-text m-b-10">
@@ -39,7 +43,7 @@ const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
             </p>
           </p>
 
-          {currentRound?.id === 3 || currentRound?.id === 4 ? (
+          {currentRound.id === 3 || currentRound.id === 4 ? (
             <div className="flex-column gap-2">
               {currentGame?.players.map((p) => {
                 return (

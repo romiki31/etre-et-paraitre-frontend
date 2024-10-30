@@ -20,7 +20,7 @@ const TurnEnd = observer(() => {
   return (
     <div className="colmn-space-btwn gap-2">
       {showRanking ? null : <div></div>}
-      {!showAnswers && <h4>TERMINÉ</h4>}
+      {!showAnswers && !showRanking && <h4>TERMINÉ</h4>}
       {showRanking ? <Ranking /> : showAnswers ? <RightAnswer /> : null}
       {gameCreator ? (
         showRanking ? (

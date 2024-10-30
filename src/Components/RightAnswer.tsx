@@ -3,17 +3,12 @@ import { Question } from "../Constantes";
 import { gameStore } from "../store";
 
 const RightAnswer = observer(() => {
-  const {
-    showAnswers,
-    currentQuestion,
-    answer,
-    rightAnswer,
-    roundPlayer,
-    currentPlayer,
-    currentGame,
-  } = gameStore;
+  const { showAnswers, answer, currentPlayerId, currentGame } = gameStore;
 
   const currentRound = currentGame?.currentRound;
+  const currentQuestion = currentGame?.currentQuestion;
+  const roundPlayer = currentGame?.players.find((p) => p.isRoundPlayer);
+  const rightAnswer = currentGame?.rightAnswer;
 
   return (
     <>
@@ -71,7 +66,7 @@ const RightAnswer = observer(() => {
           })}
         </div>
       ) : null}
-      {roundPlayer?.id !== currentPlayer?.id ? (
+      {roundPlayer?.id !== currentPlayerId ? (
         rightAnswer === answer ? (
           <h3 className="accent-text">Bien joué !</h3>
         ) : (

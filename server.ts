@@ -1,3 +1,4 @@
+import cookieParser from "cookie-parser";
 import express, { Request, Response } from "express";
 import http from "http";
 import path from "path";
@@ -11,6 +12,7 @@ const server = http.createServer(app);
 const io = new Server(server, {});
 
 app.use(express.json());
+app.use(cookieParser());
 
 let games: Game[] = [];
 
@@ -50,6 +52,31 @@ io.on("connection", (socket: Socket) => {
   });
 });
 
+// app.get("/api/game/{pin}", (req: Request, res: Response) => {
+//   console.log(req.cookies);
+//   if (req.cookies.join_game) {
+//     const pin = req.cookies.join_game.pin;
+//     const currentPlayer = req.cookies.join_game.currentPlayer;
+//     const currentGame = games.find((g) => g.pin === pin);
+
+//     if (currentGame) {
+//       return res.json({
+//         message: "Retour à la partie",
+//         currentGame,
+//         currentPlayer,
+//       });
+//     } else {
+//       return res
+//         .status(500)
+//         .json({ message: "Vous n'avez pas rejoint la partie en cours" });
+//     }
+//   } else {
+//     return res
+//       .status(404)
+//       .json({ message: "Vous n'avez pas de partie en cours" });
+//   }
+// });
+
 app.post("/api/check-pin", (req: Request, res: Response) => {
   const { pin } = req.body;
   const game = games.find((g) => g.pin === pin);
@@ -82,15 +109,27 @@ app.post("/api/create-game", (req: Request, res: Response) => {
       ...emptyPlayer,
       id: game.players.length + 1,
       username: username,
+      isRoundPlayer: false,
     };
 
     game.players.push(newPlayer);
     io.to(pin).emit("player-joined", game);
 
+    // res.cookie(
+    //   "join_game",
+    //   { pin, currentPlayer: newPlayer },
+    //   {
+    //     httpOnly: true,
+    //     maxAge: 30 * 60 * 1000,
+    //     secure: process.env.NODE_ENV === "production",
+    //     sameSite: "lax",
+    //   }
+    // );
+
     return res.json({
       message: "Joueur ajouté à la partie existante",
       game,
-      currentPlayer: newPlayer,
+      currentPlayerId: newPlayer.id,
     });
   } else {
     const newPlayer: Player = {
@@ -108,17 +147,25 @@ app.post("/api/create-game", (req: Request, res: Response) => {
       rightAnswer: null,
       allAnswered: false,
       currentQuestion: null,
-      roundPlayer: null,
     };
 
     games.push(newGame);
 
     io.to(pin).emit("game-created", newGame);
-
+    // res.cookie(
+    //   "join_game",
+    //   { pin, currentPlayer: newPlayer },
+    //   {
+    //     httpOnly: true,
+    //     maxAge: 30 * 60 * 1000,
+    //     secure: process.env.NODE_ENV === "production",
+    //     sameSite: "lax",
+    //   }
+    // );
     return res.json({
       message: "Nouvelle partie créée",
       game: newGame,
-      currentPlayer: newPlayer,
+      currentPlayerId: newPlayer.id,
     });
   }
 });
@@ -136,13 +183,11 @@ app.post("/api/start-game", (req: Request, res: Response) => {
       game.currentQuestion = currentQuestion;
     }
 
-    const roundPlayer = game.players.find((player) => player.id === 1);
-    game.roundPlayer = roundPlayer ?? null;
-
-    game.players = game.players.map((player) => ({
-      ...player,
-      isTurn: roundPlayer ? player.id === roundPlayer.id : false,
-    }));
+    game.players = game.players.map((player) =>
+      player.id === 1
+        ? { ...player, isTurn: true, isRoundPlayer: true }
+        : player
+    );
 
     io.to(pin).emit("game-started", {
       game: game,
@@ -168,6 +213,7 @@ app.post("/api/submit-answer", (req: Request, res: Response) => {
 
     if (player) {
       player.hasAnswered = true;
+      player.isTurn = true;
       player.answer = rightAnswer;
     }
 
@@ -228,8 +274,8 @@ app.post("/api/next-turn", (req: Request, res: Response) => {
     const allPlayersPlayed = game.players.every((player) => player.isTurn);
     if (allPlayersPlayed) {
       if (game.currentRound?.id === 4) {
-        const winner = game.players.reduce((maxPlayer, currentPlayer) =>
-          currentPlayer.points > maxPlayer.points ? currentPlayer : maxPlayer
+        const winner = game.players.reduce((maxPlayer, player) =>
+          player.points > maxPlayer.points ? player : maxPlayer
         );
 
         io.to(pin).emit("end-game", {
@@ -247,21 +293,31 @@ app.post("/api/next-turn", (req: Request, res: Response) => {
         if (currentRound) {
           game.currentRound = currentRound;
         }
-        let roundPlayer = game.players.find((player) => player.id === 1);
+        game.allAnswered = false;
         game.rightAnswer = null;
         game.posedQuestions = [];
         game.players = game.players.map((p) =>
-          p.id === roundPlayer?.id
-            ? { ...p, isTurn: true }
-            : { ...p, isTurn: false, hasAnswered: false, answer: "" }
+          p.id === 1
+            ? {
+                ...p,
+                isRoundPlayer: true,
+                isTurn: true,
+                hasAnswered: false,
+                answer: "",
+              }
+            : {
+                ...p,
+                isRoundPlayer: false,
+                isTurn: false,
+                hasAnswered: false,
+                answer: "",
+              }
         );
         let currentQuestion = getRandomQuestion(game);
         if (currentQuestion) {
           game.posedQuestions.push(currentQuestion.id);
           game.currentQuestion = currentQuestion;
         }
-        game.roundPlayer = roundPlayer ?? null;
-
         io.to(pin).emit("round-ended", {
           message: "Tous les joueurs ont joué, la manche est terminée.",
           game: game,
@@ -273,15 +329,22 @@ app.post("/api/next-turn", (req: Request, res: Response) => {
       if (nextPlayer) {
         game.players.forEach((player) => {
           player.hasAnswered = false;
+          player.isRoundPlayer = false;
           player.answer = "";
         });
-
         nextPlayer.isTurn = true;
+        nextPlayer.isRoundPlayer = true;
+
         game.currentQuestion = getRandomQuestion(game) ?? null;
         if (game.currentQuestion) {
           game.posedQuestions.push(game.currentQuestion.id);
         }
-        game.roundPlayer = nextPlayer;
+        game.players = game.players.map((p) =>
+          p.id === nextPlayer.id ? nextPlayer : p
+        );
+
+        game.rightAnswer = "";
+        game.allAnswered = false;
 
         io.to(pin).emit("next-turn", { game });
       }

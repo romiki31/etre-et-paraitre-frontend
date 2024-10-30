@@ -14,7 +14,6 @@ export interface Game {
   players: Player[];
   currentRound: Round | null;
   currentQuestion: Question | null;
-  roundPlayer: Player | null;
   posedQuestions: number[];
   rightAnswer: string | null;
   allAnswered: boolean;
@@ -32,6 +31,7 @@ export interface Player {
   hasAnswered: boolean;
   answer: string;
   isTurn: boolean;
+  isRoundPlayer: boolean;
 }
 
 export interface Round {
@@ -75,6 +75,7 @@ export const emptyPlayer: Player = {
   username: "",
   points: 0,
   hasAnswered: false,
-  isTurn: false,
   answer: "",
+  isTurn: false,
+  isRoundPlayer: false,
 };

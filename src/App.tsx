@@ -1,3 +1,4 @@
+import { toJS } from "mobx";
 import { observer } from "mobx-react";
 import React, { useEffect } from "react";
 import { goToUrl, Routes } from "./routes";
@@ -6,7 +7,6 @@ import { gameStore } from "./store";
 const App: React.FC = observer(() => {
   const {
     currentGame,
-    allAnswered,
     showQuestion,
     showAnswers,
     setShowQuestion,
@@ -14,12 +14,17 @@ const App: React.FC = observer(() => {
     winner,
   } = gameStore;
 
-  // console.log(toJS(currentGame));
+  const currentRound = currentGame?.currentRound;
+  const allAnswered = currentGame?.allAnswered;
+
+  console.log(toJS(currentGame));
   // console.log("showQuestion", toJS(showQuestion));
   // console.log("showAnswer", toJS(showAnswers));
   // console.log("allAnswered", toJS(allAnswered));
 
-  const currentRound = currentGame?.currentRound;
+  // useEffect(() => {
+  //   gameStore.getCurrentGame();
+  // }, []);
 
   useEffect(() => {
     gameStore.setupSocketListeners();

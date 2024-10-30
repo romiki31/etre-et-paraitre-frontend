@@ -8,17 +8,17 @@ import Ranking from "./Ranking";
 const Question = observer(() => {
   const {
     currentGame,
-    currentPlayer,
-    roundPlayer,
-    currentQuestion,
-    rightAnswer,
+    currentPlayerId,
     answer,
     submitRightAnswer,
     submitGuess,
   } = gameStore;
 
   const [showPopup, setShowPopup] = useState(false);
+  const currentQuestion = currentGame?.currentQuestion;
   const currentRound = currentGame?.currentRound;
+  const roundPlayer = currentGame?.players.find((p) => p.isRoundPlayer);
+  const rightAnswer = currentGame?.rightAnswer;
 
   const handleSubmitAnswer = (answer: string | null) => {
     if (answer) {
@@ -32,7 +32,7 @@ const Question = observer(() => {
 
   return (
     <>
-      {currentQuestion && currentPlayer && currentRound ? (
+      {currentQuestion && currentPlayerId && currentRound ? (
         <div className="colmn-space-btwn">
           <div className="flex-space-btw">
             <div>
@@ -53,7 +53,7 @@ const Question = observer(() => {
             </button>
           </div>
 
-          {roundPlayer?.id === currentPlayer.id ? (
+          {roundPlayer?.id === currentPlayerId ? (
             rightAnswer ? (
               <>
                 <p>En attente des réponses des autres joueurs</p>

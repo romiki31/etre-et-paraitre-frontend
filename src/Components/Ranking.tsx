@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import { gameStore } from "../store";
 
 const Ranking = observer(() => {
-  const { currentGame, currentPlayer } = gameStore;
+  const { currentGame, currentPlayerId } = gameStore;
 
   const sortedPlayers = currentGame?.players
     .slice()
@@ -18,7 +18,7 @@ const Ranking = observer(() => {
                 <div
                   key={player.username}
                   className={
-                    player.id === currentPlayer?.id
+                    player.id === currentPlayerId
                       ? "flex-space-btw item accent-item"
                       : "flex-space-btw item"
                   }

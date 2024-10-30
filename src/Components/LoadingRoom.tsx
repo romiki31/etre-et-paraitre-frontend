@@ -1,30 +1,28 @@
-import { toJS } from "mobx";
 import { observer } from "mobx-react";
 import { gameStore } from "../store";
 
 const LoadingRoom = observer(() => {
-  const { startGame, currentPlayer } = gameStore;
-
-  console.log(toJS(currentPlayer));
+  const { gameCreator, pin, currentGame, startGame, currentPlayerId } =
+    gameStore;
 
   return (
     <div className="colmn-space-btwn">
-      {gameStore.gameCreator && (
+      {gameCreator && (
         <div className="flex-space-btw">
           <p>Code PIN :</p>
-          <h3>{gameStore.pin}</h3>
+          <h3>{pin}</h3>
         </div>
       )}
       <div className="flex-column gap-5">
         <p>En attente des autres joueurs...</p>
         <div className="flex-column gap-2">
-          {gameStore.currentGame?.players.map((player) => {
+          {currentGame?.players.map((player) => {
+            console.log(currentPlayerId);
+
             return (
               <h4
                 key={player.id}
-                className={
-                  currentPlayer?.id === player.id ? "accent-color" : ""
-                }
+                className={currentPlayerId === player.id ? "accent-color" : ""}
               >
                 {player.username}
               </h4>
@@ -32,9 +30,7 @@ const LoadingRoom = observer(() => {
           })}
         </div>
       </div>
-      {gameStore.gameCreator &&
-      gameStore.currentGame &&
-      gameStore.currentGame.players.length >= 2 ? (
+      {gameCreator && currentGame && currentGame.players.length >= 2 ? (
         <button onClick={() => startGame()}>GO !</button>
       ) : (
         <div></div>

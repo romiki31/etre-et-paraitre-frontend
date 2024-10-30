@@ -1,28 +1,23 @@
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { io } from "socket.io-client";
-import { Game, Player, Question } from "./Constantes";
+import { Game, Player } from "./Constantes";
 
 const socket =
   process.env.NODE_ENV === "production" ? io("https://donska.fr") : io("/");
 
 class GameStore {
   pin: string = "";
-  gameCreator: boolean = false;
-  currentPlayer: Player | null = null;
-  roundPlayer: Player | null = null;
   isPinValid: boolean = false;
+  gameCreator: boolean = false;
   currentGame: Game | null = null;
-  errorMessage: string = "";
-  currentQuestion: Question | null = null;
-  rightAnswer: string | null = "";
-  hasAnswered: boolean = false;
+  currentPlayerId: number | null = null;
   answer: string | null = null;
+  errorMessage: string = "";
   showAnswers: boolean = false;
   showRanking: boolean = false;
   showQuestion: boolean = false;
   nextTurn: boolean = false;
-  allAnswered: boolean = false;
   winner: Player | null = null;
 
   constructor() {
@@ -35,17 +30,14 @@ class GameStore {
     });
 
     socket.on("game-started", (res) => {
-      this.currentQuestion = res.game.currentQuestion;
-      this.roundPlayer = res.game.roundPlayer;
       this.currentGame = res.game;
     });
 
     socket.on("right-answer-submitted", (game) => {
-      this.setRightAnswer(game.rightAnswer);
+      this.currentGame = game;
     });
 
     socket.on("all-answered", (game) => {
-      this.setAllAnswered(game.allAnswered);
       this.setShowQuestion(false);
       this.setCurrentGame(game);
     });
@@ -101,28 +93,21 @@ class GameStore {
 
   setterNextTurn = (res: any) => {
     this.currentGame = res.game;
-    this.currentQuestion = res.game.currentQuestion;
-    this.roundPlayer = res.game.roundPlayer;
-    this.rightAnswer = null;
-    this.hasAnswered = false;
+    // this.currentPlayer = res.game.players.find(
+    //   (p: Player) => p.id === this.currentPlayer?.id
+    // );
     this.answer = null;
     this.showAnswers = false;
     this.showRanking = false;
-    this.allAnswered = false;
     this.nextTurn = false;
   };
 
   setterNextRound = (res: any) => {
     this.currentGame = res.game;
-    this.rightAnswer = res.game.rightAnswer;
-    this.currentQuestion = res.game.currentQuestion;
-    this.roundPlayer = res.game.roundPlayer;
-    this.hasAnswered = false;
     this.answer = null;
     this.showAnswers = false;
     this.showRanking = false;
     this.nextTurn = false;
-    this.allAnswered = false;
     this.showQuestion = false;
   };
 
@@ -172,30 +157,12 @@ class GameStore {
     this.currentGame = currentGame;
   };
 
-  setCurrentPlayer = (currentPlayer: Player) => {
-    this.currentPlayer = currentPlayer;
-  };
-  setRoundPlayer = (roundPlayer: Player) => {
-    this.roundPlayer = roundPlayer;
+  setCurrentPlayerId = (currentPlayerId: number) => {
+    this.currentPlayerId = currentPlayerId;
   };
 
-  setCurrentQuestion = (currentQuestion: Question) => {
-    this.currentQuestion = currentQuestion;
-  };
-
-  setRightAnswer = (rightAnswer: string | null) => {
-    this.rightAnswer = rightAnswer;
-  };
-
-  setHasAnswered = (hasAnswered: true | false) => {
-    this.hasAnswered = hasAnswered;
-  };
   setAnswer = (answer: string | null) => {
     this.answer = answer;
-  };
-
-  setAllAnswered = (allAnswered: true | false) => {
-    this.allAnswered = allAnswered;
   };
 
   setShowAnswers = (showAnswers: true | false) => {
@@ -233,6 +200,19 @@ class GameStore {
     this.gameCreator = true;
   };
 
+  getCurrentGame = async () => {
+    try {
+      const response = await axios.get("/api/game", {});
+      if (response.data) {
+        this.setCurrentGame(response.data.currentGame);
+        this.setCurrentPlayerId(response.data.currentPlayerId);
+        this.isPinValid = true;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   checkPin = async (pin: string) => {
     try {
       const response = await axios.post("/api/check-pin", {
@@ -256,7 +236,7 @@ class GameStore {
       this.setErrorMessage("");
       const response = await axios.post("/api/create-game", data);
       this.currentGame = response.data.game;
-      this.currentPlayer = response.data.currentPlayer;
+      this.currentPlayerId = response.data.currentPlayerId;
     } catch (error: any) {
       if (error.response.data.message) {
         this.setErrorMessage(error.response.data.message);
@@ -276,7 +256,7 @@ class GameStore {
       const response = await axios.post("/api/create-game", gameData);
 
       this.currentGame = response.data.game;
-      this.currentPlayer = response.data.currentPlayer;
+      this.currentPlayerId = response.data.currentPlayerId;
 
       this.clearErrorMessage();
     } catch (error) {
@@ -292,9 +272,11 @@ class GameStore {
 
       if (response.data) {
         this.setCurrentGame(response.data.game);
-        this.setCurrentQuestion(response.data.game.currentQuestion);
-        this.setRoundPlayer(response.data.game.roundPlayer);
-        this.setCurrentPlayer(response.data.game.roundPlayer);
+        // this.setCurrentPlayer(
+        //   response.data.game.players.find(
+        //     (p: Player) => p.id === this.currentPlayer?.id
+        //   )
+        // );
       }
     } catch (error) {
       console.error("Erreur lors du démarrage du jeu", error);
@@ -306,10 +288,10 @@ class GameStore {
       const response = await axios.post("/api/submit-answer", {
         pin: this.pin,
         rightAnswer,
-        roundPlayer: this.roundPlayer,
+        roundPlayer: this.currentGame?.players.find((p) => p.isRoundPlayer),
       });
       if (response.data) {
-        this.setRightAnswer(response.data.game.rightAnswer);
+        this.setCurrentGame(response.data.game);
       }
     } catch (error) {
       console.error("Erreur lors de la soumission de la réponse", error);
@@ -320,11 +302,10 @@ class GameStore {
     try {
       const response = await axios.post("/api/submit-guess", {
         pin: this.pin,
-        playerId: this.currentPlayer?.id,
+        playerId: this.currentPlayerId,
         guessedAnswer,
       });
       if (response.data.hasAnswered) {
-        this.setHasAnswered(true);
         this.setAnswer(response.data.answer);
       }
     } catch (error) {
