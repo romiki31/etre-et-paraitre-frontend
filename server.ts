@@ -53,28 +53,20 @@ io.on("connection", (socket: Socket) => {
 });
 
 // app.get("/api/game/{pin}", (req: Request, res: Response) => {
-//   console.log(req.cookies);
-//   if (req.cookies.join_game) {
-//     const pin = req.cookies.join_game.pin;
-//     const currentPlayer = req.cookies.join_game.currentPlayer;
+
 //     const currentGame = games.find((g) => g.pin === pin);
 
 //     if (currentGame) {
 //       return res.json({
 //         message: "Retour à la partie",
 //         currentGame,
-//         currentPlayer,
+//         currentPlayerId,
 //       });
 //     } else {
 //       return res
 //         .status(500)
 //         .json({ message: "Vous n'avez pas rejoint la partie en cours" });
 //     }
-//   } else {
-//     return res
-//       .status(404)
-//       .json({ message: "Vous n'avez pas de partie en cours" });
-//   }
 // });
 
 app.post("/api/check-pin", (req: Request, res: Response) => {
@@ -115,17 +107,6 @@ app.post("/api/create-game", (req: Request, res: Response) => {
     game.players.push(newPlayer);
     io.to(pin).emit("player-joined", game);
 
-    // res.cookie(
-    //   "join_game",
-    //   { pin, currentPlayer: newPlayer },
-    //   {
-    //     httpOnly: true,
-    //     maxAge: 30 * 60 * 1000,
-    //     secure: process.env.NODE_ENV === "production",
-    //     sameSite: "lax",
-    //   }
-    // );
-
     return res.json({
       message: "Joueur ajouté à la partie existante",
       game,
@@ -152,16 +133,6 @@ app.post("/api/create-game", (req: Request, res: Response) => {
     games.push(newGame);
 
     io.to(pin).emit("game-created", newGame);
-    // res.cookie(
-    //   "join_game",
-    //   { pin, currentPlayer: newPlayer },
-    //   {
-    //     httpOnly: true,
-    //     maxAge: 30 * 60 * 1000,
-    //     secure: process.env.NODE_ENV === "production",
-    //     sameSite: "lax",
-    //   }
-    // );
     return res.json({
       message: "Nouvelle partie créée",
       game: newGame,

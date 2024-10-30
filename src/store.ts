@@ -66,12 +66,12 @@ class GameStore {
 
   emitShowAnswers = () => {
     this.setShowAnswers(true);
-    socket.emit("show-answers", this.pin); // Émettre à tous les joueurs
+    socket.emit("show-answers", this.pin);
   };
 
   emitShowRanking = () => {
     this.setShowRanking(true);
-    socket.emit("show-ranking", this.pin); // Émettre à tous les joueurs
+    socket.emit("show-ranking", this.pin);
   };
 
   emitNextTurn = async () => {
@@ -93,9 +93,6 @@ class GameStore {
 
   setterNextTurn = (res: any) => {
     this.currentGame = res.game;
-    // this.currentPlayer = res.game.players.find(
-    //   (p: Player) => p.id === this.currentPlayer?.id
-    // );
     this.answer = null;
     this.showAnswers = false;
     this.showRanking = false;
@@ -272,11 +269,6 @@ class GameStore {
 
       if (response.data) {
         this.setCurrentGame(response.data.game);
-        // this.setCurrentPlayer(
-        //   response.data.game.players.find(
-        //     (p: Player) => p.id === this.currentPlayer?.id
-        //   )
-        // );
       }
     } catch (error) {
       console.error("Erreur lors du démarrage du jeu", error);
