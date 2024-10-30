@@ -1,8 +1,5 @@
-import { createBrowserHistory, History } from "history";
-import {
-  createObservableHistory,
-  ObservableHistory,
-} from "mobx-observable-history";
+import { createBrowserHistory } from "history";
+import { createObservableHistory } from "mobx-observable-history";
 import { observer } from "mobx-react";
 import { Component } from "react";
 import UrlPattern from "url-pattern";
@@ -13,14 +10,10 @@ import Round from "./Components/Round";
 import RoundEnded from "./Components/RoundEnded";
 import TurnEnd from "./Components/TurnEnd";
 
-// Créez une instance de `history` avec `createBrowserHistory`
-const baseHistory: History = createBrowserHistory();
-export const history: ObservableHistory<History> =
-  createObservableHistory(baseHistory);
-
+export const history = createObservableHistory(createBrowserHistory());
 export function goToUrl(url: string) {
-  if (!baseHistory) return;
-  baseHistory.push(url); // Utilisation directe de l'objet `baseHistory` pour `push`
+  if (!history) return;
+  history.push(url);
 }
 
 export class Link extends Component<{
@@ -44,7 +37,7 @@ export class Link extends Component<{
 export const Routes = observer(() => {
   let pathname = history.location.pathname;
   if (pathname.length > 1 && pathname.endsWith("/")) {
-    baseHistory.replace(pathname.substring(0, pathname.length - 1)); // Utilisation de `baseHistory` pour `replace`
+    history.replace(pathname.substring(0, pathname.length - 1));
     return null;
   }
 
