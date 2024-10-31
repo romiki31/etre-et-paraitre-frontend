@@ -199,12 +199,10 @@ class GameStore {
 
   async getCurrentGame(pin: string, currentPlayerId: number) {
     try {
-      console.log("caca");
-
       const response = await axios.get(`/api/game/${pin}/${currentPlayerId}`);
       if (response.data) {
-        this.currentGame = response.data.game;
         this.pin = pin;
+        this.currentGame = response.data.game;
         this.currentPlayerId = currentPlayerId;
         this.gameCreator = currentPlayerId === 1 ? true : false;
       }

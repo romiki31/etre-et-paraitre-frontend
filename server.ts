@@ -53,15 +53,22 @@ io.on("connection", (socket: Socket) => {
 });
 
 app.get("/api/game/:pin/:currentPlayerId", (req: Request, res: Response) => {
-  const { pin, currentPlayerId } = req.params;
+  try {
+    const { pin, currentPlayerId } = req.params;
 
-  const game = games.find((g) => g.pin === pin);
+    const game = games.find((g) => g.pin === pin);
 
-  if (!game) {
-    return res.status(404).json({ message: "Partie non trouvée" });
+    if (!game) {
+      console.error(`Partie non trouvée pour le PIN: ${pin}`);
+      return res.status(404).json({ message: "Partie non trouvée" });
+    }
+
+    console.log(`Données de la partie trouvées pour le PIN: ${pin}`);
+    return res.json({ game, currentPlayerId: parseInt(currentPlayerId) });
+  } catch (error) {
+    console.error("Erreur dans /api/game/:pin/:currentPlayerId :", error);
+    return res.status(500).json({ message: "Erreur serveur" });
   }
-
-  return res.json({ game, currentPlayerId: parseInt(currentPlayerId) });
 });
 
 app.post("/api/check-pin", (req: Request, res: Response) => {
