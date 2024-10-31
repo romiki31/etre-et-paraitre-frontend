@@ -15,6 +15,10 @@ export function goToUrl(url: string) {
   history.push(url);
 }
 
+export function goToWithParams(path: string, pin: string, playerId: string) {
+  goToUrl(`${path}/${pin}/${playerId}`);
+}
+
 export const Link: React.FC<{
   to: string;
   id?: string;
@@ -49,23 +53,23 @@ export const Routes = observer(() => {
       component: HomePage,
     },
     {
-      path: "/loading-room",
+      path: "/loading-room/:pin/:playerId",
       component: LoadingRoom,
     },
     {
-      path: "/question",
+      path: "/question/:pin/:playerId",
       component: Question,
     },
     {
-      path: "/round",
+      path: "/round/:pin/:playerId",
       component: Round,
     },
     {
-      path: "/turn-end",
+      path: "/turn-end/:pin/:playerId",
       component: TurnEnd,
     },
     {
-      path: "/round-ended",
+      path: "/round-ended/:pin/:playerId",
       component: RoundEnded,
     },
   ];

@@ -1,3 +1,4 @@
+import { toJS } from "mobx";
 import { observer } from "mobx-react";
 import { gameStore } from "../store";
 import Ranking from "./Ranking";
@@ -14,6 +15,8 @@ const TurnEnd = observer(() => {
     getBtnClass,
     currentGame,
   } = gameStore;
+
+  console.log(toJS(gameCreator));
 
   const currentRound = currentGame?.currentRound;
 

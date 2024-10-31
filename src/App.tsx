@@ -1,30 +1,23 @@
-import { toJS } from "mobx";
 import { observer } from "mobx-react";
-import React, { useEffect } from "react";
-import { goToUrl, Routes } from "./routes";
+import React, { useEffect, useState } from "react";
+import { Routes, goToWithParams } from "./routes";
 import { gameStore } from "./store";
 
 const App: React.FC = observer(() => {
-  const {
-    currentGame,
-    showQuestion,
-    showAnswers,
-    setShowQuestion,
-    getBackgroundClass,
-    winner,
-  } = gameStore;
+  const { getBackgroundClass, currentGame } = gameStore;
 
-  const currentRound = currentGame?.currentRound;
-  const allAnswered = currentGame?.allAnswered;
+  const [pin, setPin] = useState<string | null>(null);
+  const [currentPlayerId, setCurrentPlayerId] = useState<string | null>(null);
 
-  console.log(toJS(currentGame));
-  // console.log("showQuestion", toJS(showQuestion));
-  // console.log("showAnswer", toJS(showAnswers));
-  // console.log("allAnswered", toJS(allAnswered));
+  useEffect(() => {
+    const urlPath = window.location.pathname;
+    const pathSegments = urlPath.split("/");
 
-  // useEffect(() => {
-  //   gameStore.getCurrentGame();
-  // }, []);
+    if (pathSegments.length >= 4) {
+      setPin(pathSegments[2]);
+      setCurrentPlayerId(pathSegments[3]);
+    }
+  }, []);
 
   useEffect(() => {
     gameStore.setupSocketListeners();
@@ -32,40 +25,84 @@ const App: React.FC = observer(() => {
     if (gameStore.pin) {
       gameStore.joinSocketRoom(gameStore.pin);
     }
-  }, [gameStore.pin]);
+
+    if (gameStore.pin && gameStore.currentPlayerId) {
+      gameStore.getCurrentGame(gameStore.pin, gameStore.currentPlayerId);
+    } else if (pin && currentPlayerId) {
+      gameStore.getCurrentGame(pin, parseInt(currentPlayerId));
+    }
+  }, [pin, currentPlayerId, gameStore.pin, gameStore.currentPlayerId]);
 
   useEffect(() => {
-    if (currentRound) {
+    if (
+      gameStore.currentGame?.currentRound &&
+      gameStore.pin &&
+      gameStore.currentPlayerId
+    ) {
       const timer = setTimeout(() => {
-        setShowQuestion(true);
-        goToUrl("/question");
-      }, 3000);
+        gameStore.setShowQuestion(true);
+        goToWithParams(
+          "/question",
+          gameStore.pin,
+          gameStore.currentPlayerId!.toLocaleString()
+        );
+      }, 2000);
 
       return () => clearTimeout(timer);
     }
-  }, [currentRound]);
+  }, [
+    gameStore.currentGame?.currentRound,
+    gameStore.pin,
+    gameStore.currentPlayerId,
+  ]);
 
+  // Gestion de la navigation en fonction de l'état du jeu
   useEffect(() => {
-    if (winner) {
-      goToUrl("/round-ended");
-    } else if (allAnswered) {
-      goToUrl("/turn-end");
-    } else if (showQuestion) {
-      goToUrl("/question");
-    } else if (currentRound) {
-      goToUrl("/round");
-    } else if (currentGame) {
-      goToUrl("/loading-room");
-    } else {
-      goToUrl("/");
+    if (gameStore.pin && gameStore.currentPlayerId) {
+      if (gameStore.winner) {
+        goToWithParams(
+          "/round-ended",
+          gameStore.pin,
+          gameStore.currentPlayerId.toLocaleString()
+        );
+      } else if (gameStore.currentGame?.allAnswered) {
+        goToWithParams(
+          "/turn-end",
+          gameStore.pin,
+          gameStore.currentPlayerId.toLocaleString()
+        );
+      } else if (gameStore.showQuestion) {
+        goToWithParams(
+          "/question",
+          gameStore.pin,
+          gameStore.currentPlayerId.toLocaleString()
+        );
+      } else if (gameStore.currentGame?.currentRound) {
+        goToWithParams(
+          "/round",
+          gameStore.pin,
+          gameStore.currentPlayerId.toLocaleString()
+        );
+      } else if (gameStore.currentGame) {
+        goToWithParams(
+          "/loading-room",
+          gameStore.pin,
+          gameStore.currentPlayerId.toLocaleString()
+        );
+      }
     }
-  }, [winner, allAnswered, showQuestion, currentRound, currentGame]);
+  }, [
+    gameStore.winner,
+    gameStore.currentGame,
+    gameStore.showQuestion,
+    gameStore.pin,
+  ]);
 
   return (
     <div
       className={
-        currentRound
-          ? `main-container ${getBackgroundClass(currentRound.id)}`
+        currentGame?.currentRound
+          ? `main-container ${getBackgroundClass(currentGame.currentRound.id)}`
           : "main-container"
       }
     >

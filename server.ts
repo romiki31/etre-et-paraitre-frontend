@@ -52,22 +52,17 @@ io.on("connection", (socket: Socket) => {
   });
 });
 
-// app.get("/api/game/{pin}", (req: Request, res: Response) => {
+app.get("/api/game/:pin/:currentPlayerId", (req: Request, res: Response) => {
+  const { pin, currentPlayerId } = req.params;
 
-//     const currentGame = games.find((g) => g.pin === pin);
+  const game = games.find((g) => g.pin === pin);
 
-//     if (currentGame) {
-//       return res.json({
-//         message: "Retour à la partie",
-//         currentGame,
-//         currentPlayerId,
-//       });
-//     } else {
-//       return res
-//         .status(500)
-//         .json({ message: "Vous n'avez pas rejoint la partie en cours" });
-//     }
-// });
+  if (!game) {
+    return res.status(404).json({ message: "Partie non trouvée" });
+  }
+
+  return res.json({ game, currentPlayerId: parseInt(currentPlayerId) });
+});
 
 app.post("/api/check-pin", (req: Request, res: Response) => {
   const { pin } = req.body;

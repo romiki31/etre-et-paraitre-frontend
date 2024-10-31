@@ -197,18 +197,19 @@ class GameStore {
     this.gameCreator = true;
   };
 
-  getCurrentGame = async () => {
+  async getCurrentGame(pin: string, currentPlayerId: number) {
     try {
-      const response = await axios.get("/api/game", {});
+      const response = await axios.get(`/api/game/${pin}/${currentPlayerId}`);
       if (response.data) {
-        this.setCurrentGame(response.data.currentGame);
-        this.setCurrentPlayerId(response.data.currentPlayerId);
-        this.isPinValid = true;
+        this.pin = pin;
+        this.currentGame = response.data.game;
+        this.currentPlayerId = currentPlayerId;
+        this.gameCreator = currentPlayerId === 1 ? true : false;
       }
     } catch (error) {
-      console.log(error);
+      console.error("Erreur lors de la récupération de la partie :", error);
     }
-  };
+  }
 
   checkPin = async (pin: string) => {
     try {
