@@ -200,13 +200,12 @@ class GameStore {
   async getCurrentGame(pin: string, currentPlayerId: number) {
     try {
       const response = await axios.get(`/api/game/${pin}/${currentPlayerId}`);
-      // if (response.data) {
-      this.pin = pin;
-      this.currentGame = await axios.get(`/api/game/${pin}/${currentPlayerId}`);
-      // this.currentGame = response.data.game;
-      this.currentPlayerId = currentPlayerId;
-      this.gameCreator = currentPlayerId === 1 ? true : false;
-      // }
+      if (response.data) {
+        this.pin = pin;
+        this.currentGame = response.data.game;
+        this.currentPlayerId = currentPlayerId;
+        this.gameCreator = currentPlayerId === 1 ? true : false;
+      }
     } catch (error) {
       console.error("Erreur lors de la récupération de la partie :", error);
     }
