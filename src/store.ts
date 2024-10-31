@@ -202,7 +202,10 @@ class GameStore {
       const response = await axios.get(`/api/game/${pin}/${currentPlayerId}`);
       if (response.data) {
         this.pin = pin;
-        this.currentGame = response.data.game;
+        this.currentGame = await axios.get(
+          `/api/game/${pin}/${currentPlayerId}`
+        );
+        // this.currentGame = response.data.game;
         this.currentPlayerId = currentPlayerId;
         this.gameCreator = currentPlayerId === 1 ? true : false;
       }
