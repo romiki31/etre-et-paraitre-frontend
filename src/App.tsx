@@ -13,9 +13,9 @@ const App: React.FC = observer(() => {
     const urlPath = window.location.pathname;
     const pathSegments = urlPath.split("/");
 
-    if (pathSegments.length >= 4) {
-      setPin(pathSegments[2]);
-      setCurrentPlayerId(pathSegments[3]);
+    if (pathSegments.length >= 2) {
+      setPin(pathSegments.slice(-2)[0]);
+      setCurrentPlayerId(pathSegments.slice(-1)[0]);
     }
   }, []);
 
