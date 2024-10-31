@@ -9,10 +9,6 @@ const App: React.FC = observer(() => {
   const [pin, setPin] = useState<string | null>(null);
   const [currentPlayerId, setCurrentPlayerId] = useState<string | null>(null);
 
-  console.log(currentGame);
-  console.log(pin);
-  console.log(currentPlayerId);
-
   useEffect(() => {
     const urlPath = window.location.pathname;
     const pathSegments = urlPath.split("/");
@@ -99,6 +95,7 @@ const App: React.FC = observer(() => {
     gameStore.currentGame,
     gameStore.showQuestion,
     gameStore.pin,
+    gameStore.currentPlayerId,
   ]);
 
   return (
