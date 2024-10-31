@@ -56,7 +56,6 @@ const App: React.FC = observer(() => {
     gameStore.currentPlayerId,
   ]);
 
-  // Gestion de la navigation en fonction de l'état du jeu
   useEffect(() => {
     if (gameStore.pin && gameStore.currentPlayerId) {
       if (gameStore.winner) {
