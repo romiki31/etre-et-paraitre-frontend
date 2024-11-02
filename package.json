@@ -7,7 +7,7 @@
     "dev": "vite",
     "dev:server": "nodemon --exec 'npm run build:server && node dist/server.cjs' --watch 'server/**/*' -e ts --verbose",
     "build:server": "esbuild server/server.ts --bundle --platform=node --outdir=dist --sourcemap --out-extension:.js=.cjs",
-    "build:frontend": "vite build && esbuild server/server.ts --bundle --platform=node --outdir=dist",
+    "build:frontend": "vite build",
     "build": "npm run build:frontend && npm run build:server"
   },
   "dependencies": {

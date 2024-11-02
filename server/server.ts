@@ -3,8 +3,8 @@ import express from "express";
 import * as http from "http";
 import * as path from "path";
 import { Server, Socket } from "socket.io";
-import { questions, rounds } from "./constantes";
 import { emptyPlayer, Game, Player, Question } from "../src/Interfaces";
+import { questions, rounds } from "./constantes";
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -359,7 +359,7 @@ app.post("/api/next-turn", (req: any, res: any) => {
 app.use(express.static(path.join(__dirname, "../dist")));
 
 app.get("*", (req: any, res: any) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "../dist", "index.html"));
 });
 
 server.listen(port, () => {
