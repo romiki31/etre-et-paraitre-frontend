@@ -4,6 +4,9 @@ import { defineConfig } from "vite";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    extensions: [".js", ".ts", ".jsx", ".tsx"],
+  },
   server: {
     proxy: {
       "/api": {
