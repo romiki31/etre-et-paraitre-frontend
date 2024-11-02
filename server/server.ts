@@ -4,7 +4,7 @@ import * as http from "http";
 import * as path from "path";
 import { Server, Socket } from "socket.io";
 import { questions, rounds } from "./constantes";
-import { emptyPlayer, Game, Player, Question } from "./src/Interfaces";
+import { emptyPlayer, Game, Player, Question } from "../src/Interfaces";
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -356,10 +356,10 @@ app.post("/api/next-turn", (req: any, res: any) => {
   }
 });
 
-app.use(express.static(path.join(import.meta.dirname, "build")));
+app.use(express.static(path.join(__dirname, "../dist")));
 
 app.get("*", (req: any, res: any) => {
-  res.sendFile(path.join(import.meta.dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 server.listen(port, () => {

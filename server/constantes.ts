@@ -1,4 +1,4 @@
-import { Question, Round } from "./src/Interfaces";
+import { Question, Round } from "../src/Interfaces";
 
 export const rounds: Round[] = [
   {
