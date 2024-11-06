@@ -9,5 +9,5 @@ npm run dev:server
 
 ```
 npm run build
-pm2 start dist/server.js
+pm2 start dist/server.cjs
 ```
