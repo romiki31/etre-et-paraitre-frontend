@@ -62,7 +62,7 @@ const HomePage = observer(() => {
               />
               <button
                 className="w-33 internal-btn"
-                onClick={() => checkPin(inputPin.toUpperCase())}
+                onClick={() => checkPin(inputPin)}
               >
                 GO
               </button>

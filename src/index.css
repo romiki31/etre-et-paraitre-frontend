@@ -145,12 +145,12 @@ body,
   --third-color: #3a3642;
   --accent-color: #ffc759;
   --soft-color: #ece9ec;
-  --first-round-light: #ffad0a;
-  --first-round: #f48e0a;
-  --second-round-light: #0b69d5;
-  --second-round: #052f5f;
-  --third-round-light: #01df5e;
-  --third-round: #018d3c;
+  --first-round-light: #0b69d5;
+  --first-round: #052f5f;
+  --second-round-light: #01df5e;
+  --second-round: #018d3c;
+  --third-round-light: #ffad0a;
+  --third-round: #f48e0a;
   --fourth-round-light: #e63946;
   --fourth-round: #c81927;
 }
@@ -193,7 +193,7 @@ body {
   );
 }
 
-.bg-relations {
+.bg-representations {
   background: linear-gradient(
     0deg,
     var(--third-round) 0%,
@@ -201,7 +201,7 @@ body {
   );
 }
 
-.bg-representations {
+.bg-relations {
   background: linear-gradient(
     0deg,
     var(--fourth-round) 0%,

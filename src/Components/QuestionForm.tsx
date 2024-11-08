@@ -46,15 +46,19 @@ const QuestionForm: React.FC<QuestionFORMProps> = observer(({ submitFunc }) => {
           {currentRound.id === 3 || currentRound.id === 4 ? (
             <div className="flex-column gap-2">
               {currentGame?.players.map((p) => {
-                return (
-                  <button
-                    key={p.id}
-                    className="answer-btn"
-                    onClick={() => submitFunc(p.username)}
-                  >
-                    {p.username}
-                  </button>
-                );
+                if (currentRound.id === 4 && p.id === roundPlayer?.id) {
+                  return <></>;
+                } else {
+                  return (
+                    <button
+                      key={p.id}
+                      className="answer-btn"
+                      onClick={() => submitFunc(p.username)}
+                    >
+                      {p.username}
+                    </button>
+                  );
+                }
               })}
             </div>
           ) : (

@@ -113,8 +113,6 @@ class GameStore {
   };
 
   setterNextTurn = (res: any) => {
-    console.log("hey");
-
     runInAction(() => {
       this.currentGame = res.game;
       this.answer = null;
@@ -142,9 +140,9 @@ class GameStore {
       case 2:
         return "bg-situations";
       case 3:
-        return "bg-relations";
-      case 4:
         return "bg-representations";
+      case 4:
+        return "bg-relations";
       default:
         return "bg-default";
     }
@@ -219,7 +217,7 @@ class GameStore {
 
   generatePin = () => {
     this.clearErrorMessage();
-    const newPin = Math.random().toString(36).substr(2, 6).toUpperCase();
+    const newPin = Math.random().toString(36).substr(2, 6).toLowerCase();
     runInAction(() => {
       this.pin = newPin;
       this.gameCreator = true;
