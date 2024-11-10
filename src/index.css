@@ -330,6 +330,11 @@ p {
   padding: 0 !important;
 }
 
+.img-btn {
+  all: unset !important;
+  cursor: pointer !important;
+}
+
 button {
   cursor: pointer;
   font-family: "Belanosima", sans-serif;

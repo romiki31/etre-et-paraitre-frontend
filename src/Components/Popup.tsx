@@ -1,4 +1,5 @@
 import React from "react";
+import Close from "../assets/close.png";
 
 interface PopupProps {
   onClose: () => void;
@@ -39,7 +40,7 @@ const Popup: React.FC<PopupProps> = ({ onClose, children }) => {
               }}
               onClick={onClose}
             >
-              <img src="/assets/close.png" alt="" />
+              <img src={Close} alt="" />
             </button>
           </div>
           {children}

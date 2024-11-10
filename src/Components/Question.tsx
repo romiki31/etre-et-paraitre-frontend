@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
+import Podium from "../assets/podium.png";
 import { gameStore } from "../store";
 import Popup from "./Popup";
 import QuestionForm from "./QuestionForm";
@@ -42,14 +43,8 @@ const Question = observer(() => {
                 <p className="accent-text">{roundPlayer?.username}</p>
               </div>
             </div>
-            <button
-              style={{
-                all: "unset",
-                cursor: "pointer",
-              }}
-              onClick={() => setShowPopup(true)}
-            >
-              <img src="/assets/podium.png" alt="" />
+            <button className="img-btn" onClick={() => setShowPopup(true)}>
+              <img src={Podium} alt="" />
             </button>
           </div>
 
