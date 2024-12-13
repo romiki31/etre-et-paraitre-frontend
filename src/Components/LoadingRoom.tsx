@@ -28,7 +28,7 @@ const LoadingRoom = observer(() => {
           })}
         </div>
       </div>
-      {gameCreator && currentGame && currentGame.players.length >= 4 ? (
+      {gameCreator && currentGame && currentGame.players.length >= 2 ? (
         <button onClick={() => startGame()}>GO !</button>
       ) : (
         <div></div>

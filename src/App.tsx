@@ -1,5 +1,6 @@
+import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, goToWithParams } from "./routes";
 import { gameStore } from "./store";
 
@@ -19,10 +20,8 @@ const App: React.FC = observer(() => {
     }
   }, []);
 
-  // console.log(gameStore.pin);
-  // console.log(gameStore.currentPlayerId);
-  // console.log(pin);
-  // console.log(currentPlayerId);
+  console.log(toJS(gameStore.currentPlayerId));
+  console.log(toJS(gameStore.currentGame));
 
   useEffect(() => {
     if (gameStore.pin) {
