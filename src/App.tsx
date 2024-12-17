@@ -28,7 +28,10 @@ const App: React.FC = observer(() => {
       gameStore.joinSocketRoom(gameStore.pin);
     }
     if (gameStore.pin && gameStore.currentPlayerId) {
-      gameStore.getCurrentGame(gameStore.pin, gameStore.currentPlayerId);
+      const intervalId = setInterval(() => {
+        gameStore.getCurrentGame(gameStore.pin, gameStore.currentPlayerId!);
+      }, 2 * 60 * 1000);
+      return () => clearInterval(intervalId);
     } else if (pin && currentPlayerId) {
       gameStore.getCurrentGame(pin, parseInt(currentPlayerId));
     }

@@ -217,7 +217,7 @@ class GameStore {
 
   generatePin = () => {
     this.clearErrorMessage();
-    const newPin = Math.random().toString(36).substr(2, 6).toLowerCase();
+    const newPin = Math.floor(100000 + Math.random() * 900000).toString();
     runInAction(() => {
       this.pin = newPin;
       this.gameCreator = true;

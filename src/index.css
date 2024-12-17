@@ -310,6 +310,9 @@ p {
   .answer-btn {
     font-size: 22px !important;
   }
+  .disabled-btn {
+    font-size: 22px !important;
+  }
 
   .soft-text {
     font-size: 16px !important;
@@ -387,6 +390,20 @@ input[type="number"] {
   border-radius: 10px !important;
   background-color: transparent;
   border: 3px solid #ffffff !important;
+}
+
+.disabled-btn {
+  font-weight: 400 !important;
+  font-size: 24px;
+  color: rgb(130, 130, 130);
+  padding: 10px !important;
+  border-radius: 10px !important;
+  background-color: rgb(210, 210, 210);
+  border: 3px solid rgb(210, 210, 210) !important;
+  cursor: default;
+}
+.disabled-btn:hover {
+  filter: none;
 }
 
 .strong {

@@ -81,5 +81,11 @@ export const Routes = observer(() => {
     }
   }
 
-  return <div>Not found</div>;
+  return (
+    <div className="colmn-space-btwn">
+      <div></div>
+      <h4>Not found</h4>
+      <div></div>
+    </div>
+  );
 });

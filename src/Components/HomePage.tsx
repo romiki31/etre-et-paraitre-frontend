@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { gameStore } from "../store";
 import UsernameInput from "./UsernameInput";
 
@@ -16,6 +16,12 @@ const HomePage = observer(() => {
 
   const [inputPin, setInputPin] = useState("");
   const [inputUsername, setInputUsername] = useState("");
+
+  useEffect(() => {
+    if (isPinValid) {
+      setErrorMessage("");
+    }
+  }, [isPinValid]);
 
   return (
     <div className="colmn-space-btwn">
@@ -55,6 +61,11 @@ const HomePage = observer(() => {
             <h4>Ou</h4>
             <div className="flex">
               <input
+                type="number"
+                inputMode="numeric"
+                pattern="\d{6}"
+                minLength={6}
+                maxLength={6}
                 className="w-66 internal-input"
                 placeholder="Code PIN ..."
                 value={inputPin}

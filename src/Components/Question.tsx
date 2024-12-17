@@ -55,10 +55,13 @@ const Question = observer(() => {
                 <div></div>
               </>
             ) : (
-              <QuestionForm submitFunc={handleSubmitAnswer} />
+              <QuestionForm
+                submitFunc={handleSubmitAnswer}
+                isDisabled={false}
+              />
             )
           ) : rightAnswer && !answer ? (
-            <QuestionForm submitFunc={handleSubmitAnswer} />
+            <QuestionForm submitFunc={handleSubmitAnswer} isDisabled={false} />
           ) : answer ? (
             <>
               <p>En attente des réponses des autres joueurs</p>
@@ -66,15 +69,20 @@ const Question = observer(() => {
             </>
           ) : (
             <>
-              <div className="flex-center gap-1">
-                <p className="soft-text">
-                  {" "}
-                  <span className="strong">{roundPlayer?.username} </span>
-                  est en train de répondre à : <br />
-                  <br />
-                  <p className="strong">{currentQuestion.name}</p>
-                </p>
-              </div>
+              {/* <div className="flex-center gap-1"> */}
+              <p className="soft-text">
+                {" "}
+                <span className="strong">{roundPlayer?.username} </span>
+                est en train de répondre à : <br />
+                <br />
+                <p className="strong">{currentQuestion.name}</p>
+                <br />
+                <QuestionForm
+                  submitFunc={handleSubmitAnswer}
+                  isDisabled={true}
+                />
+              </p>
+              {/* </div> */}
               <div></div>
             </>
           )}
