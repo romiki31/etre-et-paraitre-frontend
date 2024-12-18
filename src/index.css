@@ -317,6 +317,10 @@ p {
   .soft-text {
     font-size: 16px !important;
   }
+
+  .very-small-text {
+    font-size: 12px !important;
+  }
 }
 
 .small-text {
@@ -325,6 +329,12 @@ p {
 
 .soft-text {
   font-size: 18px;
+  font-weight: 400 !important;
+  color: var(--soft-color);
+}
+
+.very-small-text {
+  font-size: 14px !important;
   font-weight: 400 !important;
   color: var(--soft-color);
 }

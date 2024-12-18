@@ -16,6 +16,14 @@ const HomePage = observer(() => {
 
   const [inputPin, setInputPin] = useState("");
   const [inputUsername, setInputUsername] = useState("");
+  const [isIntro, setIsIntro] = useState(true);
+  const [isRules, setIsRules] = useState(false);
+
+  useEffect(() => {
+    if (isRules) {
+      setIsIntro(false);
+    }
+  }, [isRules]);
 
   useEffect(() => {
     if (isPinValid) {
@@ -25,7 +33,7 @@ const HomePage = observer(() => {
 
   return (
     <div className="colmn-space-btwn">
-      <h1 className="title">ÊTRE ET PARAÎTRE</h1>
+      {isRules ? null : <h1 className="title">ÊTRE ET PARAÎTRE</h1>}
       {gameCreator || isPinValid ? (
         <div className="flex-column gap-1">
           <div className="flex button-slide-in">
@@ -47,6 +55,74 @@ const HomePage = observer(() => {
             </button>
           </div>
           {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+        </div>
+      ) : isIntro ? (
+        <>
+          <p className="soft-text">
+            Avec Percept, plongez dans une expérience où vos perceptions et
+            celles des autres se confrontent. <br />
+            Jouez et découvrez comment vos amis vous voient et si vous êtes
+            celui ou celle qu'ils croient ! <br />
+            Si vous voulez gagner, il faudra cerner qui se cache derrière les
+            masques que les autres joueurs portent… parfois même sans s’en
+            apercevoir. <br /> <br />
+            Alors, connaissez-vous vraiment vos partenaires de jeu ? Sont-ils
+            ceux que vous pensez ? Percept vous offrira l’opportunité que vous
+            attendiez pour vous découvrir ou vous redécouvrir. À vous de jouer !
+          </p>
+          <button onClick={() => setIsRules(true)}>Suivant</button>
+        </>
+      ) : isRules ? (
+        <div className="flex-column gap-1">
+          <h3>Règles du jeu</h3>
+          <p className="very-small-text">
+            <p>Devinez, débriefez, et gagnez !</p>
+            Plongez dans un jeu où la clé de la victoire réside dans votre
+            capacité à comprendre les autres joueurs.
+            <br />
+            <br />
+            <p>Comment ça marche ?</p>
+            1. À chaque tour, un joueur tire une question et y répond. <br />
+            2. Les autres doivent deviner sa réponse : qu’aurait-il ou elle pu
+            dire ? <br />
+            3. Le rôle du "questionné" change à chaque nouvelle question. <br />
+            4. La partie se joue en <span className="strong">4 manches</span>,
+            chacune avec un type de question différent pour varier les surprises
+            ! <br />
+            <i>
+              *Si besoin : accordez vous sur les termes et/ou le contexte de la
+              question avant d’y répondre
+            </i>{" "}
+            <br />
+            <br />
+            <p>Le but du jeu :</p>
+            Accumulez des points en devinant les réponses des autres joueurs.
+            Attention, pas de points en jeu pour votre propre réponse, alors
+            soyez <span className="strong">honnête et spontané</span>. <br />
+            <br />
+            <p>Pourquoi vous allez adorer ?</p>
+            Au-delà du jeu, l’intérêt réside dans les discussions qui en
+            découlent. Débriefez les réponses, essayez de comprendre les choix
+            des uns et des autres, et découvrez des facettes inattendues de vos
+            amis ou de votre famille. <br />
+            <br />
+            <p>Infos pratiques :</p>
+            Pour 4 à 7 joueurs
+            <br />
+            Idéal pour des soirées pleines de rires, de débats, et de
+            découvertes.
+            <br />
+            Celui ou celle qui aura deviné le plus de réponses remporte la
+            partie ! <br />
+            <br />
+            <i>
+              <span className="strong">
+                Un jeu simple à prendre en main, mais riche en surprises et en
+                émotions.
+              </span>
+            </i>
+          </p>
+          <button onClick={() => setIsRules(false)}>Suivant</button>
         </div>
       ) : (
         <>
