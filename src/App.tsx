@@ -30,7 +30,7 @@ const App: React.FC = observer(() => {
     if (gameStore.pin && gameStore.currentPlayerId) {
       const intervalId = setInterval(() => {
         gameStore.getCurrentGame(gameStore.pin, gameStore.currentPlayerId!);
-      }, 2 * 60 * 1000);
+      }, 15 * 1000);
       return () => clearInterval(intervalId);
     } else if (pin && currentPlayerId) {
       gameStore.getCurrentGame(pin, parseInt(currentPlayerId));
