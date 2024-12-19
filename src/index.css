@@ -294,7 +294,7 @@ p {
     font-size: 28px;
   }
   h4 {
-    font-size: 26px;
+    font-size: 24px;
   }
   p {
     font-size: 20px !important;
@@ -560,4 +560,13 @@ input[type="number"] {
 .button-slide-in {
   animation: slideInFromRight 0.5s ease-out;
   opacity: 1;
+}
+
+.thank-you-container {
+  background-image: url("assets/game-creators.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  padding: 10px 5px;
 }

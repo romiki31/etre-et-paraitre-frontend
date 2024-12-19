@@ -5,7 +5,7 @@ import { Routes, goToWithParams } from "./routes";
 import { gameStore } from "./store";
 
 const App: React.FC = observer(() => {
-  const { getBackgroundClass, currentGame } = gameStore;
+  const { getBackgroundClass, currentGame, winner } = gameStore;
 
   const [pin, setPin] = useState<string | null>(null);
   const [currentPlayerId, setCurrentPlayerId] = useState<string | null>(null);
@@ -105,7 +105,7 @@ const App: React.FC = observer(() => {
   return (
     <div
       className={
-        currentGame?.currentRound
+        currentGame?.currentRound && !winner
           ? `main-container ${getBackgroundClass(currentGame.currentRound.id)}`
           : "main-container"
       }
