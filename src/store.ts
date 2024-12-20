@@ -6,7 +6,7 @@ import { goToUrl } from "./routes";
 
 const socket =
   process.env.NODE_ENV === "production"
-    ? io("https://donska.fr")
+    ? io("https://epercept.fr")
     : io("http://localhost:5001");
 
 class GameStore {
