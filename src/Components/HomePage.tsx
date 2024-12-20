@@ -76,11 +76,6 @@ const HomePage = observer(() => {
         <div className="flex-column gap-1">
           <h3>Règles du jeu</h3>
           <p className="very-small-text">
-            <p>Devinez, débriefez, et gagnez !</p>
-            Plongez dans un jeu où la clé de la victoire réside dans votre
-            capacité à comprendre les autres joueurs.
-            <br />
-            <br />
             <p>Comment ça marche ?</p>
             1. À chaque tour, un joueur tire une question et y répond. <br />
             2. Les autres doivent deviner sa réponse : qu’aurait-il ou elle pu
