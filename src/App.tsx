@@ -1,4 +1,3 @@
-import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { Routes, goToWithParams } from "./routes";
@@ -20,21 +19,33 @@ const App: React.FC = observer(() => {
     }
   }, []);
 
-  console.log(toJS(gameStore.currentPlayerId));
-  console.log(toJS(gameStore.currentGame));
+  // console.log(toJS(gameStore.currentPlayerId));
+  // console.log(toJS(gameStore.currentGame));
 
   useEffect(() => {
     if (gameStore.pin) {
       gameStore.joinSocketRoom(gameStore.pin);
     }
+
+    let intervalId: NodeJS.Timeout | null = null;
+
     if (gameStore.pin && gameStore.currentPlayerId) {
-      const intervalId = setInterval(() => {
-        gameStore.getCurrentGame(gameStore.pin, gameStore.currentPlayerId!);
+      intervalId = setInterval(() => {
+        if (!gameStore.winner) {
+          gameStore.getCurrentGame(gameStore.pin, gameStore.currentPlayerId!);
+        }
       }, 15 * 1000);
-      return () => clearInterval(intervalId);
     } else if (pin && currentPlayerId) {
       gameStore.getCurrentGame(pin, parseInt(currentPlayerId));
     }
+    if (gameStore.winner && intervalId) {
+      clearInterval(intervalId);
+    }
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
   }, [pin, currentPlayerId, gameStore.pin, gameStore.currentPlayerId]);
 
   useEffect(() => {
