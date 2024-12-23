@@ -98,7 +98,7 @@ export const questions: Question[] = [
     name: "face à un problème, tu commences par ...",
     answer_1: "Rechercher des solutions par toi-même",
     answer_2: "Demander de l'aide",
-    answer_3: "Éviter le problème et remettre à plus tard",
+    answer_3: "L'éviter et remettre à plus tard",
     answer_4: null,
   },
   {
@@ -218,24 +218,24 @@ export const questions: Question[] = [
     answer_3: "Dépassée à notre époque",
     answer_4: null,
   },
-  {
-    id: 23,
-    round_id: 1,
-    name: "pour toi, l’immigration ...",
-    answer_1: "Doit être régulée",
-    answer_2: "Doit être encouragée",
-    answer_3: null,
-    answer_4: null,
-  },
-  {
-    id: 24,
-    round_id: 1,
-    name: "pour toi, le réchauffement climatique ...",
-    answer_1: "Est un problème urgent et primordial",
-    answer_2: "Est un combat perdu d’avance",
-    answer_3: "N’est pas une priorité",
-    answer_4: null,
-  },
+  // {
+  //   id: 23,
+  //   round_id: 1,
+  //   name: "pour toi, l’immigration ...",
+  //   answer_1: "Doit être régulée",
+  //   answer_2: "Doit être encouragée",
+  //   answer_3: null,
+  //   answer_4: null,
+  // },
+  // {
+  //   id: 24,
+  //   round_id: 1,
+  //   name: "pour toi, le réchauffement climatique ...",
+  //   answer_1: "Est un problème urgent et primordial",
+  //   answer_2: "Est un combat perdu d’avance",
+  //   answer_3: "N’est pas une priorité",
+  //   answer_4: null,
+  // },
   // {
   //   id: 25,
   //   round_id: 1,
@@ -250,7 +250,7 @@ export const questions: Question[] = [
     round_id: 1,
     name: "la principale qualité que tu attends d'un ami, c'est ...",
     answer_1: "La disponibilité",
-    answer_2: "La franchise",
+    answer_2: "La confiance",
     answer_3: "La complicité",
     answer_4: null,
   },
@@ -476,8 +476,8 @@ export const questions: Question[] = [
     name: "les relations que tu chéris le plus sont ...",
     answer_1: "Les plus longues",
     answer_2: "Les plus intenses",
-    answer_3: "Les plus complices",
-    answer_4: "Les plus exclusives",
+    answer_3: "Les plus exclusives",
+    answer_4: null,
   },
   {
     id: 52,
@@ -491,10 +491,10 @@ export const questions: Question[] = [
   {
     id: 53,
     round_id: 1,
-    name: "tu chéris plus une relation d’après ...",
-    answer_1: "Sa longévité",
-    answer_2: "Son intensité",
-    answer_3: "Son exclusivité",
+    name: "tu préfère être dans ...",
+    answer_1: "L'ombre",
+    answer_2: "La lumière",
+    answer_3: null,
     answer_4: null,
   },
   {
@@ -571,6 +571,33 @@ export const questions: Question[] = [
   },
   {
     id: 62,
+    round_id: 1,
+    name: "la rémunération doit être accordée en priorité selon ...",
+    answer_1: "La valeur ajoutée",
+    answer_2: "Le temps travaillé",
+    answer_3: "La pénibilité",
+    answer_4: "Les risques pris",
+  },
+  {
+    id: 63,
+    round_id: 1,
+    name: "tu préfères ...",
+    answer_1: "Ne jamais perdre",
+    answer_2: "Ne jamais gagner",
+    answer_3: null,
+    answer_4: null,
+  },
+  {
+    id: 64,
+    round_id: 1,
+    name: "tu es plutôt ...",
+    answer_1: "Cigale",
+    answer_2: "Fourmi",
+    answer_3: null,
+    answer_4: null,
+  },
+  {
+    id: 65,
     round_id: 2,
     name: "tu as une opportunité de carrière exceptionnelle à l'étranger, mais cela signifierait laisser derrière toi ta famille et tes amis proches pour une période non négligeable. Que choisis-tu ?",
     answer_1: "Je pars",
@@ -579,7 +606,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 63,
+    id: 66,
     round_id: 2,
     name: "ton ami(e) a une altercation avec des inconnus. Prends-tu instinctivement son parti sachant qu’il/elle peut être en tort ?",
     answer_1: "Je prends son parti",
@@ -588,7 +615,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 64,
+    id: 67,
     round_id: 2,
     name: "tu découvres qu'un ami très cher t'a caché un événement important de sa vie. Restes-tu son ami ?",
     answer_1: "Je reste son ami",
@@ -597,7 +624,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 65,
+    id: 68,
     round_id: 2,
     name: "tu as promis à quelqu'un de garder un secret. Gardes-tu le silence au risque de nuire à une autre personne ?",
     answer_1: "Je garde le silence",
@@ -605,46 +632,19 @@ export const questions: Question[] = [
     answer_3: null,
     answer_4: null,
   },
-  {
-    id: 66,
-    round_id: 2,
-    name: "tu as des informations compromettantes sur un collègue de travail agaçant. Un supérieur hiérarchique te demande de les partager pour discréditer cette personne. Que fais-tu ?",
-    answer_1: "Je partage les informations",
-    answer_2: "Je garde le silence",
-    answer_3: null,
-    answer_4: null,
-  },
-  {
-    id: 67,
-    round_id: 2,
-    name: "tu es en désaccord avec un membre de ta famille sur une question politique très sensible. Défends-tu ton point de vue au risque de te mettre cette personne à dos ?",
-    answer_1: "Oui",
-    answer_2: "Non",
-    answer_3: null,
-    answer_4: null,
-  },
-  {
-    id: 68,
-    round_id: 2,
-    name: "un ami te demande de le couvrir en mentant à sa moitié au sujet de sa présence à un événement. Acceptes-tu de mentir pour lui ou refuses-tu de participer à la duperie ?",
-    answer_1: "J'accepte",
-    answer_2: "Je refuse",
-    answer_3: null,
-    answer_4: null,
-  },
-  {
-    id: 69,
-    round_id: 2,
-    name: "un membre de ta famille fait des commentaires désobligeants sur ton partenaire. Confrontes-tu cette personne ou ignores-tu les commentaires pour éviter les conflits ?",
-    answer_1: "Je la confronte",
-    answer_2: "Je laisse couler",
-    answer_3: null,
-    answer_4: null,
-  },
+  // {
+  //   id: 69,
+  //   round_id: 2,
+  //   name: "tu as des informations compromettantes sur un collègue de travail agaçant. Un supérieur hiérarchique te demande de les partager pour discréditer cette personne. Que fais-tu ?",
+  //   answer_1: "Je partage les informations",
+  //   answer_2: "Je garde le silence",
+  //   answer_3: null,
+  //   answer_4: null,
+  // },
   {
     id: 70,
     round_id: 2,
-    name: "ton ami heureux en ménage est sur le point de commettre un adultère. Le dissuades-tu ?",
+    name: "tu es en désaccord avec un aîné de ta famille sur une question politique très sensible. Défends-tu ton point de vue au risque de te mettre cette personne à dos ?",
     answer_1: "Oui",
     answer_2: "Non",
     answer_3: null,
@@ -653,25 +653,25 @@ export const questions: Question[] = [
   {
     id: 71,
     round_id: 2,
-    name: "ton partenaire tient un journal intime. Ce journal est laissé sans surveillance, le consultes-tu sans son consentement ?",
-    answer_1: "Oui",
-    answer_2: "Non",
+    name: "un ami te demande de le couvrir en mentant à sa moitié au sujet de sa présence à un événement. Acceptes-tu de mentir pour lui ou refuses-tu de participer à la duperie ?",
+    answer_1: "J'accepte",
+    answer_2: "Je refuse",
     answer_3: null,
     answer_4: null,
   },
   {
     id: 72,
     round_id: 2,
-    name: "tu organises une fête et un invité boit trop, devenant gênant pour les autres. Irais-tu jusqu’à le calmer devant tout le monde ?",
-    answer_1: "Oui",
-    answer_2: "Non",
+    name: "un aîné de ta famille fait des commentaires désobligeants sur ton partenaire. Confrontes-tu cette personne ou ignores-tu les commentaires pour éviter les conflits ?",
+    answer_1: "Je la confronte",
+    answer_2: "Je laisse couler",
     answer_3: null,
     answer_4: null,
   },
   {
     id: 73,
     round_id: 2,
-    name: "tu n’arrives plus à faire l’amour et n’éprouves plus aucun désir. Autorises-tu ton partenaire à assouvir ses besoins sexuels avec d’autres personnes ? (Il/Elle n’est pas la cause de ton absence de libido)",
+    name: "ton ami heureux en ménage est sur le point de commettre un adultère. Le dissuades-tu ?",
     answer_1: "Oui",
     answer_2: "Non",
     answer_3: null,
@@ -680,16 +680,16 @@ export const questions: Question[] = [
   {
     id: 74,
     round_id: 2,
-    name: "un aîné de votre famille vous critique sévèrement sur votre mode de vie lors d’un repas. Lui réponds-tu ou gardes-tu ton calme pour ne pas envenimer les choses ?",
-    answer_1: "Je me défends",
-    answer_2: "Je laisse couler",
+    name: "ton partenaire tient un journal intime. Ce journal est laissé sans surveillance, le consultes-tu sans son consentement ?",
+    answer_1: "Oui",
+    answer_2: "Non",
     answer_3: null,
     answer_4: null,
   },
   {
     id: 75,
     round_id: 2,
-    name: "tu as eu des relations sexuelles avec un(e) ami(e), t’éloignes-tu de cette personne une fois en couple ?",
+    name: "tu organises une fête et un invité boit trop, devenant gênant pour les autres. Irais-tu jusqu’à le calmer devant tout le monde ?",
     answer_1: "Oui",
     answer_2: "Non",
     answer_3: null,
@@ -698,7 +698,7 @@ export const questions: Question[] = [
   {
     id: 76,
     round_id: 2,
-    name: "tu as un ami qui ne cesse de se plaindre de ses problèmes, mais ne semble jamais prendre de mesures pour les résoudre. Lui avoues-tu le fond de ta pensée ?",
+    name: "tu n’arrives plus à faire l’amour et n’éprouves plus aucun désir. Autorises-tu ton partenaire à assouvir ses besoins sexuels avec d’autres personnes ? (Il/Elle n’est pas la cause de ton absence de libido)",
     answer_1: "Oui",
     answer_2: "Non",
     answer_3: null,
@@ -707,16 +707,16 @@ export const questions: Question[] = [
   {
     id: 77,
     round_id: 2,
-    name: "tu gagnes une grosse somme d’argent au casino quand tes amis ont perdu à la même soirée. Rembourses-tu leur perte si ton gain le permet ?",
-    answer_1: "Oui",
-    answer_2: "Non",
+    name: "un aîné de votre famille vous critique sévèrement sur votre mode de vie lors d’un repas. Lui réponds-tu ou gardes-tu ton calme pour ne pas envenimer les choses ?",
+    answer_1: "Je me défends",
+    answer_2: "Je laisse couler",
     answer_3: null,
     answer_4: null,
   },
   {
     id: 78,
     round_id: 2,
-    name: "mettrais-tu un terme à une relation si toi et ton partenaire n’étiez pas d’accord sur l’idée d’avoir des enfants ?",
+    name: "tu as eu des relations sexuelles avec un(e) ami(e), t’éloignes-tu de cette personne une fois en couple ?",
     answer_1: "Oui",
     answer_2: "Non",
     answer_3: null,
@@ -725,14 +725,41 @@ export const questions: Question[] = [
   {
     id: 79,
     round_id: 2,
-    name: "tu constates qu’un proche s’éloigne peu à peu de toi. Tentes-tu de renouer avec la personne ou t’émancipes-tu de la relation ?",
+    name: "tu as un ami qui ne cesse de se plaindre de ses problèmes, mais ne semble jamais prendre de mesures pour les résoudre. Lui avoues-tu le fond de ta pensée ?",
+    answer_1: "Oui",
+    answer_2: "Non",
+    answer_3: null,
+    answer_4: null,
+  },
+  {
+    id: 80,
+    round_id: 2,
+    name: "tu gagnes une grosse somme d’argent au casino quand tes amis ont perdu à la même soirée. Rembourses-tu leur perte si ton gain le permet ?",
+    answer_1: "Oui",
+    answer_2: "Non",
+    answer_3: null,
+    answer_4: null,
+  },
+  {
+    id: 81,
+    round_id: 2,
+    name: "mettrais-tu un terme à une relation si toi et ton partenaire n’étiez pas d’accord sur l’idée d’avoir des enfants ?",
+    answer_1: "Oui",
+    answer_2: "Non",
+    answer_3: null,
+    answer_4: null,
+  },
+  {
+    id: 82,
+    round_id: 2,
+    name: "tu constates qu’un proche s’éloigne peu à peu de toi. Tu le laisses s'éloigner ou tu tentes de renouer avec la personne ?",
     answer_1: "J'essaye de rattraper la personne",
     answer_2: "Je m'en éloigne",
     answer_3: null,
     answer_4: null,
   },
   // {
-  //   id: 80,
+  //   id: 83,
   //   round_id: 2,
   //   name: "ton enfant se fait violer. Laisses-tu la justice s’en charger ou fais-tu justice toi-même ?",
   //   answer_1: "Je laisse la justice se charger de punir le coupable",
@@ -741,7 +768,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   {
-    id: 81,
+    id: 84,
     round_id: 2,
     name: "tu apprends que ton ami(e) subit des violences conjugales. Agis-tu même si cet(te) ami(e) te demande de rester en dehors de ça ?",
     answer_1: "Je respecte son choix",
@@ -750,7 +777,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   // {
-  //   id: 82,
+  //   id: 85,
   //   round_id: 2,
   //   name: "partirais-tu d’Omelas ?",
   //   answer_1: "Oui",
@@ -759,7 +786,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   {
-    id: 83,
+    id: 86,
     round_id: 2,
     name: "tu es condamné pour un crime. Dénonces-tu tes associés contre une remise de peine significative ?",
     answer_1: "Je balance",
@@ -768,7 +795,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 84,
+    id: 87,
     round_id: 2,
     name: "un ami te prête un objet et tu le casses accidentellement. Cependant ton ami ne se souvient pas de l’état de l’objet et pourrait croire que le défaut était déjà là avant de te le prêter. Avoues-tu ta maladresse ou fais-tu mine de rien ?",
     answer_1: "J'avoue",
@@ -777,7 +804,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   // {
-  //   id: 85,
+  //   id: 88,
   //   round_id: 2,
   //   name: "ton/ta meilleur(e) ami(e) est heureux en couple avec une personne que tu méprises. Partages-tu ta perspective ?",
   //   answer_1: "Je dis rien",
@@ -786,7 +813,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   {
-    id: 86,
+    id: 89,
     round_id: 2,
     name: "serais-tu capable de partir en vacances avec les amis de ton partenaire que tu n’aimes pas ?",
     answer_1: "Oui",
@@ -795,7 +822,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 87,
+    id: 90,
     round_id: 2,
     name: "tu trouves un portefeuille dans la rue. Le prends-tu ou bien passes-tu ton chemin ?",
     answer_1: "Je le prends",
@@ -805,7 +832,7 @@ export const questions: Question[] = [
   },
 
   {
-    id: 88,
+    id: 91,
     round_id: 2,
     name: "tu es invité à un dîner et la nourriture est très mauvaise. Fais-tu des commentaires ou gardes-tu tes impressions pour toi ?",
     answer_1: "Je me permets un commentaire",
@@ -814,7 +841,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 89,
+    id: 92,
     round_id: 2,
     name: "au début d’une relation amoureuse, caches-tu ce que ton partenaire pourrait trouver agaçant chez toi ou bien joues-tu carte sur table ?",
     answer_1: "Je joue carte sur table",
@@ -823,7 +850,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 90,
+    id: 93,
     round_id: 2,
     name: "ton partenaire insiste pour regarder un film que tu détestes. Acceptes-tu de le regarder pour lui faire plaisir ?",
     answer_1: "Oui",
@@ -832,7 +859,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 91,
+    id: 94,
     round_id: 2,
     name: "tu es témoin d'une réprimande sévère d’un parent à son enfant dans un lieu public. Interviens-tu ?",
     answer_1: "Oui",
@@ -841,7 +868,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 92,
+    id: 95,
     round_id: 2,
     name: "tu es invité à un événement auquel tu ne veux pas aller, te forces-tu pour ne pas froisser l’organisateur/trice ?",
     answer_1: "Oui",
@@ -850,9 +877,9 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 93,
+    id: 96,
     round_id: 2,
-    name: "ton meilleur ami est en couple avec quelqu'un que tu détestes. Caches-tu cette aversion ?",
+    name: "ton meilleur ami est en couple avec quelqu'un que tu méprises. Caches-tu cette aversion ?",
     answer_1:
       "Oui , je ne peux pas le laisser se saboter par quelqu'un d'aussi médiocre",
     answer_2: "non, je le laisse trouver son bonheur comme il veut",
@@ -860,7 +887,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 94,
+    id: 97,
     round_id: 2,
     name: "tu as commis une erreur majeure au travail qui pourrait coûter cher à ton entreprise. Es-tu honnête ou essaies-tu de la cacher ?",
     answer_1: "Je le déclare",
@@ -869,7 +896,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 95,
+    id: 98,
     round_id: 2,
     name: "tu es invité à un événement familial important, mais tu as un engagement professionnel majeur le même jour. Que priorises-tu ?",
     answer_1:
@@ -879,7 +906,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 96,
+    id: 99,
     round_id: 2,
     name: "tu es témoin d'une conversation où quelqu'un dénigre ou discrimine une personne en raison de sa religion, de sa race ou de son orientation sexuelle. Interviens-tu pour défendre la personne offensée ou restes-tu en retrait ?",
     answer_1: "J'interviens",
@@ -888,7 +915,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 97,
+    id: 100,
     round_id: 2,
     name: "tu as l'opportunité de tricher à un examen important, ce qui pourrait améliorer considérablement tes résultats. Choisis-tu l'intégrité ou la réussite à tout prix ?",
     answer_1: "Je triche, pour réussir il faut être prêt à tout",
@@ -898,7 +925,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 98,
+    id: 101,
     round_id: 2,
     name: "quelqu'un dont tu reconnais le visage t’aborde avec familiarité. Après dix minutes de conversation, tu n'es toujours pas en mesure de te souvenir de son nom. Lui demandes-tu de te le rappeler ?",
     answer_1: "Je fais comme si je le reconnaissait",
@@ -907,7 +934,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 99,
+    id: 102,
     round_id: 2,
     name: "tu remarques qu’une personne âgée peine à traverser la rue. L'aides-tu spontanément ou continues-tu ton chemin sans intervenir ?",
     answer_1: "Je l'aide",
@@ -916,7 +943,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 100,
+    id: 103,
     round_id: 2,
     name: "un ami te demande de lui prêter de l'argent, mais tu sais qu'il a des habitudes de dépenses irresponsables. Accèdes-tu à sa demande ?",
     answer_1: "Oui",
@@ -925,7 +952,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 101,
+    id: 104,
     round_id: 2,
     name: "tu es passager d’une voiture que conduit ton ami en retour de soirée arrosée, au milieu d’une route déserte. Quelqu’un surgit et la voiture renverse la personne de plein fouet. Ton ami te demande de garder cet incident sous silence, que fais-tu ?",
     answer_1: "Je garde le silence",
@@ -934,7 +961,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 102,
+    id: 105,
     round_id: 2,
     name: "ton on collègue de travail prend tout le crédit pour un projet sur lequel tu as travaillé dur. Dévoiles-tu la vérité à ton supérieur ou laisses-tu la situation telle quelle ?",
     answer_1: "Je dévoile la vérité",
@@ -943,7 +970,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 103,
+    id: 106,
     round_id: 2,
     name: "tu es au cinéma et quelqu'un à côté de toi parle constamment au téléphone. Lui demandes-tu de se taire ou supportes-tu la situation en silence ?",
     answer_1: "Je lui demande de se taire",
@@ -952,7 +979,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 104,
+    id: 107,
     round_id: 2,
     name: "tu es invité à une soirée où tu sais que des personnes présentes ont des opinions politiques très différentes des tiennes. Y participes-tu malgré les divergences ou trouves-tu une excuse pour ne pas y aller ?",
     answer_1: "J'y vais",
@@ -961,7 +988,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 105,
+    id: 108,
     round_id: 2,
     name: "tu es au restaurant avec des amis et il est décidé de diviser l’addition à parts égales alors que tu as largement moins consommé. Manifeste-tu pour payer uniquement ta part ?",
     answer_1: "Je demande à payer ce que j'ai consommé",
@@ -970,7 +997,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 106,
+    id: 109,
     round_id: 2,
     name: "ton enfant dépasse les bornes et te manque ouvertement de respect. Lui expliques-tu calmement que son comportement est inapproprié ou réagis-tu émotionnellement pour lui faire comprendre qu’il a dépassé les bornes ?",
     answer_1: "Je lui explique calmement",
@@ -979,7 +1006,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 107,
+    id: 110,
     round_id: 2,
     name: "on te vole un bijou. Sachant que tu ne le récupéreras jamais, le ferais-tu disparaître à distance si tu en avais la faculté ?",
     answer_1: "Oui",
@@ -988,7 +1015,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 108,
+    id: 111,
     round_id: 2,
     name: "face à un danger mortel, entre sauver un proche et un groupe d’inconnus, que ferais-tu ?",
     answer_1: "Je sauve mon proche",
@@ -997,7 +1024,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 109,
+    id: 112,
     round_id: 2,
     name: "debout dans les transports avec deux amis, tu rentres chez toi après une dure journée. Une seule place assise se libère à côté de toi, t’assois-tu ?",
     answer_1: "Je m'assois",
@@ -1006,7 +1033,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 110,
+    id: 113,
     round_id: 2,
     name: "si un génie te propose de te dire quand et comment tu vas mourir, refuses-tu ?",
     answer_1: "Je refuse",
@@ -1015,7 +1042,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 111,
+    id: 114,
     round_id: 2,
     name: "dans Matrix, choisirais-tu la pilule bleue ou la pilule rouge ?",
     answer_1: "Pilule bleue",
@@ -1024,7 +1051,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 112,
+    id: 115,
     round_id: 2,
     name: "tu roules en ville à 50 km/h quand un enfant traverse sans regarder. Il t’est impossible de l’éviter sauf en te déportant sur la voie cyclable où un cycliste arrive en face. Restes-tu sur la route ou sacrifies-tu le cycliste ?",
     answer_1: "Je reste sur la route",
@@ -1033,7 +1060,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 113,
+    id: 116,
     round_id: 2,
     name: "tu croises une vieille connaissance dans la rue mais elle ne t'aperçoit pas, l’interpelles-tu pour discuter ?",
     answer_1: "Oui",
@@ -1042,7 +1069,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 114,
+    id: 117,
     round_id: 2,
     name: "votre enfant se fait tuer. laissez-vous la justice se charger du coupable ou faites-vous justice vous-même ?",
     answer_1: "Justice",
@@ -1051,7 +1078,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 115,
+    id: 118,
     round_id: 2,
     name: "tu as la possibilité de modifier un moment clé de ton passé. tentes-tu de le changer, sachant que cela pourrait avoir des conséquences imprévisibles sur le présent ?",
     answer_1: "Oui",
@@ -1060,7 +1087,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 116,
+    id: 119,
     round_id: 2,
     name: "si tu pouvais complètement effacer de ta mémoire certains éléments de ta vie, le ferais-tu ?",
     answer_1: "Oui",
@@ -1069,7 +1096,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 117,
+    id: 120,
     round_id: 2,
     name: "si tu pouvais te cloner tel que tu es actuellement, le ferais-tu ?",
     answer_1: "Oui",
@@ -1078,7 +1105,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 118,
+    id: 121,
     round_id: 2,
     name: "on te propose de télécharger ta conscience dans une machine pour vivre après ta mort. tu le fais ou pas ?",
     answer_1: "Oui",
@@ -1087,7 +1114,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 119,
+    id: 122,
     round_id: 2,
     name: "une technologie permet à certaines personnes de transposer leur conscience dans un ordinateur (avec la capacité de traitement adéquate pour soutenir toutes les informations disponibles sur internet). les considères-tu toujours comme humains après l’opération ?",
     answer_1: "Oui",
@@ -1096,7 +1123,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 120,
+    id: 123,
     round_id: 2,
     name: "on te propose une modification qui peut supprimer les biais cognitifs. tu l’acceptes ou pas ?",
     answer_1: "Oui",
@@ -1105,7 +1132,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 121,
+    id: 124,
     round_id: 2,
     name: "tu peux parler couramment toutes les langues du monde, mais tu perds ton sens de l’humour. tu acceptes ou pas ?",
     answer_1: "Oui",
@@ -1114,7 +1141,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 122,
+    id: 125,
     round_id: 2,
     name: "une marque te propose de te tatouer leur logo en échange de produits gratuits à vie. tu acceptes ou pas ?",
     answer_1: "Oui",
@@ -1123,7 +1150,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 123,
+    id: 126,
     round_id: 2,
     name: "on t’offre un an de nourriture gratuite au restaurant de ton choix, mais tu ne pourras rien manger ailleurs pendant cette période. tu le fais ou pas ?",
     answer_1: "Oui",
@@ -1132,7 +1159,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 124,
+    id: 127,
     round_id: 2,
     name: "serais-tu prêt.e à suivre ton.ta partenaire pour faire ta vie ailleurs ?",
     answer_1: "Oui",
@@ -1141,7 +1168,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   // {
-  //   id: 125,
+  //   id: 128,
   //   round_id: 2,
   //   name: "un candidat défend tes intérêts, au détriment de la situation globale du pays. tu votes pour lui ou pas ?",
   //   answer_1: "Oui",
@@ -1150,7 +1177,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 126,
+  //   id: 129,
   //   round_id: 2,
   //   name: "un nouveau confinement covid est déclaré. le respectes-tu ?",
   //   answer_1: "Oui",
@@ -1159,7 +1186,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   {
-    id: 127,
+    id: 130,
     round_id: 3,
     name: "qui te semble être le·la plus influençable ?",
     answer_1: null,
@@ -1168,7 +1195,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 128,
+    id: 131,
     round_id: 3,
     name: "qui serait le·la plus enclin·e à partir avant la fin du jeu à cause d’une réponse qui ne lui plaît pas ?",
     answer_1: null,
@@ -1177,7 +1204,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 129,
+    id: 132,
     round_id: 3,
     name: "qui te semble être le·la plus susceptible ?",
     answer_1: null,
@@ -1186,7 +1213,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 130,
+    id: 133,
     round_id: 3,
     name: "qui te semble être le·la plus dépensier·ère ?",
     answer_1: null,
@@ -1195,7 +1222,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 131,
+    id: 134,
     round_id: 3,
     name: "qui te semble être le·la plus opportuniste ?",
     answer_1: null,
@@ -1204,7 +1231,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 132,
+    id: 135,
     round_id: 3,
     name: "qui te semble être le·la plus rancunier·ère ?",
     answer_1: null,
@@ -1212,17 +1239,17 @@ export const questions: Question[] = [
     answer_3: null,
     answer_4: null,
   },
+  // {
+  //   id: 136,
+  //   round_id: 3,
+  //   name: "qui te semble être le·la plus peureux·se ?",
+  //   answer_1: null,
+  //   answer_2: null,
+  //   answer_3: null,
+  //   answer_4: null,
+  // },
   {
-    id: 133,
-    round_id: 3,
-    name: "qui te semble être le·la plus peureux·se ?",
-    answer_1: null,
-    answer_2: null,
-    answer_3: null,
-    answer_4: null,
-  },
-  {
-    id: 134,
+    id: 137,
     round_id: 3,
     name: "qui te semble être le·la plus matérialiste ?",
     answer_1: null,
@@ -1231,7 +1258,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   // {
-  //   id: 135,
+  //   id: 138,
   //   round_id: 3,
   //   name: "qui te semble être le·la plus susceptible de faire des caprices ?",
   //   answer_1: null,
@@ -1240,7 +1267,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   {
-    id: 136,
+    id: 139,
     round_id: 3,
     name: "qui te semble être le·la plus anxieux·se ?",
     answer_1: null,
@@ -1249,7 +1276,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 137,
+    id: 140,
     round_id: 3,
     name: "qui te semble être le·la plus satisfait·e de sa vie ?",
     answer_1: null,
@@ -1258,7 +1285,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 138,
+    id: 141,
     round_id: 3,
     name: "qui te semble être le·la plus pessimiste ?",
     answer_1: null,
@@ -1267,7 +1294,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 139,
+    id: 142,
     round_id: 3,
     name: "qui te semble être le·la plus provocateur·rice ?",
     answer_1: null,
@@ -1276,7 +1303,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 140,
+    id: 143,
     round_id: 3,
     name: "qui te semble être le·la plus indifférent·e aux autres ?",
     answer_1: null,
@@ -1285,7 +1312,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 141,
+    id: 144,
     round_id: 3,
     name: "qui te semble être le·la plus dominant·e ?",
     answer_1: null,
@@ -1294,7 +1321,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 142,
+    id: 145,
     round_id: 3,
     name: "qui te semble être le·la plus indécis·e ?",
     answer_1: null,
@@ -1303,7 +1330,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 143,
+    id: 146,
     round_id: 3,
     name: "qui te semble être le·la plus naïf·ve ?",
     answer_1: null,
@@ -1312,7 +1339,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 144,
+    id: 147,
     round_id: 3,
     name: "qui se remet le moins en question ?",
     answer_1: null,
@@ -1321,7 +1348,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 145,
+    id: 148,
     round_id: 3,
     name: "qui vend le plus de rêve ?",
     answer_1: null,
@@ -1330,7 +1357,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 146,
+    id: 149,
     round_id: 3,
     name: "qui te semble être le·la plus insatisfait·e ?",
     answer_1: null,
@@ -1339,7 +1366,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 147,
+    id: 150,
     round_id: 3,
     name: "qui a l’esprit le plus torturé selon toi ?",
     answer_1: null,
@@ -1348,7 +1375,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 148,
+    id: 151,
     round_id: 3,
     name: "qui te semble être le·la moins résilient·e ?",
     answer_1: null,
@@ -1357,7 +1384,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 149,
+    id: 152,
     round_id: 3,
     name: "qui te semble être le·la plus psychorigide ?",
     answer_1: null,
@@ -1366,7 +1393,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 150,
+    id: 153,
     round_id: 3,
     name: "qui te semble être le·la plus enclin·e à fuir les confrontations ?",
     answer_1: null,
@@ -1375,7 +1402,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 151,
+    id: 154,
     round_id: 3,
     name: "qui te semble être le·la plus réactif·ve sous le coup de l’émotion ?",
     answer_1: null,
@@ -1384,7 +1411,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 152,
+    id: 155,
     round_id: 3,
     name: "qui te semble être le·la plus sujet·te aux excès de confiance ?",
     answer_1: null,
@@ -1393,7 +1420,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 153,
+    id: 156,
     round_id: 3,
     name: "qui te semble être le·la plus distrait·e ?",
     answer_1: null,
@@ -1402,7 +1429,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 154,
+    id: 157,
     round_id: 3,
     name: "qui te semble être le·la plus précipité·e ?",
     answer_1: null,
@@ -1411,7 +1438,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 155,
+    id: 158,
     round_id: 3,
     name: "qui te semble être le·la plus pressé·e ?",
     answer_1: null,
@@ -1420,7 +1447,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 156,
+    id: 159,
     round_id: 3,
     name: "qui te semble être le·la plus préoccupé·e par l’apparence ?",
     answer_1: null,
@@ -1429,7 +1456,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 157,
+    id: 160,
     round_id: 3,
     name: "qui te semble être le·la plus enclin·e à se comparer aux autres ?",
     answer_1: null,
@@ -1438,7 +1465,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 158,
+    id: 161,
     round_id: 3,
     name: "qui te semble être le·la plus désorganisé·e ?",
     answer_1: null,
@@ -1447,7 +1474,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 159,
+    id: 162,
     round_id: 3,
     name: "qui te semble être le·la plus affecté·e par les jugements extérieurs ?",
     answer_1: null,
@@ -1456,7 +1483,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 160,
+    id: 163,
     round_id: 3,
     name: "qui te semble être le·la plus résistant·e aux changements, même bénéfiques ?",
     answer_1: null,
@@ -1465,7 +1492,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 161,
+    id: 164,
     round_id: 3,
     name: "qui te semble être le·la plus sujet·te à dramatiser ?",
     answer_1: null,
@@ -1474,7 +1501,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 162,
+    id: 165,
     round_id: 3,
     name: "qui te semble être le·la plus négligent·e dans l’entretien de ses relations ?",
     answer_1: null,
@@ -1483,7 +1510,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 163,
+    id: 166,
     round_id: 3,
     name: "qui te semble être le·la plus influencé·e par des peurs irrationnelles ?",
     answer_1: null,
@@ -1492,7 +1519,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 164,
+    id: 167,
     round_id: 3,
     name: "qui subit le plus la solitude ?",
     answer_1: null,
@@ -1501,7 +1528,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 165,
+    id: 168,
     round_id: 3,
     name: "qui te semble être le·la plus observateur·rice ?",
     answer_1: null,
@@ -1510,7 +1537,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 166,
+    id: 169,
     round_id: 3,
     name: "qui te semble être le·la plus cultivé·e ?",
     answer_1: null,
@@ -1519,7 +1546,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 167,
+    id: 170,
     round_id: 3,
     name: "qui te semble être le·la plus secret·e ?",
     answer_1: null,
@@ -1528,7 +1555,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 168,
+    id: 171,
     round_id: 3,
     name: "qui te semble être le·la plus tolérant·e ?",
     answer_1: null,
@@ -1537,7 +1564,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 169,
+    id: 172,
     round_id: 3,
     name: "qui te semble être le·la plus sensuel·le ?",
     answer_1: null,
@@ -1546,7 +1573,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 170,
+    id: 173,
     round_id: 3,
     name: "qui te semble être le·la plus altruiste ?",
     answer_1: null,
@@ -1555,7 +1582,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 171,
+    id: 174,
     round_id: 3,
     name: "qui te semble être le·la plus charismatique ?",
     answer_1: null,
@@ -1564,7 +1591,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 172,
+    id: 175,
     round_id: 3,
     name: "qui te semble être le·la plus charmeur·se ?",
     answer_1: null,
@@ -1573,7 +1600,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 173,
+    id: 176,
     round_id: 3,
     name: "qui te semble être le·la plus intelligent·e ?",
     answer_1: null,
@@ -1582,7 +1609,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 174,
+    id: 177,
     round_id: 3,
     name: "qui te semble être le·la moins émotif·ve ?",
     answer_1: null,
@@ -1591,7 +1618,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 175,
+    id: 178,
     round_id: 3,
     name: "qui te semble être le·la plus impénétrable ?",
     answer_1: null,
@@ -1600,7 +1627,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 176,
+    id: 179,
     round_id: 3,
     name: "qui te semble être le·la plus extraverti·e ?",
     answer_1: null,
@@ -1609,7 +1636,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 177,
+    id: 180,
     round_id: 3,
     name: "qui te semble être le·la plus insaisissable ?",
     answer_1: null,
@@ -1618,7 +1645,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 178,
+    id: 181,
     round_id: 3,
     name: "qui te semble être le·la plus élégant·e ?",
     answer_1: null,
@@ -1627,7 +1654,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 179,
+    id: 182,
     round_id: 3,
     name: "qui te semble être le·la plus créatif·ve ?",
     answer_1: null,
@@ -1636,7 +1663,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 180,
+    id: 183,
     round_id: 3,
     name: "qui a le mental le plus solide ?",
     answer_1: null,
@@ -1645,7 +1672,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 181,
+    id: 184,
     round_id: 3,
     name: "qui a traversé les épreuves les plus difficiles ?",
     answer_1: null,
@@ -1654,7 +1681,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 182,
+    id: 185,
     round_id: 3,
     name: "qui serait le·la plus susceptible de vomir d’amour ?",
     answer_1: null,
@@ -1663,7 +1690,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 183,
+    id: 186,
     round_id: 3,
     name: "Selon toi, qui ferait primer le bien-être sur les valeurs comme la liberté, l’égalité ou l’honneur ?",
     answer_1: null,
@@ -1672,7 +1699,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 184,
+    id: 187,
     round_id: 3,
     name: "De manière générale, qui te semble être le·la plus exigeant·e ?",
     answer_1: null,
@@ -1681,7 +1708,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 185,
+    id: 188,
     round_id: 3,
     name: "qui te semble être le·la plus exigeant·e envers elle-même ?",
     answer_1: null,
@@ -1690,7 +1717,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 186,
+    id: 189,
     round_id: 3,
     name: "De manière générale, qui te semble être le·la plus dur·e ?",
     answer_1: null,
@@ -1699,7 +1726,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 187,
+    id: 190,
     round_id: 3,
     name: "qui te semble être le·la plus dur·e envers elle-même ?",
     answer_1: null,
@@ -1708,7 +1735,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 188,
+    id: 191,
     round_id: 3,
     name: "qui te semble être le·la plus sérieux·se ?",
     answer_1: null,
@@ -1717,7 +1744,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 189,
+    id: 192,
     round_id: 3,
     name: "qui a la plus grande capacité à prendre sur soi dans une situation grave ?",
     answer_1: null,
@@ -1726,7 +1753,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 190,
+    id: 193,
     round_id: 3,
     name: "qui a une image intérieure qui diffère le plus de celle qu’il·elle reflète aux autres ?",
     answer_1: null,
@@ -1735,7 +1762,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 191,
+    id: 194,
     round_id: 3,
     name: "qui te semble être le·la plus orienté·e solutions ?",
     answer_1: null,
@@ -1744,7 +1771,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 192,
+    id: 195,
     round_id: 3,
     name: "qui te semble être le·la plus transparent·e dans ses intentions ?",
     answer_1: null,
@@ -1753,7 +1780,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 193,
+    id: 196,
     round_id: 3,
     name: "qui te semble être le·la plus authentique, fidèle à ses valeurs ?",
     answer_1: null,
@@ -1762,7 +1789,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 194,
+    id: 197,
     round_id: 3,
     name: "qui te semble être le·la plus flexible dans ses attentes ?",
     answer_1: null,
@@ -1771,7 +1798,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 195,
+    id: 198,
     round_id: 3,
     name: "qui te semble être le·la plus aventureux·se dans ses projets ?",
     answer_1: null,
@@ -1780,7 +1807,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 196,
+    id: 199,
     round_id: 3,
     name: "qui te semble être le·la plus inspiré·e par la nouveauté ?",
     answer_1: null,
@@ -1789,7 +1816,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 197,
+    id: 200,
     round_id: 3,
     name: "qui te semble être le·la plus en quête de sens dans sa vie ?",
     answer_1: null,
@@ -1798,7 +1825,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 198,
+    id: 201,
     round_id: 3,
     name: "qui te semble être le·la plus loyal·e dans ses relations ?",
     answer_1: null,
@@ -1807,7 +1834,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 199,
+    id: 202,
     round_id: 3,
     name: "qui te semble être le·la plus sensible à l’injustice ?",
     answer_1: null,
@@ -1816,7 +1843,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 200,
+    id: 203,
     round_id: 3,
     name: "qui te semble être le·la plus structuré·e dans ses pensées ?",
     answer_1: null,
@@ -1825,7 +1852,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 201,
+    id: 204,
     round_id: 3,
     name: "qui te semble être le·la plus intègre, même sous pression ?",
     answer_1: null,
@@ -1834,7 +1861,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 202,
+    id: 205,
     round_id: 3,
     name: "qui te semble être le·la plus stimulé·e par les défis ?",
     answer_1: null,
@@ -1843,7 +1870,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 203,
+    id: 206,
     round_id: 3,
     name: "qui te semble être le·la plus serein·e face à l’incertitude ?",
     answer_1: null,
@@ -1852,7 +1879,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 204,
+    id: 207,
     round_id: 3,
     name: "qui te semble être le·la plus imaginatif·ve pour les projets futurs ?",
     answer_1: null,
@@ -1861,7 +1888,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 205,
+    id: 208,
     round_id: 3,
     name: "qui te semble être le·la plus bienveillant·e envers elle-même ?",
     answer_1: null,
@@ -1870,7 +1897,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 206,
+    id: 209,
     round_id: 3,
     name: "qui te semble être le·la plus innovant·e dans ses idées ?",
     answer_1: null,
@@ -1879,7 +1906,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 207,
+    id: 210,
     round_id: 3,
     name: "qui te semble être le·la plus capable de prendre du recul sur elle-même ?",
     answer_1: null,
@@ -1888,7 +1915,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 208,
+    id: 211,
     round_id: 3,
     name: "qui te semble être le·la plus en harmonie avec ses émotions ?",
     answer_1: null,
@@ -1897,7 +1924,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 209,
+    id: 212,
     round_id: 3,
     name: "qui te semble être le·la plus inquiet·ète ?",
     answer_1: null,
@@ -1906,7 +1933,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 210,
+    id: 213,
     round_id: 3,
     name: "qui te semble être le·la plus honnête ?",
     answer_1: null,
@@ -1915,7 +1942,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 211,
+    id: 214,
     round_id: 3,
     name: "qui ici se contente du moins de choses ?",
     answer_1: null,
@@ -1924,7 +1951,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 212,
+    id: 215,
     round_id: 3,
     name: "qui est le·la plus susceptible de respecter ses propres règles plutôt que celles de la société lorsqu’elles entrent en conflit ?",
     answer_1: null,
@@ -1933,7 +1960,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 213,
+    id: 216,
     round_id: 3,
     name: "d’après toi, qui masque le mieux ses peines ?",
     answer_1: null,
@@ -1942,7 +1969,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 214,
+    id: 217,
     round_id: 3,
     name: "qui te semble le·la plus doué·e pour résoudre des problèmes complexes ?",
     answer_1: null,
@@ -1951,7 +1978,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 215,
+    id: 218,
     round_id: 3,
     name: "quelle personne te semble le·la plus compétent·e pour résoudre des conflits ?",
     answer_1: null,
@@ -1960,7 +1987,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 216,
+    id: 219,
     round_id: 3,
     name: "d’après toi, qui est le·la plus apte à prendre des décisions rationnelles ?",
     answer_1: null,
@@ -1969,7 +1996,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 217,
+    id: 220,
     round_id: 3,
     name: "qui te semble le·la plus courageux·se ?",
     answer_1: null,
@@ -1978,7 +2005,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 218,
+    id: 221,
     round_id: 3,
     name: "qui est le·la plus romantique ?",
     answer_1: null,
@@ -1987,7 +2014,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 219,
+    id: 222,
     round_id: 3,
     name: "quelle personne te semble le·la plus résiliente ?",
     answer_1: null,
@@ -1996,7 +2023,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 220,
+    id: 223,
     round_id: 3,
     name: "qui te semble être le·la plus enclin·e à prendre des risques audacieux ?",
     answer_1: null,
@@ -2005,7 +2032,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 221,
+    id: 224,
     round_id: 3,
     name: "d’après toi, qui serait le·la meilleur·e conseiller·ère en relations amoureuses ?",
     answer_1: null,
@@ -2014,7 +2041,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 222,
+    id: 225,
     round_id: 3,
     name: "d’après toi, qui serait le·la plus calme dans une situation d’urgence ?",
     answer_1: null,
@@ -2023,7 +2050,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 223,
+    id: 226,
     round_id: 3,
     name: "qui te semble être le·la plus calme en situation de conflit ?",
     answer_1: null,
@@ -2032,7 +2059,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 224,
+    id: 227,
     round_id: 3,
     name: "qui est la personne la moins apte à se remettre d’une déception amoureuse ?",
     answer_1: null,
@@ -2041,7 +2068,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 225,
+    id: 228,
     round_id: 3,
     name: "qui te semble être le·la plus convaincant·e ?",
     answer_1: null,
@@ -2050,7 +2077,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 226,
+    id: 229,
     round_id: 3,
     name: "qui est la personne la plus complexe ?",
     answer_1: null,
@@ -2059,7 +2086,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 227,
+    id: 230,
     round_id: 3,
     name: "qui est le·la plus généreux·se ?",
     answer_1: null,
@@ -2068,7 +2095,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 228,
+    id: 231,
     round_id: 3,
     name: "qui semble être le plus sincère ?",
     answer_1: null,
@@ -2076,8 +2103,26 @@ export const questions: Question[] = [
     answer_3: null,
     answer_4: null,
   },
+  {
+    id: 232,
+    round_id: 3,
+    name: "qui est la personne la plus insouciante ?",
+    answer_1: null,
+    answer_2: null,
+    answer_3: null,
+    answer_4: null,
+  },
+  {
+    id: 233,
+    round_id: 3,
+    name: "qui a eu le plus gros chagrin d’amour ?",
+    answer_1: null,
+    answer_2: null,
+    answer_3: null,
+    answer_4: null,
+  },
   // {
-  //   id: 229,
+  //   id: 234,
   //   round_id: 3,
   //   name: "qui est la personne la plus complexée ?",
   //   answer_1: null,
@@ -2086,7 +2131,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 230,
+  //   id: 235,
   //   round_id: 3,
   //   name: "qui est la personne la plus frustrée ?",
   //   answer_1: null,
@@ -2095,7 +2140,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 231,
+  //   id: 236,
   //   round_id: 3,
   //   name: "qui est la personne la plus narcissique ?",
   //   answer_1: null,
@@ -2104,7 +2149,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 232,
+  //   id: 237,
   //   round_id: 3,
   //   name: "qui est la personne la plus paresseuse ?",
   //   answer_1: null,
@@ -2113,7 +2158,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 233,
+  //   id: 238,
   //   round_id: 3,
   //   name: "qui est la personne la plus malheureuse ?",
   //   answer_1: null,
@@ -2122,7 +2167,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 234,
+  //   id: 239,
   //   round_id: 3,
   //   name: "qui est la personne la plus soumise ?",
   //   answer_1: null,
@@ -2131,7 +2176,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 235,
+  //   id: 240,
   //   round_id: 3,
   //   name: "qui est la personne la plus désagréable ?",
   //   answer_1: null,
@@ -2140,7 +2185,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 236,
+  //   id: 241,
   //   round_id: 3,
   //   name: "qui est la personne la plus décevante ?",
   //   answer_1: null,
@@ -2149,7 +2194,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 237,
+  //   id: 242,
   //   round_id: 3,
   //   name: "qui est la personne la plus lâche ?",
   //   answer_1: null,
@@ -2158,7 +2203,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 238,
+  //   id: 243,
   //   round_id: 3,
   //   name: "qui est la personne la plus hypocrite ?",
   //   answer_1: null,
@@ -2167,7 +2212,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 239,
+  //   id: 244,
   //   round_id: 3,
   //   name: "qui serait le moins à même de surmonter une épreuve difficile ?",
   //   answer_1: null,
@@ -2176,7 +2221,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 240,
+  //   id: 245,
   //   round_id: 3,
   //   name: "qui est la personne la plus manipulatrice ?",
   //   answer_1: null,
@@ -2185,7 +2230,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   // {
-  //   id: 241,
+  //   id: 246,
   //   round_id: 3,
   //   name: "qui est le plus raciste ?",
   //   answer_1: null,
@@ -2194,7 +2239,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // }
   {
-    id: 242,
+    id: 247,
     round_id: 4,
     name: "la vie de quelle joueur/joueuse ne voudrais-tu pas mener ?",
     answer_1: null,
@@ -2203,7 +2248,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 243,
+    id: 248,
     round_id: 4,
     name: "d'après toi, qui serait capable de tuer quelqu'un ?",
     answer_1: null,
@@ -2212,7 +2257,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 244,
+    id: 249,
     round_id: 4,
     name: "à qui ferais-tu le moins confiance pour garder un secret ?",
     answer_1: null,
@@ -2221,7 +2266,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   // {
-  //   id: 245,
+  //   id: 250,
   //   round_id: 4,
   //   name: "qui trouves-tu le moins mature ?",
   //   answer_1: null,
@@ -2230,7 +2275,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   {
-    id: 246,
+    id: 251,
     round_id: 4,
     name: "qui te semble être le plus différent de toi ?",
     answer_1: null,
@@ -2239,7 +2284,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 247,
+    id: 252,
     round_id: 4,
     name: "avec qui pourrais-tu avoir des motifs de dispute ?",
     answer_1: null,
@@ -2248,7 +2293,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 248,
+    id: 253,
     round_id: 4,
     name: "d'après toi, qui ici a le moins de chances de vivre quelque chose d’inattendu ?",
     answer_1: null,
@@ -2257,7 +2302,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 249,
+    id: 254,
     round_id: 4,
     name: "avec qui te sens-tu le plus en concurrence ?",
     answer_1: null,
@@ -2266,7 +2311,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   // {
-  //   id: 250,
+  //   id: 255,
   //   round_id: 4,
   //   name: "qui serait le plus susceptible de te trahir pour ses intérêts ?",
   //   answer_1: null,
@@ -2275,7 +2320,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   {
-    id: 251,
+    id: 256,
     round_id: 4,
     name: "qui a les convictions les plus opposées aux tiennes ?",
     answer_1: null,
@@ -2284,7 +2329,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 252,
+    id: 257,
     round_id: 4,
     name: "d'après toi, qui fait le plus de choses à moitié ?",
     answer_1: null,
@@ -2293,7 +2338,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 253,
+    id: 258,
     round_id: 4,
     name: "qui serait le moins susceptible d’être honnête avec toi si la vérité peut te blesser ?",
     answer_1: null,
@@ -2302,7 +2347,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 254,
+    id: 259,
     round_id: 4,
     name: "avec qui te sens-tu le moins en sécurité ?",
     answer_1: null,
@@ -2311,7 +2356,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 255,
+    id: 260,
     round_id: 4,
     name: "avec qui te sens-tu le moins à l’aise ?",
     answer_1: null,
@@ -2320,7 +2365,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 256,
+    id: 261,
     round_id: 4,
     name: "quelle personne te paraît la plus froide ?",
     answer_1: null,
@@ -2329,7 +2374,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 257,
+    id: 262,
     round_id: 4,
     name: "d'après toi, qui est le moins intéressé par la sexualité ?",
     answer_1: null,
@@ -2338,7 +2383,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 258,
+    id: 263,
     round_id: 4,
     name: "avec qui as-tu le plus de chances d'avoir encore des relations dans vingt ans ?",
     answer_1: null,
@@ -2347,7 +2392,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 259,
+    id: 264,
     round_id: 4,
     name: "qui te semble le plus susceptible de se rendre exécrable à cause d’une déconvenue ?",
     answer_1: null,
@@ -2356,7 +2401,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   // {
-  //   id: 260,
+  //   id: 265,
   //   round_id: 4,
   //   name: "qui te semble le plus susceptible de se rendre exécrable en voulant briller ?",
   //   answer_1: null,
@@ -2365,7 +2410,7 @@ export const questions: Question[] = [
   //   answer_4: null,
   // },
   {
-    id: 261,
+    id: 266,
     round_id: 4,
     name: "d’après toi, qui a le moins de chance de s’épanouir professionnellement ?",
     answer_1: null,
@@ -2374,7 +2419,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 262,
+    id: 267,
     round_id: 4,
     name: "qui te semble le plus égoïste ?",
     answer_1: null,
@@ -2383,7 +2428,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 263,
+    id: 268,
     round_id: 4,
     name: "qui te paraît le plus égocentrique ?",
     answer_1: null,
@@ -2392,7 +2437,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 264,
+    id: 269,
     round_id: 4,
     name: "qui te fait le plus peur ?",
     answer_1: null,
@@ -2401,7 +2446,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 265,
+    id: 270,
     round_id: 4,
     name: "qui t’a le plus déçu ?",
     answer_1: null,
@@ -2410,7 +2455,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 266,
+    id: 271,
     round_id: 4,
     name: "avec qui as-tu le plus de mal à communiquer ?",
     answer_1: null,
@@ -2419,7 +2464,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 267,
+    id: 272,
     round_id: 4,
     name: "qui cernes-tu le moins ?",
     answer_1: null,
@@ -2428,7 +2473,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 268,
+    id: 273,
     round_id: 4,
     name: "qui te paraît le moins responsable ?",
     answer_1: null,
@@ -2437,7 +2482,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 269,
+    id: 274,
     round_id: 4,
     name: "avec qui ne partirais-tu pas en vacances ?",
     answer_1: null,
@@ -2446,7 +2491,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 270,
+    id: 275,
     round_id: 4,
     name: "qui pourrait te faire le plus de mal ?",
     answer_1: null,
@@ -2455,7 +2500,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 271,
+    id: 276,
     round_id: 4,
     name: "avec qui ressens-tu le plus de non-dits ?",
     answer_1: null,
@@ -2464,7 +2509,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 272,
+    id: 277,
     round_id: 4,
     name: "qui te fais le moins d’effet ?",
     answer_1: null,
@@ -2473,7 +2518,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 273,
+    id: 278,
     round_id: 4,
     name: "à qui penses-tu le plus ?",
     answer_1: null,
@@ -2482,7 +2527,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 274,
+    id: 279,
     round_id: 4,
     name: "à qui penses-tu le moins ?",
     answer_1: null,
@@ -2491,7 +2536,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 275,
+    id: 280,
     round_id: 4,
     name: "qui ici serait le plus à même d’être de mauvaise foi pour ne pas admettre qu’il/qu’elle s’est trompé(e) ?",
     answer_1: null,
@@ -2500,7 +2545,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 276,
+    id: 281,
     round_id: 4,
     name: "qui souffrirait le plus d’avoir un enfant LGBT ?",
     answer_1: null,
@@ -2509,7 +2554,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 277,
+    id: 282,
     round_id: 4,
     name: "qui est le moins reconnaissant envers sa chance ?",
     answer_1: null,
@@ -2518,7 +2563,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 278,
+    id: 283,
     round_id: 4,
     name: "quelle personne t’inspire le plus confiance ?",
     answer_1: null,
@@ -2527,7 +2572,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 279,
+    id: 284,
     round_id: 4,
     name: "qui te satisfait le plus ?",
     answer_1: null,
@@ -2536,7 +2581,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 280,
+    id: 285,
     round_id: 4,
     name: "quelle personne te paraît la plus ambitieuse ?",
     answer_1: null,
@@ -2545,7 +2590,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 281,
+    id: 286,
     round_id: 4,
     name: "quel visage te fait le plus penser à un animal ?",
     answer_1: null,
@@ -2554,7 +2599,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 282,
+    id: 287,
     round_id: 4,
     name: "d'après toi, qui a eu le plus d'aventures sexuelles ?",
     answer_1: null,
@@ -2563,7 +2608,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 283,
+    id: 288,
     round_id: 4,
     name: "qui te paraît le plus mature ?",
     answer_1: null,
@@ -2572,7 +2617,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 284,
+    id: 289,
     round_id: 4,
     name: "d'après toi, qui a le plus beau sourire ?",
     answer_1: null,
@@ -2581,7 +2626,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 285,
+    id: 290,
     round_id: 4,
     name: "d’après toi, qui sera le plus accompli dans 10 ans ?",
     answer_1: null,
@@ -2590,7 +2635,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 286,
+    id: 291,
     round_id: 4,
     name: "qui aurait, selon toi, le plus de succès en tant que leader politique ?",
     answer_1: null,
@@ -2599,7 +2644,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 287,
+    id: 292,
     round_id: 4,
     name: "avec qui aimerais-tu partir en voyage ?",
     answer_1: null,
@@ -2608,7 +2653,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 288,
+    id: 293,
     round_id: 4,
     name: "qui te ressemble le plus ?",
     answer_1: null,
@@ -2617,7 +2662,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 289,
+    id: 294,
     round_id: 4,
     name: "qui respectes-tu le plus ?",
     answer_1: null,
@@ -2626,7 +2671,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 290,
+    id: 295,
     round_id: 4,
     name: "quelle est la personne avec qui tu as la relation la plus intense ?",
     answer_1: null,
@@ -2635,7 +2680,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 291,
+    id: 296,
     round_id: 4,
     name: "qui te semble le plus créatif ou imaginatif ?",
     answer_1: null,
@@ -2644,7 +2689,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 292,
+    id: 297,
     round_id: 4,
     name: "avec qui te sens-tu le plus en sécurité ?",
     answer_1: null,
@@ -2653,7 +2698,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 293,
+    id: 298,
     round_id: 4,
     name: "avec qui te sens-tu le plus à l’aise ?",
     answer_1: null,
@@ -2662,7 +2707,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 294,
+    id: 299,
     round_id: 4,
     name: "d’après toi, qui a le plus de chance de devenir très riche ?",
     answer_1: null,
@@ -2671,7 +2716,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 295,
+    id: 300,
     round_id: 4,
     name: "avec qui pourrais-tu avoir les conversations les plus profondes et significatives ?",
     answer_1: null,
@@ -2680,7 +2725,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 296,
+    id: 301,
     round_id: 4,
     name: "avec qui partagerais-tu tes joies et tes peines en premier ?",
     answer_1: null,
@@ -2689,7 +2734,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 297,
+    id: 302,
     round_id: 4,
     name: "qui te comprend le mieux ?",
     answer_1: null,
@@ -2698,7 +2743,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 298,
+    id: 303,
     round_id: 4,
     name: "les pensées de quel participant(e) préférerais-tu pouvoir lire ?",
     answer_1: null,
@@ -2707,7 +2752,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 299,
+    id: 304,
     round_id: 4,
     name: "quelle est la personne te paraissant la plus fiable ?",
     answer_1: null,
@@ -2716,7 +2761,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 300,
+    id: 305,
     round_id: 4,
     name: "qui te donne le plus d’espoir ?",
     answer_1: null,
@@ -2725,7 +2770,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 301,
+    id: 306,
     round_id: 4,
     name: "qui te fait le plus rire ?",
     answer_1: null,
@@ -2734,7 +2779,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 302,
+    id: 307,
     round_id: 4,
     name: "qui partage le plus ta vision du monde ?",
     answer_1: null,
@@ -2743,7 +2788,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 303,
+    id: 308,
     round_id: 4,
     name: "qui t’apaise le plus ?",
     answer_1: null,
@@ -2752,7 +2797,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 304,
+    id: 309,
     round_id: 4,
     name: "qui choisit le mieux ses combats ?",
     answer_1: null,
@@ -2761,7 +2806,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 305,
+    id: 310,
     round_id: 4,
     name: "qui a le meilleur style ?",
     answer_1: null,
@@ -2770,7 +2815,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 306,
+    id: 311,
     round_id: 4,
     name: "qui a le plus d’égo ?",
     answer_1: null,
@@ -2779,7 +2824,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 307,
+    id: 312,
     round_id: 4,
     name: "si tu devais cacher un corps, qui appellerais-tu pour t’aider ?",
     answer_1: null,
@@ -2788,7 +2833,7 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 308,
+    id: 313,
     round_id: 4,
     name: "avec qui échangerais-tu ta vie pendant une journée ?",
     answer_1: null,
@@ -2797,54 +2842,9 @@ export const questions: Question[] = [
     answer_4: null,
   },
   {
-    id: 309,
-    round_id: 4,
-    name: "qui a une réflexion la plus proche de la tienne ?",
-    answer_1: null,
-    answer_2: null,
-    answer_3: null,
-    answer_4: null,
-  },
-  {
-    id: 310,
-    round_id: 4,
-    name: "qui a des valeurs les plus similaires aux tiennes ?",
-    answer_1: null,
-    answer_2: null,
-    answer_3: null,
-    answer_4: null,
-  },
-  {
-    id: 311,
-    round_id: 4,
-    name: "qui aurais-tu élu·e comme délégué·e de classe ?",
-    answer_1: null,
-    answer_2: null,
-    answer_3: null,
-    answer_4: null,
-  },
-  {
-    id: 312,
-    round_id: 4,
-    name: "qui s’investit le plus dans ses relations amicales ou amoureuses ?",
-    answer_1: null,
-    answer_2: null,
-    answer_3: null,
-    answer_4: null,
-  },
-  {
-    id: 313,
-    round_id: 4,
-    name: "qui est la personne la plus gentille ?",
-    answer_1: null,
-    answer_2: null,
-    answer_3: null,
-    answer_4: null,
-  },
-  {
     id: 314,
     round_id: 4,
-    name: "qui est la personne la plus bienveillante ?",
+    name: "qui a la réflexion la plus proche de la tienne ?",
     answer_1: null,
     answer_2: null,
     answer_3: null,
@@ -2853,7 +2853,7 @@ export const questions: Question[] = [
   {
     id: 315,
     round_id: 4,
-    name: "à qui fais-tu le plus confiance ?",
+    name: "qui a des valeurs les plus similaires aux tiennes ?",
     answer_1: null,
     answer_2: null,
     answer_3: null,
@@ -2862,7 +2862,7 @@ export const questions: Question[] = [
   {
     id: 316,
     round_id: 4,
-    name: "qui a la plus belle plume ?",
+    name: "qui aurais-tu élu·e comme délégué·e de classe ?",
     answer_1: null,
     answer_2: null,
     answer_3: null,
@@ -2871,7 +2871,7 @@ export const questions: Question[] = [
   {
     id: 317,
     round_id: 4,
-    name: "qui écoute la meilleure musique ?",
+    name: "qui s’investit le plus dans ses relations amicales ou amoureuses ?",
     answer_1: null,
     answer_2: null,
     answer_3: null,
@@ -2880,7 +2880,7 @@ export const questions: Question[] = [
   {
     id: 318,
     round_id: 4,
-    name: "qui est la personne la plus sûre de ce qu’elle est ?",
+    name: "qui est la personne la plus gentille ?",
     answer_1: null,
     answer_2: null,
     answer_3: null,
@@ -2889,7 +2889,7 @@ export const questions: Question[] = [
   {
     id: 319,
     round_id: 4,
-    name: "qui choisirais-tu comme témoin de mariage ?",
+    name: "qui est la personne la plus bienveillante ?",
     answer_1: null,
     answer_2: null,
     answer_3: null,
@@ -2898,14 +2898,77 @@ export const questions: Question[] = [
   {
     id: 320,
     round_id: 4,
+    name: "à qui fais-tu le plus confiance ?",
+    answer_1: null,
+    answer_2: null,
+    answer_3: null,
+    answer_4: null,
+  },
+  {
+    id: 321,
+    round_id: 4,
+    name: "qui a la plus belle plume ?",
+    answer_1: null,
+    answer_2: null,
+    answer_3: null,
+    answer_4: null,
+  },
+  {
+    id: 322,
+    round_id: 4,
+    name: "qui écoute la meilleure musique ?",
+    answer_1: null,
+    answer_2: null,
+    answer_3: null,
+    answer_4: null,
+  },
+  {
+    id: 323,
+    round_id: 4,
+    name: "qui est la personne la plus sûre de ce qu’elle est ?",
+    answer_1: null,
+    answer_2: null,
+    answer_3: null,
+    answer_4: null,
+  },
+  {
+    id: 324,
+    round_id: 4,
+    name: "qui choisirais-tu comme témoin de mariage ?",
+    answer_1: null,
+    answer_2: null,
+    answer_3: null,
+    answer_4: null,
+  },
+  {
+    id: 325,
+    round_id: 4,
     name: "qui choisirais-tu comme parrain/marraine de ton enfant ?",
     answer_1: null,
     answer_2: null,
     answer_3: null,
     answer_4: null,
   },
+  {
+    id: 326,
+    round_id: 4,
+    name: "qui a les convictions les plus différentes des tiennes ?",
+    answer_1: null,
+    answer_2: null,
+    answer_3: null,
+    answer_4: null,
+  },
+  {
+    id: 327,
+    round_id: 4,
+    name: "d'après toi, qui fait le moins les choses à moitié ?",
+    answer_1: null,
+    answer_2: null,
+    answer_3: null,
+    answer_4: null,
+  },
   // {
-  //   id: 321,
+  //   id: 328,
   //   round_id: 4,
   //   name: "avec qui n’aurais-tu pas pu être ami·e au collège ?",
   //   answer_1: null,

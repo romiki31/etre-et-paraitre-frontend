@@ -33,7 +33,7 @@ const HomePage = observer(() => {
 
   return (
     <div className="colmn-space-btwn">
-      {isRules ? null : <h1 className="title">ÊTRE ET PARAÎTRE</h1>}
+      {isRules ? null : <h1 className="title">PERCEPT</h1>}
       {gameCreator || isPinValid ? (
         <div className="flex-column gap-1">
           <div className="flex button-slide-in">
@@ -85,8 +85,13 @@ const HomePage = observer(() => {
             chacune avec un type de question différent pour varier les surprises
             ! <br />
             <i>
-              *Si besoin : accordez vous sur les termes et/ou le contexte de la
-              question avant d’y répondre
+              <u>
+                {" "}
+                <span className="strong">
+                  *Si besoin : accordez vous sur les termes et/ou le contexte de
+                  la question avant d’y répondre
+                </span>
+              </u>
             </i>{" "}
             <br />
             <br />

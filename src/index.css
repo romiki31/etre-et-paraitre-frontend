@@ -132,7 +132,7 @@ table {
 html,
 body,
 #root {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 * {
@@ -172,7 +172,7 @@ body {
 }
 
 .main-container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: row;
 }
