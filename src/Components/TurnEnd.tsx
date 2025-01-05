@@ -5,11 +5,9 @@ import RightAnswer from "./RightAnswer";
 
 const TurnEnd = observer(() => {
   const {
-    gameCreator,
     showAnswers,
     showRanking,
-    emitShowAnswers,
-    emitShowRanking,
+    // emitShowRanking,
     emitNextTurn,
     getBtnClass,
     currentGame,
@@ -22,38 +20,14 @@ const TurnEnd = observer(() => {
       {showRanking ? null : <div></div>}
       {!showAnswers && !showRanking && <h4>TERMINÉ</h4>}
       {showRanking ? <Ranking /> : showAnswers ? <RightAnswer /> : null}
-      {gameCreator ? (
-        showRanking ? (
-          <button
-            onClick={() => {
-              emitNextTurn();
-            }}
-            className={currentRound ? `${getBtnClass(currentRound.id)}` : ""}
-          >
-            Suivant
-          </button>
-        ) : showAnswers ? (
-          <button
-            onClick={() => {
-              emitShowRanking();
-            }}
-            className={currentRound ? `${getBtnClass(currentRound.id)}` : ""}
-          >
-            Voir le classement
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              emitShowAnswers();
-            }}
-            className={currentRound ? `${getBtnClass(currentRound.id)}` : ""}
-          >
-            Voir la réponse
-          </button>
-        )
-      ) : (
-        <div></div>
-      )}
+      <button
+        onClick={() => {
+          emitNextTurn();
+        }}
+        className={currentRound ? `${getBtnClass(currentRound.id)}` : ""}
+      >
+        Suivant
+      </button>
     </div>
   );
 });

@@ -4,11 +4,11 @@ import WeroLogo from "../assets/wero-logo.svg";
 import { gameStore } from "../store";
 
 const RoundEnded = observer(() => {
-  const { winner } = gameStore;
+  const { winners } = gameStore;
   const [showThankYouMessage, setShowThankYouMessage] = useState(false);
 
   useEffect(() => {
-    if (winner) {
+    if (winners) {
       const timer = setTimeout(() => {
         setShowThankYouMessage(true);
       }, 3000);
@@ -16,11 +16,11 @@ const RoundEnded = observer(() => {
     } else {
       setShowThankYouMessage(false);
     }
-  }, [winner]);
+  }, [winners]);
 
   return (
     <>
-      {winner ? (
+      {winners ? (
         showThankYouMessage ? (
           <div className="colmn-space-btwn thank-you-container">
             <h4 className="accent-color">
@@ -40,10 +40,24 @@ const RoundEnded = observer(() => {
         ) : (
           <div className="colmn-space-btwn">
             <div></div>
-            <h3>
-              <span className="accent-color">{winner.username}</span> a remporté
-              la partie !
-            </h3>
+            {winners.length > 1 ? (
+              <h3>
+                <span className="accent-color">
+                  {winners.map((winner, index) =>
+                    index === winners.length - 1 && index !== 0
+                      ? ` et ${winner.username}`
+                      : `${index > 0 ? ", " : ""}${winner.username}`
+                  )}
+                </span>{" "}
+                "ont gagné et sont arrivés ex-aequo !"
+              </h3>
+            ) : (
+              <h3>
+                <span className="accent-color">{winners[0].username}</span> a
+                remporté la partie !
+              </h3>
+            )}
+
             <div></div>
           </div>
         )

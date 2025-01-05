@@ -21,7 +21,7 @@ class GameStore {
   showRanking: boolean = false;
   showQuestion: boolean = false;
   nextTurn: boolean = false;
-  winner: Player | null = null;
+  winners: Player[] | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -52,12 +52,13 @@ class GameStore {
       runInAction(() => {
         this.setShowQuestion(false);
         this.setCurrentGame(game);
+        this.setShowAnswers(true);
       });
     });
 
-    socket.on("show-answers", () => {
-      this.setShowAnswers(true);
-    });
+    // socket.on("show-answers", () => {
+    //   this.setShowAnswers(true);
+    // });
 
     socket.on("show-ranking", () => {
       this.setShowRanking(true);
@@ -77,15 +78,15 @@ class GameStore {
 
     socket.on("end-game", (res) => {
       runInAction(() => {
-        this.setWinner(res.winner);
+        this.setWinners(res.winners);
       });
     });
   };
 
-  emitShowAnswers = () => {
-    this.setShowAnswers(true);
-    socket.emit("show-answers", this.pin);
-  };
+  // emitShowAnswers = () => {
+  //   this.setShowAnswers(true);
+  //   socket.emit("show-answers", this.pin);
+  // };
 
   emitShowRanking = () => {
     this.setShowRanking(true);
@@ -103,7 +104,7 @@ class GameStore {
             this.setterNextTurn(response.data);
           }
           if (response.data.message === "Partie terminée") {
-            this.setWinner(response.data.winner);
+            this.setWinners(response.data.winners);
           }
         });
       }
@@ -203,8 +204,8 @@ class GameStore {
     this.nextTurn = nextTurn;
   };
 
-  setWinner = (winner: Player) => {
-    this.winner = winner;
+  setWinners = (winners: Player[]) => {
+    this.winners = winners;
   };
 
   setErrorMessage = (message: string) => {

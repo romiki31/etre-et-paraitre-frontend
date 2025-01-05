@@ -1,10 +1,11 @@
+import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { Routes, goToWithParams } from "./routes";
 import { gameStore } from "./store";
 
 const App: React.FC = observer(() => {
-  const { getBackgroundClass, currentGame, winner } = gameStore;
+  const { getBackgroundClass, currentGame, winners } = gameStore;
 
   const [pin, setPin] = useState<string | null>(null);
   const [currentPlayerId, setCurrentPlayerId] = useState<string | null>(null);
@@ -31,14 +32,14 @@ const App: React.FC = observer(() => {
 
     if (gameStore.pin && gameStore.currentPlayerId) {
       intervalId = setInterval(() => {
-        if (!gameStore.winner) {
+        if (!gameStore.winners) {
           gameStore.getCurrentGame(gameStore.pin, gameStore.currentPlayerId!);
         }
       }, 15 * 1000);
     } else if (pin && currentPlayerId) {
       gameStore.getCurrentGame(pin, parseInt(currentPlayerId));
     }
-    if (gameStore.winner && intervalId) {
+    if (gameStore.winners && intervalId) {
       clearInterval(intervalId);
     }
     return () => {
@@ -72,20 +73,25 @@ const App: React.FC = observer(() => {
   ]);
 
   useEffect(() => {
-    if (gameStore.pin && gameStore.currentPlayerId) {
-      if (gameStore.winner) {
+    console.log(toJS(gameStore.currentGame));
+    if (gameStore.pin && gameStore.currentPlayerId && gameStore.currentGame) {
+      if (gameStore.winners) {
         goToWithParams(
           "/round-ended",
           gameStore.pin,
           gameStore.currentPlayerId.toLocaleString()
         );
-      } else if (gameStore.currentGame?.allAnswered) {
+      } else if (gameStore.currentGame.allAnswered) {
+        console.log("turn-end");
+
         goToWithParams(
           "/turn-end",
           gameStore.pin,
           gameStore.currentPlayerId.toLocaleString()
         );
       } else if (gameStore.showQuestion) {
+        console.log("question");
+
         goToWithParams(
           "/question",
           gameStore.pin,
@@ -106,7 +112,7 @@ const App: React.FC = observer(() => {
       }
     }
   }, [
-    gameStore.winner,
+    gameStore.winners,
     gameStore.currentGame,
     gameStore.showQuestion,
     gameStore.pin,
@@ -116,7 +122,7 @@ const App: React.FC = observer(() => {
   return (
     <div
       className={
-        currentGame?.currentRound && !winner
+        currentGame?.currentRound && !winners
           ? `main-container ${getBackgroundClass(currentGame.currentRound.id)}`
           : "main-container"
       }

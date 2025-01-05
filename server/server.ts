@@ -54,10 +54,10 @@ io.on("connection", (socket: Socket) => {
     // );
   });
 
-  socket.on("show-answers", (gamePin: string) => {
-    // console.log("Emission des réponses pour la partie:", gamePin);
-    io.to(gamePin).emit("show-answers");
-  });
+  // socket.on("show-answers", (gamePin: string) => {
+  //   // console.log("Emission des réponses pour la partie:", gamePin);
+  //   io.to(gamePin).emit("show-answers");
+  // });
 
   socket.on("show-ranking", (gamePin: string) => {
     // console.log("Emission du classement pour la partie:", gamePin);
@@ -288,12 +288,18 @@ app.post("/api/next-turn", (req: any, res: any) => {
     const allPlayersPlayed = game.players.every((player) => player.isTurn);
     if (allPlayersPlayed) {
       if (game.currentRound?.id === 4) {
-        const winner = game.players.reduce((maxPlayer, player) =>
-          player.points > maxPlayer.points ? player : maxPlayer
+        const maxPoints = Math.max(
+          ...game.players.map((player) => player.points)
         );
+        const winners = game.players.filter(
+          (player) => player.points === maxPoints
+        );
+        // const winners = game.players.reduce((maxPlayer, player) =>
+        //   player.points > maxPlayer.points ? player : maxPlayer
+        // );
 
-        io.to(pin).emit("end-game", { message: "Partie terminée", winner });
-        return res.json({ message: "Partie terminée", winner });
+        io.to(pin).emit("end-game", { message: "Partie terminée", winners });
+        return res.json({ message: "Partie terminée", winners });
       } else {
         const currentRound = rounds.find(
           (r) => r.id === (game.currentRound?.id ?? 0) + 1

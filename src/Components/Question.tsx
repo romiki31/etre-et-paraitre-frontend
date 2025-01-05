@@ -1,10 +1,7 @@
 import { observer } from "mobx-react-lite";
-import { useState } from "react";
-import Podium from "../assets/podium.png";
 import { gameStore } from "../store";
-import Popup from "./Popup";
 import QuestionForm from "./QuestionForm";
-import Ranking from "./Ranking";
+import SmallRanking from "./SmallRanking";
 
 const Question = observer(() => {
   const {
@@ -15,7 +12,7 @@ const Question = observer(() => {
     submitGuess,
   } = gameStore;
 
-  const [showPopup, setShowPopup] = useState(false);
+  // const [showPopup, setShowPopup] = useState(false);
   const currentQuestion = currentGame?.currentQuestion;
   const currentRound = currentGame?.currentRound;
   const roundPlayer = currentGame?.players.find((p) => p.isRoundPlayer);
@@ -43,15 +40,16 @@ const Question = observer(() => {
                 <p className="accent-text">{roundPlayer?.username}</p>
               </div>
             </div>
-            <button className="img-btn" onClick={() => setShowPopup(true)}>
+            <SmallRanking />
+            {/* <button className="img-btn" onClick={() => setShowPopup(true)}>
               <img src={Podium} alt="" />
-            </button>
+            </button> */}
           </div>
 
           {roundPlayer?.id === currentPlayerId ? (
             rightAnswer ? (
               <>
-                <p>En attente des réponses des autres joueurs</p>
+                <p>En attente des réponses des autres joueurs FFFF</p>
                 <div></div>
               </>
             ) : (
@@ -86,9 +84,9 @@ const Question = observer(() => {
               <div></div>
             </>
           )}
-          {showPopup && (
+          {/* {showPopup && (
             <Popup onClose={() => setShowPopup(false)} children={<Ranking />} />
-          )}
+          )} */}
         </div>
       ) : (
         <div>Chargement</div>

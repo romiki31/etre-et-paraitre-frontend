@@ -32,7 +32,7 @@ const HomePage = observer(() => {
   }, [isPinValid]);
 
   return (
-    <div className="colmn-space-btwn">
+    <div className="colmn-space-btwn gap-1">
       {isRules ? null : <h1 className="title">PERCEPT</h1>}
       {gameCreator || isPinValid ? (
         <div className="flex-column gap-1">
@@ -73,9 +73,15 @@ const HomePage = observer(() => {
           <button onClick={() => setIsRules(true)}>Suivant</button>
         </>
       ) : isRules ? (
-        <div className="flex-column gap-1">
+        <>
           <h3>Règles du jeu</h3>
           <p className="very-small-text">
+            <p>Le but du jeu :</p>
+            Accumulez des points en devinant les réponses des autres joueurs.
+            Attention, pas de points en jeu pour votre propre réponse, alors
+            soyez honnête et spontané. soyez
+            <span className="strong">honnête et spontané</span>. <br />
+            <br />
             <p>Comment ça marche ?</p>
             1. À chaque tour, un joueur tire une question et y répond. <br />
             2. Les autres doivent deviner sa réponse : qu’aurait-il ou elle pu
@@ -95,35 +101,16 @@ const HomePage = observer(() => {
             </i>{" "}
             <br />
             <br />
-            <p>Le but du jeu :</p>
-            Accumulez des points en devinant les réponses des autres joueurs.
-            Attention, pas de points en jeu pour votre propre réponse, alors
-            soyez <span className="strong">honnête et spontané</span>. <br />
-            <br />
             <p>Pourquoi vous allez adorer ?</p>
             Au-delà du jeu, l’intérêt réside dans les discussions qui en
             découlent. Débriefez les réponses, essayez de comprendre les choix
             des uns et des autres, et découvrez des facettes inattendues de vos
             amis ou de votre famille. <br />
             <br />
-            <p>Infos pratiques :</p>
-            Pour 4 à 7 joueurs
-            <br />
-            Idéal pour des soirées pleines de rires, de débats, et de
-            découvertes.
-            <br />
-            Celui ou celle qui aura deviné le plus de réponses remporte la
-            partie ! <br />
-            <br />
-            <i>
-              <span className="strong">
-                Un jeu simple à prendre en main, mais riche en surprises et en
-                émotions.
-              </span>
-            </i>
+            <span className="strong">Pour 4 à 7 joueurs</span>
           </p>
           <button onClick={() => setIsRules(false)}>Suivant</button>
-        </div>
+        </>
       ) : (
         <>
           <p className="soft-text">
