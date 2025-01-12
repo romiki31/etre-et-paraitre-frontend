@@ -234,10 +234,11 @@ class GameStore {
           this.currentPlayerId = currentPlayerId;
           this.gameCreator = currentPlayerId === 1;
 
-          if (
-            !this.currentGame ||
+          if (!this.currentGame) {
+            return null;
+          } else if (
             response.data.game.currentRound.id !==
-              this.currentGame.currentRound?.id
+            this.currentGame.currentRound?.id
           ) {
             this.currentGame = {
               ...response.data.game,
