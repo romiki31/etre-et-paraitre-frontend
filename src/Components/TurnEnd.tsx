@@ -11,6 +11,7 @@ const TurnEnd = observer(() => {
     emitNextTurn,
     getBtnClass,
     currentGame,
+    gameCreator,
   } = gameStore;
 
   const currentRound = currentGame?.currentRound;
@@ -20,14 +21,18 @@ const TurnEnd = observer(() => {
       {showRanking ? null : <div></div>}
       {!showAnswers && !showRanking && <h4>TERMINÉ</h4>}
       {showRanking ? <Ranking /> : showAnswers ? <RightAnswer /> : null}
-      <button
-        onClick={() => {
-          emitNextTurn();
-        }}
-        className={currentRound ? `${getBtnClass(currentRound.id)}` : ""}
-      >
-        Suivant
-      </button>
+      {gameCreator ? (
+        <button
+          onClick={() => {
+            emitNextTurn();
+          }}
+          className={currentRound ? `${getBtnClass(currentRound.id)}` : ""}
+        >
+          Suivant
+        </button>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 });

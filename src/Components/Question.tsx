@@ -49,7 +49,7 @@ const Question = observer(() => {
           {roundPlayer?.id === currentPlayerId ? (
             rightAnswer ? (
               <>
-                <p>En attente des réponses des autres joueurs FFFF</p>
+                <p>En attente des réponses des autres joueurs</p>
                 <div></div>
               </>
             ) : (

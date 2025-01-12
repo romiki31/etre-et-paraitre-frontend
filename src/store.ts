@@ -231,9 +231,25 @@ class GameStore {
       runInAction(() => {
         if (response.data) {
           this.pin = pin;
-          this.currentGame = response.data.game;
           this.currentPlayerId = currentPlayerId;
           this.gameCreator = currentPlayerId === 1;
+
+          if (
+            !this.currentGame ||
+            response.data.game.currentRound.id !==
+              this.currentGame.currentRound?.id
+          ) {
+            this.currentGame = {
+              ...response.data.game,
+              currentRound: response.data.game.currentRound,
+            };
+          } else {
+            this.currentGame = {
+              ...this.currentGame,
+              ...response.data.game,
+              currentRound: this.currentGame.currentRound,
+            };
+          }
         }
       });
     } catch (error) {

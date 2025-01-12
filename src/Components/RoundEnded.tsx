@@ -49,7 +49,7 @@ const RoundEnded = observer(() => {
                       : `${index > 0 ? ", " : ""}${winner.username}`
                   )}
                 </span>{" "}
-                "ont gagné et sont arrivés ex-aequo !"
+                ont gagné et sont arrivés ex-aequo !
               </h3>
             ) : (
               <h3>
