@@ -68,9 +68,13 @@ const RightAnswer = observer(() => {
       ) : null}
       {roundPlayer?.id !== currentPlayerId ? (
         rightAnswer === answer ? (
-          <h3 className="accent-text">Bien joué !</h3>
+          <h3 className={currentRound?.id === 1 ? "white" : "accent-text"}>
+            Bien joué !
+          </h3>
         ) : (
-          <h3 className="accent-text">Mauvaise réponse...</h3>
+          <h3 className={currentRound?.id === 1 ? "white" : "accent-text"}>
+            Mauvaise réponse...
+          </h3>
         )
       ) : null}
     </>

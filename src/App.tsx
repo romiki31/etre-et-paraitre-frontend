@@ -82,16 +82,12 @@ const App: React.FC = observer(() => {
           gameStore.currentPlayerId.toLocaleString()
         );
       } else if (gameStore.currentGame.allAnswered) {
-        console.log("turn-end");
-
         goToWithParams(
           "/turn-end",
           gameStore.pin,
           gameStore.currentPlayerId.toLocaleString()
         );
       } else if (gameStore.showQuestion) {
-        console.log("question");
-
         goToWithParams(
           "/question",
           gameStore.pin,

@@ -24,8 +24,8 @@ const RoundEnded = observer(() => {
         showThankYouMessage ? (
           <div className="colmn-space-btwn thank-you-container">
             <h4 className="accent-color">
-              On construit ce jeu à deux, mais avec votre aide (même la plus
-              modeste) il peut devenir bien plus
+              Aidez-nous à créer une fonctionnalité pour enchaîner vos parties !
+              Et bien plus encore...
             </h4>
             <div className="center-text">
               <p className="accent-color">Soutenez le projet avec un don</p>

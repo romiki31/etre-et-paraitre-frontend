@@ -489,6 +489,10 @@ input[type="number"] {
   text-align: center;
 }
 
+.white {
+  color: white;
+}
+
 .accent-color {
   color: #ffc759;
 }

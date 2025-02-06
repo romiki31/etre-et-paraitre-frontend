@@ -1,5 +1,5 @@
 import axios from "axios";
-import { makeAutoObservable, runInAction, toJS } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { io } from "socket.io-client";
 import { Game, Player } from "./Interfaces";
 import { goToUrl } from "./routes";
@@ -233,10 +233,6 @@ class GameStore {
           this.pin = pin;
           this.currentPlayerId = currentPlayerId;
           this.gameCreator = currentPlayerId === 1;
-
-          console.log(response.data);
-          console.log(toJS(this.currentGame));
-
           if (
             !this.currentGame ||
             response.data.game.currentRound?.id !==
