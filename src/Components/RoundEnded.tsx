@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import WeroLogo from "../assets/wero-logo.svg";
 import { gameStore } from "../store";
 
@@ -7,16 +7,16 @@ const RoundEnded = observer(() => {
   const { winners } = gameStore;
   const [showThankYouMessage, setShowThankYouMessage] = useState(false);
 
-  useEffect(() => {
-    if (winners) {
-      const timer = setTimeout(() => {
-        setShowThankYouMessage(true);
-      }, 3000);
-      return () => clearTimeout(timer);
-    } else {
-      setShowThankYouMessage(false);
-    }
-  }, [winners]);
+  // useEffect(() => {
+  //   if (winners) {
+  //     const timer = setTimeout(() => {
+  //       setShowThankYouMessage(true);
+  //     }, 3000);
+  //     return () => clearTimeout(timer);
+  //   } else {
+  //     setShowThankYouMessage(false);
+  //   }
+  // }, [winners]);
 
   return (
     <>
@@ -58,7 +58,9 @@ const RoundEnded = observer(() => {
               </h3>
             )}
 
-            <div></div>
+            <button onClick={() => setShowThankYouMessage(true)}>
+              Suivant
+            </button>
           </div>
         )
       ) : (
