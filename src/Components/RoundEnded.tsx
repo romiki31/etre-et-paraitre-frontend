@@ -59,7 +59,7 @@ const RoundEnded = observer(() => {
             )}
 
             <button onClick={() => setShowThankYouMessage(true)}>
-              Suivant
+              Nouvelle partie
             </button>
           </div>
         )
