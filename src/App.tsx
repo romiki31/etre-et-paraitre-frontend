@@ -18,6 +18,15 @@ const App: React.FC = observer(() => {
       setPin(pathSegments.slice(-2)[0]);
       setCurrentPlayerId(pathSegments.slice(-1)[0]);
     }
+    const handleFocus = (event: FocusEvent) => {
+      const target = event.target as HTMLElement;
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 300);
+    };
+
+    document.addEventListener("focusin", handleFocus);
+    return () => document.removeEventListener("focusin", handleFocus);
   }, []);
 
   // console.log(toJS(gameStore.currentPlayerId));
