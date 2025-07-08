@@ -2,6 +2,9 @@ import { createBrowserHistory } from "history";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import UrlPattern from "url-pattern";
+import AdminLogin from "./Components/AdminLogin";
+import AdminPanel from "./Components/AdminPanel";
+import AdminProtectedRoute from "./Components/AdminProtectedRoute";
 import HomePage from "./Components/HomePage";
 import LoadingRoom from "./Components/LoadingRoom";
 import Question from "./Components/Question";
@@ -51,6 +54,18 @@ export const Routes = observer(() => {
     {
       path: "/",
       component: HomePage,
+    },
+    {
+      path: "/admin/login",
+      component: AdminLogin,
+    },
+    {
+      path: "/admin",
+      component: () => (
+        <AdminProtectedRoute>
+          <AdminPanel />
+        </AdminProtectedRoute>
+      ),
     },
     {
       path: "/loading-room/:pin/:playerId",

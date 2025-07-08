@@ -29,3 +29,6 @@ dist-ssr
 
 # Claude Code
 CLAUDE.md
+
+# Admin configuration (contains password hash)
+server/admin-config.json

@@ -13,6 +13,12 @@ const App: React.FC = observer(() => {
   useEffect(() => {
     gameStore.setupSocketListeners();
     const urlPath = window.location.pathname;
+    
+    // Ne pas traiter les routes admin comme des routes de jeu
+    if (urlPath.startsWith('/admin')) {
+      return;
+    }
+    
     const pathSegments = urlPath.split("/");
     if (pathSegments.length >= 2) {
       setPin(pathSegments.slice(-2)[0]);
@@ -33,6 +39,11 @@ const App: React.FC = observer(() => {
   // console.log(toJS(gameStore.currentGame));
 
   useEffect(() => {
+    // Ne pas exécuter la logique de jeu pour les routes admin
+    if (window.location.pathname.startsWith('/admin')) {
+      return;
+    }
+    
     if (gameStore.pin) {
       gameStore.joinSocketRoom(gameStore.pin);
     }
@@ -82,6 +93,11 @@ const App: React.FC = observer(() => {
   ]);
 
   useEffect(() => {
+    // Ne pas exécuter la logique de navigation pour les routes admin
+    if (window.location.pathname.startsWith('/admin')) {
+      return;
+    }
+    
     console.log(toJS(gameStore.currentGame));
     if (gameStore.pin && gameStore.currentPlayerId && gameStore.currentGame) {
       if (gameStore.winners) {

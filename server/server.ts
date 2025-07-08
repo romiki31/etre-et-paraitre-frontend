@@ -4,6 +4,7 @@ import * as http from "http";
 import * as path from "path";
 import { Server, Socket } from "socket.io";
 import { emptyPlayer, Game, Player, Question } from "../src/Interfaces";
+import { authenticateAdmin, changeAdminPassword, loginAdmin, verifyAdminSetup } from "./auth";
 import { questions, rounds } from "./constantes";
 
 const app = express();
@@ -23,6 +24,22 @@ const io = new Server(server, {
 
 app.use(express.json());
 app.use(cookieParser());
+
+// Configuration CORS pour les requêtes HTTP
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  
+  // Répondre aux requêtes OPTIONS (preflight)
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+    return;
+  }
+  
+  next();
+});
 
 const games: Game[] = [];
 
@@ -70,7 +87,15 @@ io.on("connection", (socket: Socket) => {
   });
 });
 
-// Endpoints
+// Admin authentication endpoints
+app.post("/api/admin/login", loginAdmin);
+app.post("/api/admin/change-password", authenticateAdmin, changeAdminPassword);
+app.get("/api/admin/verify", authenticateAdmin, (req, res) => {
+  res.json({ message: "Token valide", admin: true });
+});
+app.get("/api/admin/setup-status", verifyAdminSetup);
+
+// Game endpoints
 app.get("/api/game/:pin/:currentPlayerId", (req: any, res: any) => {
   const { pin, currentPlayerId } = req.params;
   // console.log(

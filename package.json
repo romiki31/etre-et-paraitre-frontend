@@ -6,15 +6,21 @@
   "scripts": {
     "dev": "vite",
     "dev:server": "nodemon --exec 'npm run build:server && node dist/server.cjs' --watch 'server/**/*' -e ts --verbose",
+    "dev:full": "concurrently \"npm run dev:server\" \"npm run dev\"",
     "build:server": "esbuild server/server.ts --bundle --platform=node --outdir=dist --sourcemap --out-extension:.js=.cjs",
     "build:frontend": "vite build",
-    "build": "npm run build:frontend && npm run build:server"
+    "build": "npm run build:frontend && npm run build:server",
+    "admin:setup": "node scripts/setup-admin.js"
   },
   "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "axios": "^1.7.7",
+    "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
     "express": "^4.21.1",
     "history": "^5.3.0",
+    "jsonwebtoken": "^9.0.2",
     "mobx-react-lite": "^4.0.7",
     "path": "^0.12.7",
     "react": "^18.3.1",
@@ -30,6 +36,7 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
+    "concurrently": "^9.2.0",
     "esbuild": "^0.24.0",
     "eslint": "^9.13.0",
     "eslint-plugin-react-hooks": "^5.0.0",
