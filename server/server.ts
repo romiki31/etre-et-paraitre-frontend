@@ -17,6 +17,7 @@ const io = new Server(server, {
       "http://localhost:5173",
       "https://epercept.fr",
       "http://epercept.fr",
+      "https://fuzzy-succotash-x55r6xgqgvrh576-5173.app.github.dev"
     ],
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],

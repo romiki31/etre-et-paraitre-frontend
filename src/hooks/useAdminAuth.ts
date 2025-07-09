@@ -8,7 +8,7 @@ interface AuthState {
   token: string | null;
 }
 
-const API_BASE = 'http://localhost:5001';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
 
 export const useAdminAuth = () => {
   const [authState, setAuthState] = useState<AuthState>({
@@ -19,7 +19,15 @@ export const useAdminAuth = () => {
   });
 
   useEffect(() => {
-    checkAuthStatus();
+    // Désactiver temporairement l'authentification :
+    setAuthState({
+      isAuthenticated: true,
+      loading: false,
+      error: null,
+      token: 'fake-token'
+    });
+
+    // checkAuthStatus(); // désactivé pour débogage local
   }, []);
 
   const checkAuthStatus = async () => {
@@ -30,7 +38,6 @@ export const useAdminAuth = () => {
         return;
       }
 
-      // Vérifier si le token est valide
       const response = await fetch(`${API_BASE}/api/admin/verify`, {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -148,3 +155,4 @@ export const useAdminAuth = () => {
     checkAuthStatus
   };
 };
+
