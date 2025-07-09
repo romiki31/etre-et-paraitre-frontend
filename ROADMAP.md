@@ -128,22 +128,22 @@ interface CustomRound {
 Fournir des insights sur l'utilisation et la performance des questions.
 
 ### 📊 Métriques
-- **Popularité des questions** : Les plus/moins jouées
-- **Taux de succès** : Difficultés relatives
-- **Engagement utilisateur** : Temps par question
-- **Données géographiques** : Utilisation par région
-- **Tendances temporelles** : Évolution de l'usage
+- **Temps de réponse moyen** : Par question (questionné vs répondants)
+- **Parties par jour** : Nombre de parties créées avec nombre de participants
+- **Taux de complétion** : Pourcentage de parties terminées
+- **Engagement utilisateur** : Durée moyenne des parties
+- **Tendances temporelles** : Évolution du nombre de joueurs
 
 ### 🛠 Visualisations
 - **Graphiques interactifs** : Charts.js ou D3.js
-- **Heatmaps** : Popularité par round/question
-- **Tableaux de bord** : KPI en temps réel
+- **Tableaux de bord** : KPI en temps réel (parties actives, joueurs connectés)
+- **Courbes temporelles** : Évolution des métriques sur le temps
 - **Export analytics** : Rapports PDF/Excel
 
 ### 💼 Valeur business
-- **Optimisation contenu** : Améliorer questions faibles
-- **ROI mesurable** : Impact des modifications
-- **Insights utilisateurs** : Comportements et préférences
+- **Optimisation gameplay** : Améliorer l'expérience utilisateur
+- **ROI mesurable** : Engagement et rétention des joueurs
+- **Insights utilisateurs** : Comportements et préférences de jeu
 
 ---
 

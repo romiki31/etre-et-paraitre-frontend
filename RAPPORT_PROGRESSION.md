@@ -13,7 +13,7 @@ Interface d'administration complète pour la gestion des questions du jeu Eperce
 
 ### 🎛️ Interface Principale
 - **Composant**: `src/Components/AdminPanel.tsx`
-- **Fonctionnalités**: Accordéons par round, recherche globale/locale, statistiques
+- **Fonctionnalités**: Accordéons par round, recherche globale/locale, compteur de questions
 - **État**: Hook `useAdminQuestions` pour gestion centralisée
 - **Design**: Responsive, cohérent avec charte graphique existante
 

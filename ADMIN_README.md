@@ -112,7 +112,7 @@ npm run build:server         # Build backend
 - **UX continuité** : Modifications sans interruption
 
 ### Phase 3 : 📋 Planifiée
-- **Dashboard statistiques** : Analytics des questions
+- **Dashboard statistiques** : Analytics des parties et joueurs
 - **Gestion des rounds** : Création/modification des catégories
 - **Multi-admin** : Plusieurs comptes administrateur
 - **Audit logs** : Journalisation complète des actions
