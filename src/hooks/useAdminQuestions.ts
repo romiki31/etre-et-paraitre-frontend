@@ -62,7 +62,8 @@ export const useAdminQuestions = () => {
 
     setState(prev => ({
       ...prev,
-      questions: [...prev.questions, newQuestion]
+      questions: [...prev.questions, newQuestion],
+      hasUnsavedChanges: true
     }));
 
     addToHistory('created', newQuestion);
@@ -88,7 +89,8 @@ export const useAdminQuestions = () => {
       return {
         ...prev,
         questions: newQuestions,
-        error: null
+        error: null,
+        hasUnsavedChanges: true
       };
     });
   }, [addToHistory]);
@@ -110,7 +112,8 @@ export const useAdminQuestions = () => {
       return {
         ...prev,
         questions: newQuestions,
-        error: null
+        error: null,
+        hasUnsavedChanges: true
       };
     });
   }, [addToHistory]);
@@ -169,7 +172,7 @@ export const useAdminQuestions = () => {
 
   // Sauvegarder les modifications
   const saveChanges = useCallback(async () => {
-    if (!state.hasUnsavedChanges) return;
+    if (!state.hasUnsavedChanges) return { success: false, message: 'Aucune modification à sauvegarder' };
 
     setState(prev => ({ ...prev, loading: true, error: null }));
 
@@ -191,9 +194,10 @@ export const useAdminQuestions = () => {
         })
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Erreur lors de la sauvegarde');
+        throw new Error(result.message || 'Erreur lors de la sauvegarde');
       }
 
       setState(prev => ({
@@ -203,14 +207,20 @@ export const useAdminQuestions = () => {
         error: null
       }));
 
-      return true;
+      return { 
+        success: true, 
+        message: result.message,
+        backupPath: result.backupPath 
+      };
+      
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
       setState(prev => ({
         ...prev,
         loading: false,
-        error: error instanceof Error ? error.message : 'Erreur inconnue'
+        error: errorMessage
       }));
-      return false;
+      return { success: false, message: errorMessage };
     }
   }, [state.questions, state.history, state.hasUnsavedChanges]);
 

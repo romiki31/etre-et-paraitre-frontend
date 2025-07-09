@@ -6,6 +6,7 @@ import { Server, Socket } from "socket.io";
 import { emptyPlayer, Game, Player, Question } from "../src/Interfaces";
 import { authenticateAdmin, changeAdminPassword, loginAdmin, verifyAdminSetup } from "./auth";
 import { questions, rounds } from "./constantes";
+import { QuestionManager } from "./questionManager";
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 });
 
 const games: Game[] = [];
+const questionManager = new QuestionManager();
 
 // Fonction pour obtenir une question aléatoire
 function getRandomQuestion(game: Game): Question | undefined {
@@ -94,6 +96,103 @@ app.get("/api/admin/verify", authenticateAdmin, (req, res) => {
   res.json({ message: "Token valide", admin: true });
 });
 app.get("/api/admin/setup-status", verifyAdminSetup);
+
+// Admin question management endpoints
+app.post("/api/admin/questions", authenticateAdmin, async (req, res) => {
+  try {
+    const { questions: newQuestions, history } = req.body;
+
+    if (!newQuestions || !Array.isArray(newQuestions)) {
+      return res.status(400).json({ message: "Format de données invalide" });
+    }
+
+    const result = await questionManager.saveQuestions(newQuestions, history || []);
+
+    if (result.success) {
+      // Notifier tous les clients connectés qu'il y a eu des changements
+      // Mais seulement pour les NOUVELLES parties (pas celles en cours)
+      io.emit("admin-questions-updated", {
+        message: "Questions mises à jour par l'administrateur",
+        timestamp: new Date().toISOString(),
+        affectedGames: "new-games-only"
+      });
+
+      res.json({
+        message: result.message,
+        success: true,
+        backupPath: result.backupPath
+      });
+    } else {
+      res.status(500).json({
+        message: result.message,
+        success: false
+      });
+    }
+  } catch (error) {
+    console.error("Erreur lors de la sauvegarde des questions:", error);
+    res.status(500).json({
+      message: "Erreur serveur lors de la sauvegarde",
+      success: false
+    });
+  }
+});
+
+app.get("/api/admin/questions/history", authenticateAdmin, async (req, res) => {
+  try {
+    const history = await questionManager.getHistory();
+    res.json({ history });
+  } catch (error) {
+    console.error("Erreur lors de la récupération de l'historique:", error);
+    res.status(500).json({ message: "Erreur lors de la récupération de l'historique" });
+  }
+});
+
+app.get("/api/admin/backups", authenticateAdmin, async (req, res) => {
+  try {
+    const backups = questionManager.getBackups();
+    res.json({ backups });
+  } catch (error) {
+    console.error("Erreur lors de la récupération des backups:", error);
+    res.status(500).json({ message: "Erreur lors de la récupération des backups" });
+  }
+});
+
+app.post("/api/admin/restore", authenticateAdmin, async (req, res) => {
+  try {
+    const { backupFileName } = req.body;
+
+    if (!backupFileName) {
+      return res.status(400).json({ message: "Nom du fichier de backup requis" });
+    }
+
+    const result = await questionManager.restoreFromBackup(backupFileName);
+
+    if (result.success) {
+      // Notifier les clients de la restauration
+      io.emit("admin-questions-restored", {
+        message: "Questions restaurées depuis un backup",
+        timestamp: new Date().toISOString(),
+        backupFileName
+      });
+
+      res.json({
+        message: result.message,
+        success: true
+      });
+    } else {
+      res.status(500).json({
+        message: result.message,
+        success: false
+      });
+    }
+  } catch (error) {
+    console.error("Erreur lors de la restauration:", error);
+    res.status(500).json({
+      message: "Erreur serveur lors de la restauration",
+      success: false
+    });
+  }
+});
 
 // Game endpoints
 app.get("/api/game/:pin/:currentPlayerId", (req: any, res: any) => {

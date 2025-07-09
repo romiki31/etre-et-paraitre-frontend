@@ -32,3 +32,6 @@ CLAUDE.md
 
 # Admin configuration (contains password hash)
 server/admin-config.json
+
+# Admin backups and history
+server/backups/
